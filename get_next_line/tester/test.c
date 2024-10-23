@@ -10,6 +10,7 @@ int	main(void)
 
 	// File input
 	fd = open("text.txt", O_RDONLY);
+	printf("fd == %d\n", fd);
 	for (int i = 1;; i++)
 	{
 		res = get_next_line(fd);
@@ -17,6 +18,7 @@ int	main(void)
 			break ;
 		printf("call count : %d || ", i);
 		printf("%s\n", res);
+		free(res);
 	}
 	close(fd);
 
