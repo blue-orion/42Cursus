@@ -10,13 +10,13 @@ int	main(void)
 
 	// File input
 	fd = open("text.txt", O_RDONLY);
-	for (int i = 0;; i++)
+	for (int i = 1;; i++)
 	{
 		res = get_next_line(fd);
-		if (res == 0)
-			return (0);
-		printf("call count : %d\n", i);
-		printf("%s", res);
+		if (res == NULL)
+			break ;
+		printf("call count : %d || ", i);
+		printf("%s\n", res);
 	}
 	close(fd);
 
