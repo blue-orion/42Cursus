@@ -1,7 +1,9 @@
 #include "get_next_line.h"
 #include <string.h>
 
-#define BUFFER_SIZE 10
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 10
+#endif
 
 char	*get_next_line(int fd)
 {
@@ -11,14 +13,15 @@ char	*get_next_line(int fd)
 
 	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 	line = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-	while (read(fd, buf, BUFFER_SIZE) != -1)
-	{
-		// buf_idx = 0;
-		// strcpy(line, buf);
-		// while (*(buf + buf_idx) != '\n' || *(buf + buf_idx))
-		// {
-		// }
-	}
-		// return (NULL);
+	// while (read(fd, buf, BUFFER_SIZE) != 0)
+	// {
+	// 	buf_idx = 0;
+	// 	strcpy(line, buf);
+	// 	while (*(buf + buf_idx) != '\n' || *(buf + buf_idx))
+	// 	{
+	// 	}
+	// }
+	if (read(fd, buf, BUFFER_SIZE) == 0)
+		buf = NULL;
 	return (buf);
 }

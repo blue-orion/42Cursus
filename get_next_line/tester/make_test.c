@@ -7,10 +7,17 @@ int	main(int argc, char *argv[])
 	char	command[100];
 
 	if (argc == 1)
-		return (0);
-	strcpy(command, "cc -D BUFFER_SIZE=");
-	strcat(command, argv[1]);
-	strcat(command, " ../get_next_line.c ../get_next_line_utils.c test.c -o test.out");
+	{
+		strcpy(command, "cc ");
+		strcat(command, " ../get_next_line.c ../get_next_line_utils.c test.c -o test.out");
+
+	}
+	else
+	{
+		strcpy(command, "cc -D BUFFER_SIZE=");
+		strcat(command, argv[1]);
+		strcat(command, " ../get_next_line.c ../get_next_line_utils.c test.c -o test.out");
+	}
 	printf("%s\n", command);
 	int	ret = system(command);
 	
@@ -23,7 +30,7 @@ int	main(int argc, char *argv[])
 		printf("./test.out\n");
 		printf("===============================================================================\n\n");
 		ret = system("./test.out");
-		printf("\n===============================================================================\n");
+		printf("===============================================================================\n");
 	}
 	if (ret == 0)
 	{
