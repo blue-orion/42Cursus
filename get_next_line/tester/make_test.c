@@ -37,12 +37,23 @@ int	main(int argc, char *argv[])
 		printf("./test.out\n");
 		printf("===============================================================================\n\n");
 		ret = system("./test.out");
-		printf("===============================================================================\n");
+		printf("\n===============================================================================\n");
 	}
 	if (ret == 0)
 	{
 		printf("rm test.out\n");
 		ret = system("rm test.out");
+	}
+	if (ret == 0)
+	{
+		printf("diff text.txt text_user.txt\n");
+		printf("===============================================================================\n\n");
+		ret = system("diff -q text.txt text_user.txt");
+		if (ret == 0)
+			printf("diff OK!\n");
+		else
+			system("diff text.txt text_user.txt");
+		printf("\n===============================================================================\n\n");
 	}
 	return (0);
 }
