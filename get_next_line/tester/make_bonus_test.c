@@ -17,29 +17,29 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 	{
 		strcpy(command, "cc ");
-		strcat(command, " ../get_next_line.c ../get_next_line_utils.c test.c -o test.out");
+		strcat(command, " ../get_next_line_bonus.c ../get_next_line_utils.c ../get_next_line_utils_bonus.c bonus_test.c -o test.out");
 
 	}
 	else
 	{
 		strcpy(command, "cc -g ");
-		strcat(command, "-Wall -Wextra -Werror ");
+		// strcat(command, "-Wall -Wextra -Werror ");
 		strcat(command, "-D BUFFER_SIZE=");
 		strcat(command, argv[1]);
-		strcat(command, " ../get_next_line.c ../get_next_line_utils.c test.c ");
+		strcat(command, " ../get_next_line_bonus.c ../get_next_line_utils.c ../get_next_line_utils_bonus.c bonus_test.c ");
 		strcat(command, "-o test.out");
 	}
 	printf("%s\n", command);
 	int	ret = system(command);
 	
 	// test.out 실행
-	// if (ret == 0)
-	// {
-	// 	printf("./test.out\n");
-	// 	printf("===============================================================================\n\n");
-	// 	ret = system("./test.out");
-	// 	printf("\n===============================================================================\n");
-	// }
+	if (ret == 0)
+	{
+		printf("./test.out\n");
+		printf("===============================================================================\n\n");
+		ret = system("./test.out");
+		printf("\n===============================================================================\n");
+	}
 	if (ret == 0)
 	{
 		printf("valgrind --leak-check=full ./test.out\n");
