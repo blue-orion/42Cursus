@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 06:51:38 by takwak            #+#    #+#             */
-/*   Updated: 2024/10/28 06:51:38 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/28 17:55:35 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/28 18:02:48 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdio.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
 
 typedef struct s_buf
 {
-	char	*buf;
-	int		idx;
-	int		last_flag;
+	int				label;
+	char			*last;
+	int				idx;
+	struct s_buf	*next;
 }	t_buf;
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strndup(const char *s, size_t n);
-size_t	ft_strlen(const char *s);
-char	*get_next_line(int fd);
 
 #endif

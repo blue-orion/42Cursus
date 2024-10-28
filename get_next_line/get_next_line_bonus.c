@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 16:59:14 by takwak            #+#    #+#             */
-/*   Updated: 2024/10/28 10:19:06 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/28 17:59:47 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/28 18:26:55 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*make_line(char *res, char *buf, int size)
 {
@@ -35,12 +35,13 @@ static char	*make_line(char *res, char *buf, int size)
 	return (new_res);
 }
 
-static int	exist_line(char **res, char *buf, int *idx, int *last_flag)
+static int	exist_line(char **res, t_buf *info)
 {
 	int	len;
 
-	if (*last_flag != 0)
+	if (info->last != 0)
 	{
+		// 여기서 부터 고쳐야됨
 		if (ft_strchr(buf + *idx, '\n') != NULL)
 		{
 			len = ft_strchr(buf + *idx, '\n') + 1 - (buf + *idx);
@@ -63,55 +64,24 @@ static int	exist_line(char **res, char *buf, int *idx, int *last_flag)
 	}
 	return (0);
 }
-
-static char	*set_buffer(char *buf)
-{
-	if (buf == NULL)
-	{
-		buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-		if (buf == NULL)
-			return (NULL);
-		buf[BUFFER_SIZE] = '\0';
-	}
-	return (buf);
-}
-
-void	*free_all(char **buf, char **res)
-{
-	free(*buf);
-	*buf = NULL;
-	if (*res != NULL)
-	{
-		free(*res);
-		*res = NULL;
-	}
-	return (NULL);
-}
-
 char	*get_next_line(int fd)
 {
-	static t_buf	info;
+	static t_buf	*info;
+	t_buf			*list;
 	char			*res;
+	char			*buf;
 	int				read_size;
 
 	res = NULL;
-	info.buf = set_buffer(info.buf);
-	if (exist_line(&res, info.buf, &info.idx, &info.last_flag))
-		return (res);
-	read_size = read(fd, info.buf, BUFFER_SIZE);
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	list = info;
+	while (list->label != 0 && list->label != fd)
+		list = list->next;
+	if (exist_line(&res, list))
+	 	return (res);
+	read_size = read(fd, buf, BUFFER_SIZE);
 	while (read_size > 0)
 	{
-		info.idx = 0;
-		info.last_flag = 1;
-		if (read_size < BUFFER_SIZE)
-			info.buf[read_size] = '\0';
-		if (exist_line(&res, info.buf, &info.idx, &info.last_flag))
-			return (res);
-		read_size = read(fd, info.buf, BUFFER_SIZE);
+		
 	}
-	if (read_size == -1)
-		return (free_all(&info.buf, &res));
-	if (res != NULL)
-		return (res);
-	return (free_all(&info.buf, &res));
 }
