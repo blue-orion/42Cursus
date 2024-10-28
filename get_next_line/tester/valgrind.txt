@@ -1,0 +1,113 @@
+
+cur list : 
+fd = 3
+call count : 1 || Hello
+
+cur list : 
+fd = 5
+call count : 2 || 012345678901234567890123456789012345678901
+cur list : 
+fd = 7
+call count : 3 || aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cur list : ddd
+dddddd
+fd = 3
+call count : 4 || ddd
+
+cur list : 01
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 5 || ame.is.
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 6 || TTT.TTTTT.TTTTT.TTTTT.TTTTT.TTTTT
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 7 || = 30
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 8 || .AAAAA.AAAAA.AAAAA.AAAAA.AAA
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 9 ||  num = 28
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 10 || EEEEE.EEEEE.EEEEE.EEEEE.EEEEE.E
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 11 || 26
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 12 || HHHH.HHHH
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 13 || H num = 14
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 14 || OO.OOOOO.OOOOO.OOOOO.OOOOO.OOO
+
+cur list : 
+
+cur list : 
+
+cur list : 
+fd = 3
+call count : 15 || 3
+
+cur list : 
+
+cur list : 
+
+cur list : 
+
+cur list : 
+
+cur list : 

@@ -17,12 +17,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_buf
+typedef struct s_buf_bonus
 {
 	int				label;
-	char			*last;
+	char			buf[BUFFER_SIZE];
 	int				idx;
-	struct s_buf	*next;
-}	t_buf;
+	int				last;
+	struct s_buf_bonus	*next;
+}	t_buf_bonus;
 
+t_buf_bonus	*ft_newlst(t_buf_bonus *list, t_buf_bonus *new, int fd);
+void		*free_lst(t_buf_bonus **lst, char **res);
 #endif
