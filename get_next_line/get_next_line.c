@@ -15,23 +15,18 @@
 static char	*make_line(char *res, char *buf, int size)
 {
 	char	*new_res;
-	char	*dup_s;
 
 	if (res == NULL)
 	{
-		new_res = ft_strndup(buf, size);
-		if (new_res == NULL)
+		res = (char *)malloc(sizeof(char));
+		if (res == NULL)
 			return (NULL);
+		*res = '\0';
 	}
-	else
-	{
-		dup_s = ft_strndup(buf, size);
-		new_res = ft_strjoin(res, dup_s);
-		free(res);
-		free(dup_s);
-		if (new_res == NULL)
-			return (NULL);
-	}
+	new_res = ft_strjoin_custom(res, buf, size);
+	if (new_res == NULL)
+		return (NULL);
+	free(res);
 	return (new_res);
 }
 
@@ -55,7 +50,7 @@ static int	exist_line(char **res, char *buf, int *idx, int *last_flag)
 		}
 		else
 		{
-			*res = make_line(*res, buf + *idx, ft_strlen(buf + *idx));
+			*res = make_line(*res, buf + *idx, BUFFER_SIZE - *idx);
 			*idx = 0;
 			*last_flag = 0;
 			return (0);
@@ -64,27 +59,22 @@ static int	exist_line(char **res, char *buf, int *idx, int *last_flag)
 	return (0);
 }
 
-static char	*set_buffer(char *buf)
+static void	*read_end(char **buf, char *res, int read_size)
 {
-	if (buf == NULL)
+	if (read_size == -1)
 	{
-		buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-		if (buf == NULL)
+		if (res != NULL)
+		{
+			free(*buf);
+			*buf = NULL;
+			free(res);
 			return (NULL);
-		buf[BUFFER_SIZE] = '\0';
+		}
 	}
-	return (buf);
-}
-
-void	*free_all(char **buf, char **res)
-{
+	if (res != NULL)
+		return (res);
 	free(*buf);
 	*buf = NULL;
-	if (*res != NULL)
-	{
-		free(*res);
-		*res = NULL;
-	}
 	return (NULL);
 }
 
@@ -109,9 +99,5 @@ char	*get_next_line(int fd)
 			return (res);
 		read_size = read(fd, info.buf, BUFFER_SIZE);
 	}
-	if (read_size == -1)
-		return (free_all(&info.buf, &res));
-	if (res != NULL)
-		return (res);
-	return (free_all(&info.buf, &res));
+	return (read_end(&info.buf, res, read_size));
 }

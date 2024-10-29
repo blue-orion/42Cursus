@@ -76,6 +76,44 @@ int	main(void)
 	close(fd3);
 	close(fd3_user);
 
+	fd = open("only_nl.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		printf("file open failed\n");
+		return (0);
+	}
+	fd2 = open("only_nl_user.txt", O_WRONLY | O_CREAT | O_TRUNC);
+	if (fd2 == -1)
+	{
+		printf("file open failed\n");
+		return (0);
+	}
+	printf("fd == %d\n", fd);
+	for (int i = 1;; i++)
+	{
+		res = get_next_line(fd);
+		if (res == NULL)
+			break ;
+		printf("call count : %d || ", i);
+		printf("%s", res);
+		write(fd2, res, strlen(res));
+		free(res);
+	}
+	close(fd);
+	close(fd2);
+
+	fd = open("read_error.txt", O_RDONLY); fd2 = open("read_error_user.txt", O_WRONLY | O_CREAT | O_TRUNC);
+	for (int i = 1;; i++)
+	{
+		res = get_next_line(fd);
+		if (res == NULL)
+			break ;
+		printf("call count : %d || ", i);
+		printf("%s", res);
+		write(fd2, res, strlen(res));
+		free(res);
+	}
+	close(fd); close(fd2);
 	// fd = 0;
 	// while (printf("%s", get_next_line(fd)) != 0)	;
 	// printf("%s", get_next_line(fd));

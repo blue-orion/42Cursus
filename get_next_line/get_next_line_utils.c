@@ -12,43 +12,29 @@
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_custom(char *s1, char *s2, int s2_len)
 {
-	char	*joined;
-	size_t	total_len;
-	size_t	s1_len;
-	size_t	i;
+	char	*new;
+	int		s1_len;
+	int		i;
 
-	if (s1 == NULL || s2 == NULL)
-		return (0);
-	s1_len = ft_strlen(s1);
-	total_len = s1_len + ft_strlen(s2);
-	joined = (char *)malloc(sizeof(char) * (total_len + 1));
-	if (joined == NULL)
+	s1_len = 0;
+	while (*(s1 + s1_len) != '\0')
+		s1_len++;
+	new = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (new == NULL)
 		return (NULL);
 	i = 0;
-	while (i < total_len)
+	while (i < s1_len + s2_len)
 	{
 		if (i < s1_len)
-			*(joined + i) = *(s1 + i);
+			*(new + i) = *(s1 + i);
 		else
-			*(joined + i) = *(s2 + i - s1_len);
+			*(new + i) = *(s2 + i - s1_len);
 		i++;
 	}
-	*(joined + i) = '\0';
-	return (joined);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	if (s == NULL)
-		return (0);
-	len = 0;
-	while (*(s + len) != '\0')
-		len++;
-	return (len);
+	*(new + i) = '\0';
+	return (new);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -66,22 +52,18 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strndup(const char *s, size_t n)
+char	*set_buffer(char *buf)
 {
-	char	*cpy;
-	size_t	i;
+	int	i;
 
-	if (s == NULL)
-		return (0);
-	cpy = (char *)malloc(sizeof(char) * (n + 1));
-	if (cpy == NULL)
-		return (0);
-	i = 0;
-	while (i < n && *s)
+	if (buf == NULL)
 	{
-		cpy[i] = s[i];
-		i++;
+		buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+		if (buf == NULL)
+			return (NULL);
+		i = 0;
+		while (i <= BUFFER_SIZE)
+			buf[i++] = '\0';
 	}
-	cpy[i] = '\0';
-	return (cpy);
+	return (buf);
 }

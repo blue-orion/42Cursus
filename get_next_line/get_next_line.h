@@ -30,9 +30,8 @@ typedef struct s_buf
 	int		last_flag;
 }	t_buf;
 char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strndup(const char *s, size_t n);
-size_t	ft_strlen(const char *s);
+char	*ft_strjoin_custom(char *s1, char *s2, int size);
 char	*get_next_line(int fd);
+char	*set_buffer(char *buf);
 
 #endif

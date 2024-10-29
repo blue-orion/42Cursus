@@ -38,17 +38,7 @@ int	main(void)
 	close(fd2);
 
 	fd = open("empty.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("file open failed\n");
-		return (0);
-	}
 	fd2 = open("empty_user.txt", O_WRONLY | O_CREAT | O_TRUNC);
-	if (fd2 == -1)
-	{
-		printf("file2 open failed\n");
-		return (0);
-	}
 	printf("fd == %d | empty.txt\n", fd);
 	for (int i = 1;; i++)
 	{
