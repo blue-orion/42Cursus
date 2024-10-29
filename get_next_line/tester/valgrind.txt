@@ -1,113 +1,53 @@
+Invalid fd
+res : (null)
 
-cur list : 
 fd = 3
 call count : 1 || Hello
 
-cur list : 
 fd = 5
-call count : 2 || 012345678901234567890123456789012345678901
-cur list : 
+call count : 2 || 01234567890123456789012345678901234567890
+
 fd = 7
-call count : 3 || aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-cur list : ddd
-dddddd
+call count : 3 || aaaaaaaaaa
+
 fd = 3
-call count : 4 || ddd
+call count : 4 || My.name.is.
 
-cur list : 01
+fd = 7
+call count : 5 || bbbbbbbbbb
 
-cur list : 
-
-cur list : 
 fd = 3
-call count : 5 || ame.is.
+call count : 6 || TTTTT.TTTTT.TTTTT.TTTTT.TTTTT.TTTTT
 
-cur list : 
+fd = 7
+call count : 7 || cccccccccc
 
-cur list : 
-
-cur list : 
 fd = 3
-call count : 6 || TTT.TTTTT.TTTTT.TTTTT.TTTTT.TTTTT
+call count : 8 || T num = 30
 
-cur list : 
+fd = 7
+call count : 9 || dddddddddd
 
-cur list : 
-
-cur list : 
 fd = 3
-call count : 7 || = 30
+call count : 10 || AAAAA.AAAAA.AAAAA.AAAAA.AAAAA.AAA
 
-cur list : 
-
-cur list : 
-
-cur list : 
 fd = 3
-call count : 8 || .AAAAA.AAAAA.AAAAA.AAAAA.AAA
+call count : 11 || A num = 28
 
-cur list : 
-
-cur list : 
-
-cur list : 
 fd = 3
-call count : 9 ||  num = 28
+call count : 12 || EEEEE.EEEEE.EEEEE.EEEEE.EEEEE.E
 
-cur list : 
-
-cur list : 
-
-cur list : 
 fd = 3
-call count : 10 || EEEEE.EEEEE.EEEEE.EEEEE.EEEEE.E
+call count : 13 || E num = 26
 
-cur list : 
-
-cur list : 
-
-cur list : 
 fd = 3
-call count : 11 || 26
+call count : 14 || HHHHH.HHHHH.HHHH
 
-cur list : 
-
-cur list : 
-
-cur list : 
 fd = 3
-call count : 12 || HHHH.HHHH
+call count : 15 || H num = 14
 
-cur list : 
-
-cur list : 
-
-cur list : 
 fd = 3
-call count : 13 || H num = 14
+call count : 16 || OOOOO.OOOOO.OOOOO.OOOOO.OOOOO.OOOOO.OOO
 
-cur list : 
-
-cur list : 
-
-cur list : 
 fd = 3
-call count : 14 || OO.OOOOO.OOOOO.OOOOO.OOOOO.OOO
-
-cur list : 
-
-cur list : 
-
-cur list : 
-fd = 3
-call count : 15 || 3
-
-cur list : 
-
-cur list : 
-
-cur list : 
-
-cur list : 
-
-cur list : 
+call count : 17 || O num = 33
