@@ -6,61 +6,76 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:59:47 by takwak            #+#    #+#             */
-/*   Updated: 2024/10/28 18:26:55 by takwak           ###   ########.fr       */
+/*   Updated: 2024/10/29 18:30:17 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include "get_next_line.h"
+
+static char	*ft_strjoin_custom(char *s1, char *s2, int s2_len)
+{
+	char	*new;
+	int		s1_len;
+	int		i;
+
+	s1_len = 0;
+	while (*(s1 + s1_len) != '\0')
+		s1_len++;
+	new = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (new == NULL)
+		return (NULL);
+	i = 0;
+	while (i < s1_len + s2_len)
+	{
+		if (i < s1_len)
+			*(new + i) = *(s1 + i);
+		else
+			*(new + i) = *(s2 + i - s1_len);
+		i++;
+	}
+	*(new + i) = '\0';
+	return (new);
+}
 
 static char	*make_line(char *res, t_buf_bonus *info, int size)
 {
 	char	*new_res;
-	char	*dup_s;
 
 	if (res == NULL)
 	{
-		new_res = ft_strndup(info->buf, size);
-		if (new_res == NULL)
+		res = (char *)malloc(sizeof(char));
+		if (res == NULL)
 			return (NULL);
+		*res = '\0';
 	}
-	else
-	{
-		dup_s = ft_strndup(info->buf, size);
-		new_res = ft_strjoin(res, dup_s);
-		free(res);
-		free(dup_s);
-		if (new_res == NULL)
-			return (NULL);
-	}
+	new_res = ft_strjoin_custom(res, info->buf + info->idx, size);
+	if (new_res == NULL)
+		return (NULL);
+	free(res);
 	return (new_res);
 }
 
 static int	exist_line(char **res, t_buf_bonus *info)
 {
-	int	len;
+	int		len;
 	char	*start_adr;
 
-	start_adr = info->buf + info->idx;
 	if (info->last)
 	{
+		start_adr = info->buf + info->idx;
 		if (ft_strchr(start_adr, '\n') != NULL)
 		{
 			len = ft_strchr(start_adr, '\n') + 1 - start_adr;
 			*res = make_line(*res, info, len);
-			start_adr += len;
-			if (*(start_adr) == '\0')
-			{
-				info->last = 0;
-				info->idx = 0;
-			}
+			info->idx += len;
+			if (*(start_adr + len) == '\0')
+				init_(info, 2);
 			return (1);
 		}
 		else
 		{
-			*res = make_line(*res, info, ft_strlen(start_adr));
-			info->last = 0;
-			info->idx = 0;
+			*res = make_line(*res, info, BUFFER_SIZE - info->idx);
+			init_(info, 2);
 		}
 	}
 	return (0);
@@ -70,20 +85,17 @@ char	*get_next_line(int fd)
 {
 	static t_buf_bonus	*info;
 	t_buf_bonus			*list;
-	char			*res;
-	int				read_size;
+	char				*res;
+	int					read_size;
 
-	if (fd < 0)
-		return (NULL);
 	res = NULL;
 	if (info == NULL)
-		info = ft_newlst(info, list, fd);
+		info = ft_newlst(&info, info, fd);
 	list = info;
 	while (list != NULL && list->label != fd)
 		list = list->next;
 	if (list == NULL)
-		list = ft_newlst(info, list, fd);
-	printf("\ncur list : %s\n", list->buf);
+		list = ft_newlst(&info, list, fd);
 	if (exist_line(&res, list))
 		return (res);
 	read_size = read(fd, list->buf, BUFFER_SIZE);
@@ -95,11 +107,18 @@ char	*get_next_line(int fd)
 			list->buf[read_size] = '\0';
 		if (exist_line(&res, list))
 			return (res);
-		read_size = read(fd, info->buf, BUFFER_SIZE);
+		read_size = read(fd, list->buf, BUFFER_SIZE);
 	}
 	if (read_size == -1)
-		return (free_lst(&info, &res));
+	{
+		if (res != NULL)
+		{
+			free(res);
+			return (NULL);
+		}
+		return (free_lst(&info, fd));
+	}
 	if (res != NULL)
 		return (res);
-	return (free_lst(&info, &res));
+	return (free_lst(&info, fd));
 }

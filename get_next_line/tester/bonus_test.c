@@ -18,6 +18,9 @@ int	main(void)
 	char	*res;
 	int		cnt;
 
+	printf("Invalid fd\n");
+	res = get_next_line(-1);
+	printf("res : %s\n", res);
 	// File input
 	if ((fd = open("text.txt", O_RDONLY)) == -1)
 		return (printf("file open failed\n"));
@@ -43,6 +46,12 @@ int	main(void)
 		{
 			cur_fd = i;
 			cur_fd_user = i + 1;
+			if (cur_fd == 3 && fd_flag == 1)
+				continue ;
+			if (cur_fd == 5 && fd2_flag == 1)
+				continue ;
+			if (cur_fd == 7 && fd3_flag == 1)
+				continue ;
 			res = get_next_line(cur_fd);
 			if (res == NULL)
 			{
@@ -54,7 +63,7 @@ int	main(void)
 					fd3_flag = 1;
 				continue ;
 			}
-			printf("fd = %d\ncall count : %d || ", cur_fd, cnt++);
+			printf("\nfd = %d\ncall count : %d || ", cur_fd, cnt++);
 			printf("%s", res);
 			write(cur_fd_user, res, strlen(res));
 			free(res);
