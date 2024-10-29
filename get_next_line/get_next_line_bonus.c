@@ -37,7 +37,7 @@ static char	*ft_strjoin_custom(char *s1, char *s2, int s2_len)
 	return (new);
 }
 
-static char	*make_line(char *res, t_buf_bonus *info, int size)
+static char	*make_line(char *res, t_buffer *info, int size)
 {
 	char	*new_res;
 
@@ -55,7 +55,7 @@ static char	*make_line(char *res, t_buf_bonus *info, int size)
 	return (new_res);
 }
 
-static int	exist_line(char **res, t_buf_bonus *info)
+static int	exist_line(char **res, t_buffer *info)
 {
 	int		len;
 	char	*start_adr;
@@ -81,12 +81,28 @@ static int	exist_line(char **res, t_buf_bonus *info)
 	return (0);
 }
 
+void	*end_read(t_buffer **list, char *res, int fd, int read_size)
+{
+	if (read_size == -1)
+	{
+		if (res != NULL)
+		{
+			free(res);
+			return (NULL);
+		}
+		return (free_lst(list, fd));
+	}
+	if (res != NULL)
+		return (res);
+	return (free_lst(list, fd));
+}
+
 char	*get_next_line(int fd)
 {
-	static t_buf_bonus	*info;
-	t_buf_bonus			*list;
-	char				*res;
-	int					read_size;
+	static t_buffer	*info;
+	t_buffer		*list;
+	char			*res;
+	int				read_size;
 
 	res = NULL;
 	if (info == NULL)
@@ -103,22 +119,9 @@ char	*get_next_line(int fd)
 	{
 		list->idx = 0;
 		list->last = 1;
-		if (read_size < BUFFER_SIZE)
-			list->buf[read_size] = '\0';
 		if (exist_line(&res, list))
 			return (res);
 		read_size = read(fd, list->buf, BUFFER_SIZE);
 	}
-	if (read_size == -1)
-	{
-		if (res != NULL)
-		{
-			free(res);
-			return (NULL);
-		}
-		return (free_lst(&info, fd));
-	}
-	if (res != NULL)
-		return (res);
-	return (free_lst(&info, fd));
+	return (end_read(&info, res, fd, read_size));
 }

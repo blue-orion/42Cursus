@@ -131,5 +131,21 @@ int	main(int argc, char *argv[])
 		}
 	}
 	assert(flag);
+	if (ret == 0)
+	{
+		printf("diff -q -c -d only_nl.txt only_nl_user.txt => ");
+		ret = system("diff -q -c -d only_nl.txt only_nl_user.txt");
+		if (ret == 0)
+		{
+			flag = 1;
+			printf("diff OK!\n");
+		}
+		else
+		{
+			flag = 0;
+			system("diff only_nl.txt only_nl_user.txt");
+		}
+	}
+	assert(flag);
 	return (0);
 }

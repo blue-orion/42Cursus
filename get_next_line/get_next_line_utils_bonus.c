@@ -12,7 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-int	init_(t_buf_bonus *list, int type)
+int	init_(t_buffer *list, int type)
 {
 	int	i;
 
@@ -21,7 +21,9 @@ int	init_(t_buf_bonus *list, int type)
 		list->buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (list->buf == NULL)
 			return (0);
-		list->buf[BUFFER_SIZE] = '\0';
+		i = 0;
+		while (i <= BUFFER_SIZE)
+			list->buf[i++] = '\0';
 		list->last = 0;
 		list->idx = 0;
 		list->next = NULL;
@@ -29,7 +31,7 @@ int	init_(t_buf_bonus *list, int type)
 	else if (type == 2)
 	{
 		i = 0;
-		while (i < BUFFER_SIZE)
+		while (i <= BUFFER_SIZE)
 			list->buf[i++] = '\0';
 		list->last = 0;
 		list->idx = 0;
@@ -37,13 +39,13 @@ int	init_(t_buf_bonus *list, int type)
 	return (1);
 }
 
-t_buf_bonus	*ft_newlst(t_buf_bonus **list, t_buf_bonus *new, int fd)
+t_buffer	*ft_newlst(t_buffer **list, t_buffer *new_list, int fd)
 {
-	t_buf_bonus	*cur;
+	t_buffer	*cur;
 
 	if (*list == NULL)
 	{
-		*list = (t_buf_bonus *)malloc(sizeof(t_buf_bonus));
+		*list = (t_buffer *)malloc(sizeof(t_buffer));
 		if (*list == NULL)
 			return (NULL);
 		init_(*list, 1);
@@ -53,31 +55,31 @@ t_buf_bonus	*ft_newlst(t_buf_bonus **list, t_buf_bonus *new, int fd)
 	cur = *list;
 	while (cur->next != NULL)
 		cur = cur->next;
-	new = (t_buf_bonus *)malloc(sizeof(t_buf_bonus));
-	if (new == NULL)
+	new_list = (t_buffer *)malloc(sizeof(t_buffer));
+	if (new_list == NULL)
 		return (NULL);
-	init_(new, 1);
-	new->label = fd;
-	cur->next = new;
-	return (new);
+	init_(new_list, 1);
+	new_list->label = fd;
+	cur->next = new_list;
+	return (new_list);
 }
 
-void	*free_lst(t_buf_bonus **lst, int fd)
+void	*free_lst(t_buffer **lst, int fd)
 {
-	t_buf_bonus	*past;
-	t_buf_bonus	*cur;
-	t_buf_bonus	*freed;
+	t_buffer	*past;
+	t_buffer	*cur;
+	t_buffer	*freed;
 
 	cur = *lst;
 	if (cur->label == fd)
 	{
-		freed = cur;
 		*lst = cur->next;
-		free(freed->buf);
-		free(freed);
+		free(cur->buf);
+		cur->buf = NULL;
+		free(cur);
+		cur = NULL;
 		return (NULL);
 	}
-	past = cur;
 	while (cur->label != fd)
 	{
 		past = cur;
@@ -88,8 +90,6 @@ void	*free_lst(t_buf_bonus **lst, int fd)
 	past->next = cur;
 	free(freed->buf);
 	free(freed);
-	// if (res != NULL)
-	// 	free(res);
 	return (NULL);
 }
 
