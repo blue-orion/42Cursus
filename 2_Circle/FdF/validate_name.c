@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   validate_name.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 18:34:15 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/10 23:19:16 by takwak           ###   ########.fr       */
+/*   Created: 2024/11/17 21:06:27 by takwak            #+#    #+#             */
+/*   Updated: 2024/11/17 21:14:34 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
+#include "fdf.h"
 
-void	ft_perror(char	*str)
+int	validate_file_name(char *file)
 {
-	perror(str);
-	exit(EXIT_FAILURE);
+	char	*name;
+
+	name = ft_strchr(file, '.');
+	if (name == NULL)
+		return (0);
+	return (ft_strncmp(name, ".fdf", 5));
 }

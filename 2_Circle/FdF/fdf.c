@@ -6,39 +6,34 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:25:18 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/13 20:52:28 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/17 22:55:40 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	win_close(int keycode, t_vars *vars)
-{
-	printf("you press : %d\n", (unsigned char)keycode);
-	if ((unsigned char)keycode == 27)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(EXIT_SUCCESS);
-	}
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
-	t_data	img;
-	t_point	**matrix;
 
 	if (argc == 1)
 		ft_perror("Invalid input\n");
-	matrix = read_file(argv[1]);
-	print_matrix(matrix);
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "takwak");
-	img.img = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
-	img.adr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
-	make_isometric_img(matrix, &vars);
-	mlx_key_hook(vars.win, win_close, &vars);
+	if (validate_file_name(argv[1]))
+		ft_perror("Invalid file name\n");
+	vars.map = read_file(argv[1]);
+	if (init_mlx(&vars) == 0)
+	{
+		free_twoptr((void **)vars.map, vars.map[0]->y + 1);
+		ft_perror("Failed init mlx\n");
+	}
+	copy_matrix(&vars.src_map, &vars.map);
+	vars.scale = get_scale(vars.map);
+	make_image(&vars);
+	put_info_string(&vars);
+	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_mouse_hook(vars.win, mouse_hook, &vars);
+	mlx_hook(vars.win, 17, 0, destroy_hook, &vars);
+	mlx_hook(vars.win, 5, 1L << 3, mouse_release_hook, &vars);
+	mlx_hook(vars.win, 6, 1L << 6, mouse_move_hook, &vars);
 	mlx_loop(vars.mlx);
-	free_twoptr((void **)matrix, matrix[0]->y + 1);
 }
