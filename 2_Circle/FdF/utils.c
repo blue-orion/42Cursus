@@ -6,20 +6,49 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 23:06:20 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/13 23:07:58 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/17 23:22:10 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_twoptr(void **ptr, int y_num)
+int	abs(int n)
+{
+	if (n > 0)
+		return (n);
+	else
+		return (-1 * n);
+}
+
+int	free_gnl_buf(int fd)
+{
+	char	*gnl_res;
+
+	gnl_res = get_next_line(fd);
+	while (gnl_res != NULL)
+	{
+		free(gnl_res);
+		gnl_res = get_next_line(fd);
+	}
+	return (0);
+}
+
+void	*free_twoptr(void **ptr, int y_num)
 {
 	int	i;
 
 	i = 0;
-	while (i < y_num)
-		free(ptr[i++]);
-	free(ptr);
+	if (ptr != NULL)
+	{
+		while (i < y_num)
+		{
+			if (ptr[i] != NULL)
+				free(ptr[i]);
+			i++;
+		}
+		free(ptr);
+	}
+	return (NULL);
 }
 
 int	ft_is_base(char c, char *base)

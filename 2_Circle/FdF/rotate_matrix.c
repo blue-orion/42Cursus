@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_transition.c                                :+:      :+:    :+:   */
+/*   rotate_matrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:01:01 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/15 02:32:06 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/17 01:44:02 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#define radian 0.0174533
+#define RADIAN 0.0174533
 
-void	trans_matrix(t_point *point, char axis, double theta)
+void	rotate_point(t_point *point, char axis, double theta)
 {
 	t_point	tmp;
 
@@ -28,9 +28,9 @@ void	trans_matrix(t_point *point, char axis, double theta)
 	}
 	if (axis == 'y')
 	{
-		point->x = tmp.x * cos(theta) - tmp.z * sin(theta);
+		point->x = tmp.x * cos(theta) + tmp.z * sin(theta);
 		point->y = tmp.y;
-		point->z = tmp.x * sin(theta) + tmp.z * cos(theta);
+		point->z = -1 * tmp.x * sin(theta) + tmp.z * cos(theta);
 	}
 	if (axis == 'z')
 	{
@@ -40,26 +40,31 @@ void	trans_matrix(t_point *point, char axis, double theta)
 	}
 }
 
-// void	trans(t_point *point)
-// {
-// 	double	x;
-// 	double	y;
-// 	double	theta;
-//
-// 	theta = asin(tan(30 * radian));
-// 	x = point->x * cos(45 * radian) - point->y * sin(45 * radian);
-// 	y = point->x * cos(theta) * sin(45 * radian) + point->y * cos(theta) * cos(45 * radian) - sin(theta) * point->z;
-// 	point->x = x;
-// 	point->y = y;
-// }
+void	rotate_map(t_point **point, char axis, double theta)
+{
+	int	i;
+	int	j;
 
-void	trans(t_point *point)
+	i = 1;
+	while (i <= (*point)->y)
+	{
+		j = 1;
+		while (j <= (*point)->x)
+		{
+			rotate_point(&point[i][j], axis, theta);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	rotate_isometric(t_point *point)
 {
 	double	x;
 	double	y;
 
-	x = (point->x - point->y) * cos(30 * radian);
-	y = (point->x + point->y) * sin(30 * radian) - point->z;
+	x = (point->x - point->y) * cos(30 * RADIAN);
+	y = (point->x + point->y) * sin(30 * RADIAN) - point->z;
 	point->x = x;
 	point->y = y;
 }

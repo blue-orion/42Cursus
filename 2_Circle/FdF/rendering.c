@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debugging.c                                        :+:      :+:    :+:   */
+/*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 21:17:49 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/17 21:03:00 by takwak           ###   ########.fr       */
+/*   Created: 2024/11/16 16:40:43 by takwak            #+#    #+#             */
+/*   Updated: 2024/11/17 20:13:38 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
-void	print_map(t_point **map)
+void	render_x_line(t_data *img, t_point **map)
 {
 	int	i;
 	int	j;
@@ -22,26 +21,35 @@ void	print_map(t_point **map)
 	while (i <= map[0]->y)
 	{
 		j = 1;
-		while (j <= map[0]->x)
+		while (j < map[0]->x)
 		{
-			ft_printf("(%d, %d, ", (int)map[i][j].x, (int)map[i][j].y);
-			ft_printf("%d)\n", (int)map[i][j].z);
+			if (map[i][j].x < map[i][j + 1].x)
+				render_line_bresenham(img, map[i][j], map[i][j + 1]);
+			else
+				render_line_bresenham(img, map[i][j + 1], map[i][j]);
 			j++;
 		}
-		printf("\n");
 		i++;
 	}
 }
 
-void	print_lst(t_list *lst)
+void	render_y_line(t_data *img, t_point **map)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (lst != NULL)
+	i = 1;
+	while (i <= map[0]->x)
 	{
-		ft_printf("%d : %s\n", i, (char *)lst->content);
-		lst = lst->next;
+		j = map[0]->y;
+		while (j > 1)
+		{
+			if (map[j][i].x < map[j - 1][i].x)
+				render_line_bresenham(img, map[j][i], map[j - 1][i]);
+			else
+				render_line_bresenham(img, map[j - 1][i], map[j][i]);
+			j--;
+		}
 		i++;
 	}
 }
