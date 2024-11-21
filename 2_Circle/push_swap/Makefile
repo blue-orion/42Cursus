@@ -1,0 +1,52 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/20 23:38:16 by takwak            #+#    #+#              #
+#    Updated: 2024/11/21 10:20:49 by takwak           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC = cc
+FLAGS = -Wall -Wextra -Werror -g
+
+NAME = push_swap
+
+SRCS = util_stack1.c	\
+	   util_stack2.c	\
+	   util_stack3.c	\
+	   utils.c			\
+	   main.c
+
+#Libft path
+LIBFT = libft
+
+OBJS_DIRECTORY = objs/
+OBJS = $(addprefix $(OBJS_DIRECTORY), $(SRCS:.c=.o))
+
+all : $(NAME)
+
+$(NAME) : $(OBJS)
+	make -C $(LIBFT)
+	$(CC) $(FLAGS) $^ -I$(LIBFT) -L$(LIBFT) -lft -o $@
+
+objs/%.o : %.c | $(OBJS_DIRECTORY)
+	$(CC) $(FLAGS) -I$(LIBFT) -c $< -o $@
+
+$(OBJS_DIRECTORY) :
+	mkdir -p objs
+
+clean :
+	make -C $(LIBFT) clean
+	rm -rf $(OBJS)
+
+fclean : clean
+	make -C $(LIBFT) fclean
+	rm -rf $(NAME)
+
+re : fclean all
+
+.PHONY : NAME all clean fclean re

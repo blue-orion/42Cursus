@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 20:37:35 by takwak            #+#    #+#              #
-#    Updated: 2024/11/17 23:26:56 by takwak           ###   ########.fr        #
+#    Updated: 2024/11/17 23:51:27 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC = $(MAIN) $(addprefix $(SRC_PATH)/, $(SRCS))
 
 OBJS_PATH = objs
 OBJS = $(MAIN:.c=.o) $(SRCS:.c=.o)
+OBJ = $(addprefix $(OBJS_PATH)/, $(OBJS))
 
 # MLX_PATH
 MLX = srcs/minilibx-linux
@@ -57,17 +58,15 @@ LIBFT = srcs/libft
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJ)
 	make -C $(LIBFT)
-	$(CC) $(FLAGS) $(addprefix $(OBJS_PATH)/, $^) -L$(MLX) $(MLX_IN) -L$(LIBFT) -lft -o $(NAME)
+	$(CC) $(FLAGS) $^ -L$(MLX) $(MLX_IN) -L$(LIBFT) -lft -o $(NAME)
 
-$(OBJS) : $(OBJS_PATH)
+$(OBJS_PATH)/%.o : $(SRC_PATH)/%.c | $(OBJS_PATH)
+	$(CC) $(FLAGS) -I$(MLX) -I$(LIBFT) -c $< -o $@
 
 $(OBJS_PATH) :
-	mkdir objs
-
-%.o : %.c
-	$(CC) $(FLAGS) -I$(MLX) -I$(LIBFT) -c $< -o $(OBJS_PATH)/$@
+	mkdir -p objs
 
 clean :
 	rm -rf $(OBJS_PATH)
@@ -79,5 +78,3 @@ fclean : clean
 re : fclean all
 
 .PHONY : all clean fclean re
-
-
