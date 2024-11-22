@@ -6,49 +6,41 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:20:53 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/21 12:10:17 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/22 21:56:02 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_ps *st)
+void	ra(t_pslst *st)
 {
-	int	tmp;
-	int	i;
+	t_list	*past;
+	t_list	*last;
 
-	if (st->a_idx == 0)
-		return ;
-	i = 1;
-	tmp = st->a[1];
-	while (i < st->a_idx)
-	{
-		st->a[i] = st->a[i + 1];
-		i++;
-	}
-	st->a[i] = tmp;
+	past = st->a;
+	st->a = st->a->next;
+	past->next = NULL;
+	last = st->a;
+	ft_lstlast(last);
+	last->next = past;
 	ft_printf("ra\n");
 }
 
-void	rb(t_ps *st)
+void	rb(t_pslst *st)
 {
-	int	tmp;
-	int	i;
+	t_list	*past;
+	t_list	*last;
 
-	if (st->b_idx == 0)
-		return ;
-	i = 1;
-	tmp = st->b[1];
-	while (i < st->b_idx)
-	{
-		st->b[i] = st->b[i + 1];
-		i++;
-	}
-	st->b[i] = tmp;
+	past = st->b;
+	st->b = st->b->next;
+	past->next = NULL;
+	last = st->b;
+	ft_lstlast(last);
+	last->next = past;
 	ft_printf("rb\n");
 }
 
-void	rr(t_ps *st)
+void	rr(t_pslst *st)
 {
 	ra(st);
 	rb(st);
