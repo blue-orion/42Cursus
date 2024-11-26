@@ -1,38 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 21:52:06 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/26 03:37:33 by takwak           ###   ########.fr       */
+/*   Created: 2024/11/25 22:21:48 by takwak            #+#    #+#             */
+/*   Updated: 2024/11/26 03:28:30 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	find_min(int *st, int size)
 {
-	int		cnt;
-	t_ps	*st;
+	int	i;
+	int	min;
 
-	cnt = 0;
-	st = (t_ps *)malloc(sizeof(t_ps));
-	st->a_idx = 0;
-	st->b_idx = 0;
-	st->size = 0;
-	data_load(st, argc, argv);
-	print_stack(st);
-	indexing(st);
-	if (is_sorted(1, st->a, st->a_idx))
-		return (0);
-	divide(st, &cnt);
-	greedy_sort(st, &cnt);
-	// radix_atob(st, 10, &cnt);
-	print_stack(st);
-	printf("cnt cmd = %d\n", cnt);
-	free(st->a);
-	free(st->b);
-	free(st);
+	i = 1;
+	min = 2147483647;
+	while (i <= size)
+	{
+		if (st[i] < min)
+			min = st[i];
+		i++;
+	}
+	return (min);
+}
+
+int	find_data(int *st, int size, int tofind)
+{
+	int	i;
+	int	find;
+
+	i = 1;
+	find = 0;
+	while (i <= size)
+	{
+		if (st[i] == tofind)
+			find = i;
+		i++;
+	}
+	if (find > size / 2)
+		return (1);
+	else
+		return (-1);
 }

@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/20 23:38:16 by takwak            #+#    #+#              #
-#    Updated: 2024/11/21 10:20:49 by takwak           ###   ########.fr        #
+#    Updated: 2024/11/26 01:10:51 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,16 @@ NAME = push_swap
 SRCS = util_stack1.c	\
 	   util_stack2.c	\
 	   util_stack3.c	\
+	   noprint_cmd.c	\
 	   utils.c			\
+	   merge_sort.c		\
+	   indexing.c		\
+	   radix_sort.c		\
+	   reverse_stack.c	\
+	   greedy.c			\
+	   interval.c		\
+	   find.c			\
+	   divide.c			\
 	   main.c
 
 #Libft path
