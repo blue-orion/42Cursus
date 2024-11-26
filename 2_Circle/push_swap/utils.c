@@ -6,98 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:30:50 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/22 22:00:26 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/26 03:31:33 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_lstnext(char stack, t_pslst *lst)
-{
-	t_list	*cur;
-
-	if (stack == 'a')
-		cur = lst->a;
-	if (stack == 'b')
-		cur = lst->b;
-	if (cur->sorted != 0)
-	{
-		if (stack == 'a')
-			loop_command(lst, "ra", cur->sorted);
-		// if (stack == 'b')
-		// 	loop_command(lst, "rb", cur->sorted);
-	}
-	else
-	{
-		if (stack == 'a')
-			ra(lst);
-		// if (stack == 'b')
-		// 	rb(lst);
-		// if (stack == 'c')
-		// 	rr(lst);
-	}
-}
-
-// void	ft_lstpast(char stack, t_pslst *lst)
-// {
-// 	t_list	*cur;
-//
-// 	if (stack == 'a')
-// 		cur = lst->a;
-// 	if (stack == 'b')
-// 		cur = lst->b;
-// 	if (cur->sorted != 0)
-// 	{
-// 		if (stack == 'a')
-// 			loop_command(lst, "rra", cur->sorted);
-// 		if (stack == 'b')
-// 			loop_command(lst, "rrb", cur->sorted);
-// 	}
-// 	else
-// 	{
-// 		if (stack == 'a')
-// 			rra(lst);
-// 		if (stack == 'b')
-// 			rrb(lst);
-// 		if (stack == 'c')
-// 			rrr(lst);
-// 	}
-// }
-void	run_command(t_pslst **lst, char *command)
-{
-	if (!ft_strcmp(command, "ra"))
-		ra(lst);
-	// if (!ft_strcmp(command, "rb"))
-	// 	rb(lst);
-	// if (!ft_strcmp(command, "rr"))
-	// 	rr(lst);
-	// if (!ft_strcmp(command, "pa"))
-	// 	pa(lst);
-	// if (!ft_strcmp(command, "pb"))
-	// 	pb(lst);
-	// if (!ft_strcmp(command, "rra"))
-	// 	rra(lst);
-	// if (!ft_strcmp(command, "rrb"))
-	// 	rrb(lst);
-	// if (!ft_strcmp(command, "rrr"))
-	// 	rrr(lst);
-	if (!ft_strcmp(command, "sa"))
-		sa(lst);
-	// if (!ft_strcmp(command, "sb"))
-	// 	sb(lst);
-	// if (!ft_strcmp(command, "ss"))
-	// 	ss(lst);
-}
-
-void	loop_command(t_pslst **lst, char *command, int repeat_num)
-{
-	int	i;
-	while (i < repeat_num)
-	{
-		run_command(lst, command);
-		i++;
-	}
-}
 
 void	*free_twoptr(void **ptr, int size)
 {
@@ -134,57 +47,87 @@ int	count_data(int argc, char **argv)
 	return (cnt);
 }
 
-void	data_load(t_pslst *st, int argc, char **argv)
+void	data_load(t_ps *st, int argc, char **argv)
 {
 	char	**splited;
+	int		*tmp;
 	int		i;
 	int		split_idx;
-	int		size;
-	void	*data;
 
-	size = count_data(argc, argv);
-	i = 0;
-	while (i < size)
+	st->size = count_data(argc, argv);
+	st->a = (int *)ft_calloc(st->size + 1, sizeof(int));
+	st->b = (int *)ft_calloc(st->size + 1, sizeof(int));
+	tmp = (int *)ft_calloc(st->size + 1, sizeof(int));
+	i = 1;
+	while (i < argc)
 	{
 		split_idx = 0;
 		splited = ft_split(argv[i], ' ');
 		while (splited[split_idx])
 		{
-			*(int *)data = ft_atoi(splited[split_idx++]);
-			st->a->next = ft_lstnew(&data);
+			st->a[++(st->a_idx)] = ft_atoi(splited[split_idx]);
+			tmp[st->a_idx] = ft_atoi(splited[split_idx++]);
 		}
 		free_twoptr((void **)splited, split_idx);
 		i++;
 	}
+	ft_reverse(st->a, st->size);
+	ft_reverse(tmp, st->size);
+	merge_sort(tmp, st->b, 1, st->size);
+	free(tmp);
 }
 
-void	print_stack(t_pslst *st)
+void	print_stack(t_ps *st)
 {
-	t_list	*alst;
-	t_list	*blst;
+	int	ai;
+	int	bi;
 
-	alst = st->a;
-	blst = st->b;
-	ft_printf(" a stack | b stack\n");
-	while (1)
+	// usleep(100000);
+	// for (int i = 0; i < 40; i++)
+	// 	ft_printf("\n");
+	ai = st->a_idx;
+	bi = st->b_idx;
+	// ft_printf(" a stack | b stack\n");
+	while (ai >= 1 || bi >= 1)
 	{
-		if (alst == NULL && blst == NULL)
-			break ;
-		if (alst != NULL && blst == NULL)
-		{
-			ft_printf("%8d |        0\n", *(int *)alst->content);
-			alst = alst->next;
-		}
-		if (alst == NULL && blst != NULL)
-		{
-			ft_printf("       0 | %8d\n", *(int *)blst->content);
-			blst = blst->next;
-		}
-		if (alst != NULL && blst == NULL)
-		{
-			ft_printf("%8d | %8d\n", *(int *)alst->content, *(int *)blst->content);
-			alst = alst->next;
-			blst = blst->next;
-		}
+		// if (st->a[ai] == 0 && st->b[bi] == 0)
+		// 	ft_printf("         |         \n");
+		// if (st->a[ai] != 0 && st->b[bi] == 0)
+		// 	ft_printf("%8d |         \n", st->a[ai]);
+		// if (st->a[ai] == 0 && st->b[bi] != 0)
+		// 	ft_printf("         | %8d\n", st->b[bi]);
+		// if (st->a[ai] != 0 && st->b[bi] != 0)
+		// 	ft_printf("%8d | %8d\n", st->a[ai], st->b[bi]);
+		if (ai >= 1)
+			ai--;
+		if (bi >= 1)
+			bi--;
 	}
+}
+
+int	count_cmd(t_ps *st, char *cmd)
+{
+	if (!ft_strncmp(cmd, "ra", 2))
+		user_ra(st);
+	if (!ft_strncmp(cmd, "rb", 2))
+		user_rb(st);
+	if (!ft_strncmp(cmd, "rr", 2))
+		user_rr(st);
+	if (!ft_strncmp(cmd, "rra", 3))
+		user_rra(st);
+	if (!ft_strncmp(cmd, "rrb", 3))
+		user_rrb(st);
+	if (!ft_strncmp(cmd, "rrr", 3))
+		user_rrr(st);
+	if (!ft_strncmp(cmd, "sa", 2))
+		user_sa(st);
+	if (!ft_strncmp(cmd, "sb", 2))
+		user_sb(st);
+	if (!ft_strncmp(cmd, "ss", 2))
+		user_ss(st);
+	if (!ft_strncmp(cmd, "pa", 2))
+		user_pa(st);
+	if (!ft_strncmp(cmd, "pb", 2))
+		user_pb(st);
+	return (1);
 }

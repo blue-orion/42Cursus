@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:18:17 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/22 21:13:53 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/23 18:29:57 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 typedef struct s_list
 {
 	void			*content;
-	int				sorted;
 	struct s_list	*next;
 }		t_list;
 int		ft_isdigit(int c);
