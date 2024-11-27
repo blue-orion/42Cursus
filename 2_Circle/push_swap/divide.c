@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 00:51:10 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/26 03:33:41 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/27 17:47:57 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	divide(t_ps *st, int *cnt)
 		if (st->a[st->a_idx] >= div1 && st->a[st->a_idx] < div2)
 		{
 			*cnt += pb(st);
+			if (st->b[st->b_idx] < st->b[st->b_idx - 1])
+				*cnt += sb(st);
 			print_stack(st);
 			continue ;
 		}

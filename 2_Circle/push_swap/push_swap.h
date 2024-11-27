@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 21:46:17 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/26 03:24:58 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/27 17:55:51 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <libft.h>
+# include <stddef.h>
 
 typedef struct s_ps
 {

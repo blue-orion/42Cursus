@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 21:52:06 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/26 03:37:33 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/27 17:46:55 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	main(int argc, char **argv)
 	data_load(st, argc, argv);
 	print_stack(st);
 	indexing(st);
+	if (is_sorted(-1, st->a, st->a_idx))
+		return (0);
 	if (is_sorted(1, st->a, st->a_idx))
 		return (0);
 	divide(st, &cnt);
