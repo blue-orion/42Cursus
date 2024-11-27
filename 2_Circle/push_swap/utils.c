@@ -6,11 +6,19 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:30:50 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/26 03:31:33 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/27 18:43:16 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_abs(int n)
+{
+	if (n > 0)
+		return (n);
+	else
+		return (-1 * n);
+}
 
 void	*free_twoptr(void **ptr, int size)
 {

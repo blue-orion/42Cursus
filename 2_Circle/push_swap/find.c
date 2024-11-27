@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 22:21:48 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/26 03:28:30 by takwak           ###   ########.fr       */
+/*   Updated: 2024/11/27 18:38:01 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	find_min(int *st, int size)
 	int	min;
 
 	i = 1;
-	min = 2147483647;
+	min = INT_MAX;
 	while (i <= size)
 	{
 		if (st[i] < min)
@@ -26,6 +26,64 @@ int	find_min(int *st, int size)
 		i++;
 	}
 	return (min);
+}
+
+int	find_big_than(int *st, int size, int compare)
+{
+	int	top_find;
+	int	bottom_find;
+	int	r_num;
+	int	rr_num;
+
+	top_find = size;
+	while (top_find >= size / 2)
+	{
+		if (st[top_find] > compare)
+			break ;
+		top_find--;
+	}
+	bottom_find = 1;
+	while (bottom_find < size / 2)
+	{
+		if (st[bottom_find] > compare)
+			break ;
+		bottom_find++;
+	}
+	r_num = size - top_find;
+	rr_num = bottom_find;
+	if (r_num < rr_num)
+		return (top_find);
+	else
+		return (-1 * bottom_find);
+}
+
+int	find_small_than(int *st, int size, int compare)
+{
+	int	top_find;
+	int	bottom_find;
+	int	r_num;
+	int	rr_num;
+
+	top_find = size;
+	while (top_find >= size / 2)
+	{
+		if (st[top_find] < compare)
+			break ;
+		top_find--;
+	}
+	bottom_find = 1;
+	while (bottom_find < size / 2)
+	{
+		if (st[bottom_find] < compare)
+			break ;
+		bottom_find++;
+	}
+	r_num = size - top_find;
+	rr_num = bottom_find;
+	if (r_num < rr_num)
+		return (top_find);
+	else
+		return (-1 * bottom_find);
 }
 
 int	find_data(int *st, int size, int tofind)
