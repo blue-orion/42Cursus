@@ -34,19 +34,14 @@ void	divide(t_ps *st, int *cnt)
 	div1 = st->a_idx / 3;
 	div2 = 2 * (st->a_idx / 3);
 	while (st->a[st->a_idx] >= div2)
-	{
-		// printf("div2 = %d\n", div2);
-		*cnt += ra(st);
-		print_stack(st);
-	}
-	pb(st);
+		*cnt += ra(st, 1);
+	*cnt += pb(st);
 	while (st->a_idx > 0)
 	{
 		if (st->a[st->a_idx] < div1)
 		{
 			*cnt += pb(st);
-			*cnt += rb(st);
-			print_stack(st);
+			*cnt += rb(st, 1);
 			continue ;
 		}
 		if (st->a[st->a_idx] >= div1 && st->a[st->a_idx] < div2)
@@ -54,22 +49,16 @@ void	divide(t_ps *st, int *cnt)
 			*cnt += pb(st);
 			if (st->b[st->b_idx] < st->b[st->b_idx - 1])
 				*cnt += sb(st);
-			print_stack(st);
 			continue ;
 		}
 		if (st->a[st->a_idx] >= div2)
 		{
 			if (all_part3(st, div2))
 				break ;
-			*cnt += ra(st);
-			print_stack(st);
+			*cnt += ra(st, 1);
 			continue ;
 		}
 	}
 	while (st->a_idx > 3)
-	{
 		*cnt += pb(st);
-		print_stack(st);
-	}
-
 }
