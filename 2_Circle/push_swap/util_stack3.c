@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	rra(t_ps *st)
+int	rra(t_ps *st, int flag)
 {
 	int	tmp;
 	int	i;
@@ -27,11 +27,12 @@ int	rra(t_ps *st)
 		i++;
 	}
 	st->a[st->a_idx] = tmp;
-	ft_printf("rra\n");
+	if (flag)
+		ft_printf("rra\n");
 	return (1);
 }
 
-int	rrb(t_ps *st)
+int	rrb(t_ps *st, int flag)
 {
 	int	tmp;
 	int	i;
@@ -46,14 +47,15 @@ int	rrb(t_ps *st)
 		i++;
 	}
 	st->b[st->b_idx] = tmp;
-	ft_printf("rrb\n");
+	if (flag)
+		ft_printf("rrb\n");
 	return (1);
 }
 
 int	rrr(t_ps *st)
 {
-	rra(st);
-	rrb(st);
-	ft_printf("rrb\n");
+	rra(st, 0);
+	rrb(st, 0);
+	ft_printf("rrr\n");
 	return (1);
 }

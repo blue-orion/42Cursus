@@ -23,16 +23,13 @@ int	main(int argc, char **argv)
 	st->b_idx = 0;
 	st->size = 0;
 	data_load(st, argc, argv);
-	print_stack(st);
 	indexing(st);
 	if (is_sorted(-1, st->a, st->a_idx))
 		return (0);
 	if (is_sorted(1, st->a, st->a_idx))
 		return (0);
 	divide(st, &cnt);
-	greedy_sort(st, &cnt);
-	// radix_atob(st, 10, &cnt);
-	print_stack(st);
+	greedy_two_sort(st, &cnt);
 	printf("cnt cmd = %d\n", cnt);
 	free(st->a);
 	free(st->b);
