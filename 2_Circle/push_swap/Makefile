@@ -18,16 +18,15 @@ NAME = push_swap
 SRCS = util_stack1.c	\
 	   util_stack2.c	\
 	   util_stack3.c	\
-	   noprint_cmd.c	\
 	   utils.c			\
 	   merge_sort.c		\
 	   indexing.c		\
-	   radix_sort.c		\
 	   reverse_stack.c	\
 	   greedy.c			\
 	   interval.c		\
 	   find.c			\
 	   divide.c			\
+	   push_greedy.c	\
 	   main.c
 
 #Libft path

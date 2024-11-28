@@ -28,6 +28,22 @@ int	find_min(int *st, int size)
 	return (min);
 }
 
+int	find_min_idx(int *st, int size)
+{
+	int	min;
+	int	i;
+
+	i = 1;
+	min = find_min(st, size);
+	while (i <= size)
+	{
+		if (st[i] == min)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
 int	find_big_than(int *st, int size, int compare)
 {
 	int	top_find;
@@ -99,8 +115,8 @@ int	find_data(int *st, int size, int tofind)
 			find = i;
 		i++;
 	}
-	if (find > size / 2)
-		return (1);
+	if (find >= size / 2)
+		return (size - find);
 	else
-		return (-1);
+		return (-1 * find);
 }

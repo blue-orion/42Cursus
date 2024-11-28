@@ -80,62 +80,6 @@ void	data_load(t_ps *st, int argc, char **argv)
 		i++;
 	}
 	ft_reverse(st->a, st->size);
-	ft_reverse(tmp, st->size);
 	merge_sort(tmp, st->b, 1, st->size);
 	free(tmp);
-}
-
-void	print_stack(t_ps *st)
-{
-	int	ai;
-	int	bi;
-
-	// usleep(100000);
-	// for (int i = 0; i < 40; i++)
-	// 	ft_printf("\n");
-	ai = st->a_idx;
-	bi = st->b_idx;
-	// ft_printf(" a stack | b stack\n");
-	while (ai >= 1 || bi >= 1)
-	{
-		// if (st->a[ai] == 0 && st->b[bi] == 0)
-		// 	ft_printf("         |         \n");
-		// if (st->a[ai] != 0 && st->b[bi] == 0)
-		// 	ft_printf("%8d |         \n", st->a[ai]);
-		// if (st->a[ai] == 0 && st->b[bi] != 0)
-		// 	ft_printf("         | %8d\n", st->b[bi]);
-		// if (st->a[ai] != 0 && st->b[bi] != 0)
-		// 	ft_printf("%8d | %8d\n", st->a[ai], st->b[bi]);
-		if (ai >= 1)
-			ai--;
-		if (bi >= 1)
-			bi--;
-	}
-}
-
-int	count_cmd(t_ps *st, char *cmd)
-{
-	if (!ft_strncmp(cmd, "ra", 2))
-		user_ra(st);
-	if (!ft_strncmp(cmd, "rb", 2))
-		user_rb(st);
-	if (!ft_strncmp(cmd, "rr", 2))
-		user_rr(st);
-	if (!ft_strncmp(cmd, "rra", 3))
-		user_rra(st);
-	if (!ft_strncmp(cmd, "rrb", 3))
-		user_rrb(st);
-	if (!ft_strncmp(cmd, "rrr", 3))
-		user_rrr(st);
-	if (!ft_strncmp(cmd, "sa", 2))
-		user_sa(st);
-	if (!ft_strncmp(cmd, "sb", 2))
-		user_sb(st);
-	if (!ft_strncmp(cmd, "ss", 2))
-		user_ss(st);
-	if (!ft_strncmp(cmd, "pa", 2))
-		user_pa(st);
-	if (!ft_strncmp(cmd, "pb", 2))
-		user_pb(st);
-	return (1);
 }

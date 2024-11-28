@@ -31,9 +31,9 @@ void	first_three_sort(t_ps *st, int *cnt)
 		i++;
 	}
 	if (max_idx == 3)
-		*cnt += ra(st);
+		*cnt += ra(st, 1);
 	if (max_idx == 2)
-		*cnt += rra(st);
+		*cnt += rra(st, 1);
 	if (st->a[3] > st->a[2])
 		*cnt += sa(st);
 }
@@ -52,88 +52,16 @@ int	all_small(int *st, int size, int comp)
 	return (1);
 }
 
-void	div_part2_sort(t_ps *st, int *cnt)
+int	all_big(int *st, int size, int comp)
 {
-	// int	div2;
-	int	cnt_tmp;
+	int	i;
 
-	cnt_tmp = 0;
-	// div2 = 2 * (st->size / 3);
-	// while (st->b[st->b_idx] >= div2)
-	while (st->b_idx > 0)
+	i = 1;
+	while (i <= size)
 	{
-		if (st->b_idx != 1 && st->b[st->b_idx] == st->size)
-			rb(st);
-		if (st->b_idx == 1 && st->b[st->b_idx] == st->size)
-		{
-			while (st->a[st->a_idx] != 1)
-			{
-				if (find_data(st->a, st->a_idx, 1) == 1)
-					ra(st);
-				else
-					rra(st);
-			}
-			pa(st);
-			ra(st);
-			break ;
-		}
-		if (st->a[st->a_idx] < st->b[st->b_idx])
-		{
-			if (all_small(st->a, st->a_idx, st->b[st->b_idx]))
-			{
-				while (st->a[st->a_idx] != find_min(st->a, st->a_idx))
-				{
-					if (find_data(st->a, st->a_idx, find_min(st->a, st->a_idx)) == 1)
-					{
-						ra(st);
-						print_stack(st);
-					}
-					else
-					{
-						rra(st);
-						print_stack(st);
-					}
-				}
-				pa(st);
-				ra(st);
-				continue ;
-			}
-			while (st->a[st->a_idx - 1] < st->b[st->b_idx])
-			{
-				*cnt += ra(st);
-				print_stack(st);
-			}
-			pa(st);
-			print_stack(st);
-			sa(st);
-			print_stack(st);
-			continue ;
-		}
-		if (st->b[st->b_idx] < st->a[st->a_idx])
-		{
-			cnt_tmp = 1;
-			while (st->a[cnt_tmp] > st->a[cnt_tmp + 1])
-				cnt_tmp++;
-			while (cnt_tmp > 0 && st->a[cnt_tmp] < st->b[st->b_idx])
-					cnt_tmp--;
-			while (cnt_tmp != st->a_idx && cnt_tmp != 0)
-			{
-				*cnt += rra(st);
-				print_stack(st);
-				cnt_tmp--;
-			}
-			pa(st);
-			print_stack(st);
-			continue ;
-		}
+		if (st[i] < comp)
+			return (0);
+		i++;
 	}
-}
-
-void	greedy_sort(t_ps *st, int *cnt)
-{
-	first_three_sort(st, cnt);
-	print_stack(st);
-	div_part2_sort(st, cnt);
-	*cnt = *cnt;
-	st->a[st->a_idx] = st->a[st->a_idx];
+	return (1);
 }
