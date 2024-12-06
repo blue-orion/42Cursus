@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   greedy.c                                           :+:      :+:    :+:   */
+/*   utils_greedy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 21:36:31 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/26 21:02:50 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/06 22:24:42 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,15 @@ int	all_big(int *st, int size, int comp)
 		i++;
 	}
 	return (1);
+}
+
+int	rotate_num(int size, int idx)
+{
+	int	num;
+
+	if (idx >= size / 2)
+		num = size - idx;
+	else
+		num = -1 * idx;
+	return (num);
 }

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:30:50 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/27 18:43:16 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/06 22:54:21 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_interval(int n, int *st, int a, int b)
 
 int	is_sorted(int order, int *st, int size)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (i < size)
@@ -51,4 +51,12 @@ int	is_sorted(int order, int *st, int size)
 			return (0);
 	}
 	return (1);
+}
+
+int	free_stack(t_ps *st)
+{
+	free(st->a);
+	free(st->b);
+	free(st);
+	return (0);
 }

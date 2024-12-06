@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/20 23:38:16 by takwak            #+#    #+#              #
-#    Updated: 2024/11/26 01:10:51 by takwak           ###   ########.fr        #
+#    Updated: 2024/12/06 23:31:58 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,18 @@ SRCS = util_stack1.c	\
 	   util_stack2.c	\
 	   util_stack3.c	\
 	   utils.c			\
+	   utils_greedy.c	\
+	   utils_push.c		\
 	   merge_sort.c		\
 	   indexing.c		\
 	   input_data.c		\
 	   reverse_stack.c	\
-	   greedy.c			\
 	   find.c			\
 	   divide.c			\
 	   push_greedy.c	\
+	   counting_cost.c	\
+	   validate_data.c	\
+	   debugging.c	\
 	   main.c
 
 #Libft path

@@ -6,11 +6,20 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:42:50 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/24 15:35:27 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/06 21:36:24 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	copy_data(int *arr, int *sorted, int left, int right)
+{
+	while (left <= right)
+	{
+		arr[left] = sorted[left];
+		left++;
+	}
+}
 
 void	merge(int *arr, int *sorted, int left, int right)
 {
@@ -36,11 +45,7 @@ void	merge(int *arr, int *sorted, int left, int right)
 	if (j > right)
 		while (i <= mid)
 			sorted[k++] = arr[i++];
-	while (left <= right)
-	{
-		arr[left] = sorted[left];
-		left++;
-	}
+	copy_data(arr, sorted, left, right);
 }
 
 void	merge_sort(int *arr, int *sorted, int left, int right)

@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   indexing.c                                         :+:      :+:    :+:   */
+/*   validate_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 18:26:15 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/06 23:49:43 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/06 22:41:39 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/06 23:16:52 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	indexing(t_ps *st)
+int	exist_same_num(t_ps *st)
 {
 	int	i;
 	int	j;
+	int	num;
 
 	i = 1;
-	while (i <= st->a_idx)
+	while (i < st->a_idx)
 	{
-		j = 1;
+		num = st->a[i];
+		j = i + 1;
 		while (j <= st->a_idx)
 		{
-			// printf("i = %d | j = %d\n", i, j);
-			// printf("stack a = %d | stack b = %d\n", st->a[j], st->a[i]);
-			if (st->a[j] == st->b[i])
-			{
-				st->a[j] = i;
-				st->b[i] = 0;
-				break ;
-			}
+			if (num == st->a[j])
+				return (1);
 			j++;
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	validate_data(t_ps *st)
+{
+	if (exist_same_num(st))
+		return (0);
+	return (1);
 }
