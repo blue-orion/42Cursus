@@ -21,9 +21,9 @@ SRCS = util_stack1.c	\
 	   utils.c			\
 	   merge_sort.c		\
 	   indexing.c		\
+	   input_data.c		\
 	   reverse_stack.c	\
 	   greedy.c			\
-	   interval.c		\
 	   find.c			\
 	   divide.c			\
 	   push_greedy.c	\

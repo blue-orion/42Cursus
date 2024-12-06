@@ -154,7 +154,8 @@ void	push_a(t_ps *st, int idx, int *cnt)
 	int	a_rot;
 
 	b_rot = rotate_num(st->b_idx, idx);
-	if (all_small(st->a, st->a_idx, st->b[idx]))
+	if (all_small(st->a, st->a_idx, st->b[idx])
+		|| all_big(st->a, st->a_idx, st->b[idx]))
 	{
 		a_rot = find_min_idx(st->a, st->a_idx);
 		if (a_rot == st->a_idx)
@@ -162,17 +163,8 @@ void	push_a(t_ps *st, int idx, int *cnt)
 		a_rot = rotate_num(st->a_idx, a_rot);
 		find_push_locate(st, a_rot, b_rot, cnt);
 		*cnt += pa(st);
-		*cnt += ra(st, 1);
-		return ;
-	}
-	if (all_big(st->a, st->a_idx, st->b[idx]))
-	{
-		a_rot = find_min_idx(st->a, st->a_idx);
-		if (a_rot == st->a_idx)
-			a_rot = 0;
-		a_rot = rotate_num(st->a_idx, a_rot);
-		find_push_locate(st, a_rot, b_rot, cnt);
-		*cnt += pa(st);
+		if (all_small(st->a, st->a_idx, st->b[idx]))
+			*cnt += ra(st, 1);
 		return ;
 	}
 	if (st->b[idx] > st->a[st->a_idx])
