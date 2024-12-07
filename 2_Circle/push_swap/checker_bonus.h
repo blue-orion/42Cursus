@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   indexing.c                                         :+:      :+:    :+:   */
+/*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 18:26:15 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/07 16:25:03 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/07 18:54:31 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/07 20:16:21 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
-void	indexing(t_ps *st)
-{
-	int	i;
-	int	j;
+# include "push_swap.h"
 
-	i = 1;
-	while (i <= st->a_idx)
-	{
-		j = 1;
-		while (j <= st->a_idx)
-		{
-			if (st->a[i] == st->b[j])
-			{
-				st->a[i] = j;
-				st->b[j] = 0;
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+int		check_instruct(t_ps *st);
+void	run_instruct(char *inst, t_ps *st);
+#endif

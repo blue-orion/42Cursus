@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_greedy.c                                      :+:      :+:    :+:   */
+/*   greedy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 21:03:58 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/06 22:38:38 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 19:22:39 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	push_a(t_ps *st, int idx, int *cnt)
-{
-	int	b_rot;
-	int	a_rot;
-
-	if (all_small(st->a, st->a_idx, st->b[idx])
-		|| all_big(st->a, st->a_idx, st->b[idx]))
-		return (edge_case_push(st, idx, cnt));
-	a_rot = count_a_rot(st, idx);
-	b_rot = rotate_num(st->b_idx, idx);
-	find_push_locate(st, a_rot, b_rot, cnt);
-	*cnt += pa(st);
-	return ;
-}
 
 int	find_min_instruction(t_ps *st)
 {
@@ -65,10 +50,22 @@ void	get_first(t_ps *st, int *cnt)
 	}
 }
 
-void	greedy_two_sort(t_ps *st, int *cnt)
+void	greedy_sort(t_ps *st, int *cnt)
 {
 	int	bi;
+	int	size;
 
+	size = st->size;
+	if (size <= 5)
+	{
+		while (size > 3)
+		{
+			*cnt += pb(st, 1);
+			size--;
+		}
+	}
+	else
+		divide(st, cnt);
 	first_three_sort(st, cnt);
 	while (st->b_idx > 0)
 	{

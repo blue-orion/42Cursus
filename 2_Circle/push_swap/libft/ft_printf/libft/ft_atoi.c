@@ -6,11 +6,12 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 20:51:01 by takwak            #+#    #+#             */
-/*   Updated: 2024/10/05 01:21:33 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 17:44:38 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
 static int	fft_isdigit(int c)
 {
@@ -44,6 +45,8 @@ int	ft_atoi(const char *nptr)
 	}
 	while (fft_isdigit(*nptr) && *nptr != '\0')
 	{
+		if (res > (INT_MAX - (*nptr - '0')) / 10)
+			return (0);
 		res = res * 10 + (*nptr - '0');
 		nptr++;
 	}

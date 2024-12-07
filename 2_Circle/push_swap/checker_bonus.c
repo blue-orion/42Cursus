@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_stack.c                                    :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 16:34:52 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/25 16:38:56 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/07 18:50:16 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/07 20:16:11 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-void	ft_reverse(int *st, int size)
+int	main(int argc, char **argv)
 {
-	int	i;
-	int	j;
-	int	tmp;
+	t_ps	*st;
 
-	i = 1;
-	j = size;
-	while (i <= size / 2)
-	{
-		tmp = st[i];
-		st[i] = st[j];
-		st[j] = tmp;
-		i++;
-		j--;
-	}
+	if (argc < 2)
+		return (0);
+	st = (t_ps *)malloc(sizeof(t_ps));
+	data_load(st, argc, argv);
+	if (!validate_data(st))
+		ft_exit(st, NULL);
+	if (check_instruct(st))
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
+	return (free_stack(st));
 }

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 21:50:25 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/06 22:39:51 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 17:56:32 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,6 @@ int	all_big_cost(t_ps *st, int a_rot, int b_rot)
 		b_rot++;
 	}
 	return (cnt + ft_abs(a_rot) + ft_abs(b_rot));
-}
-
-int	count_a_rot(t_ps *st, int idx)
-{
-	int	a_rot;
-
-	a_rot = 0;
-	if (st->b[idx] > st->a[st->a_idx])
-	{
-		a_rot = st->a_idx;
-		while (st->a[a_rot] < st->b[idx])
-			a_rot--;
-	}
-	if (st->b[idx] < st->a[st->a_idx])
-	{
-		a_rot = 1;
-		while (st->a[a_rot] > st->b[idx] && st->a[a_rot + 1] > st->b[idx])
-		{
-			if (st->a[a_rot] < st->a[a_rot + 1])
-				break ;
-			a_rot++;
-		}
-		if (st->a[a_rot] < st->b[idx])
-			a_rot = 0;
-	}
-	a_rot = rotate_num(st->a_idx, a_rot);
-	return (a_rot);
 }
 
 int	total_cost(int a_rot, int b_rot)

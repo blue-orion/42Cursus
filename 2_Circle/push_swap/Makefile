@@ -6,59 +6,74 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/20 23:38:16 by takwak            #+#    #+#              #
-#    Updated: 2024/12/06 23:31:58 by takwak           ###   ########.fr        #
+#    Updated: 2024/12/07 21:59:59 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g
 
-NAME = push_swap
+SRC_MAIN = main.c
 
 SRCS = util_stack1.c	\
 	   util_stack2.c	\
 	   util_stack3.c	\
 	   utils.c			\
+	   utils2.c			\
 	   utils_greedy.c	\
 	   utils_push.c		\
 	   merge_sort.c		\
 	   indexing.c		\
 	   input_data.c		\
-	   reverse_stack.c	\
 	   find.c			\
 	   divide.c			\
-	   push_greedy.c	\
+	   greedy.c			\
 	   counting_cost.c	\
 	   validate_data.c	\
-	   debugging.c	\
-	   main.c
+	   debugging.c
+
+SRCS_BONUS = checker_bonus.c		\
+			 check_instruct_bonus.c
 
 #Libft path
 LIBFT = libft
 
-OBJS_DIRECTORY = objs/
-OBJS = $(addprefix $(OBJS_DIRECTORY), $(SRCS:.c=.o))
+OBJS_DIR = objs/
+OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
+OBJS_BONUS = $(addprefix $(OBJS_DIR), $(SRCS_BONUS:.c=.o))
+
+ifdef BONUS
+	OBJ = $(OBJS) $(OBJS_BONUS)
+	NAME = checker
+else
+	OBJ = $(OBJS) objs/main.o
+	NAME = push_swap
+endif
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJ)
 	make -C $(LIBFT)
 	$(CC) $(FLAGS) $^ -I$(LIBFT) -L$(LIBFT) -lft -o $@
 
-objs/%.o : %.c | $(OBJS_DIRECTORY)
+objs/%.o : %.c | $(OBJS_DIR)
 	$(CC) $(FLAGS) -I$(LIBFT) -c $< -o $@
 
-$(OBJS_DIRECTORY) :
+$(OBJS_DIR) :
 	mkdir -p objs
 
 clean :
 	make -C $(LIBFT) clean
-	rm -rf $(OBJS)
+	rm -rf $(OBJ) $(OBJS_BONUS)
 
 fclean : clean
 	make -C $(LIBFT) fclean
 	rm -rf $(NAME)
+	rm -rf checker
 
 re : fclean all
 
-.PHONY : NAME all clean fclean re
+bonus :
+	@make BONUS=1 all
+
+.PHONY : NAME all clean fclean re bonus

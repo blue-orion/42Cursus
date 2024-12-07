@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:24:30 by takwak            #+#    #+#             */
-/*   Updated: 2024/11/25 22:52:40 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 19:19:39 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ int	rrb(t_ps *st, int flag)
 	return (1);
 }
 
-int	rrr(t_ps *st)
+int	rrr(t_ps *st, int flag)
 {
 	rra(st, 0);
 	rrb(st, 0);
-	ft_printf("rrr\n");
+	if (flag)
+		ft_printf("rrr\n");
 	return (1);
 }

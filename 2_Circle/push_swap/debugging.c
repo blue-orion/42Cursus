@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:29:05 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/06 23:31:29 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 17:54:37 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_stack(int *st, int size)
 	i = size;
 	while (i > 0)
 	{
-		printf("%d\n", st[i]);
+		ft_printf("%d\n", st[i]);
 		i--;
 	}
 }

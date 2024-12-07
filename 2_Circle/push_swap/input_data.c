@@ -6,11 +6,29 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:03:19 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/06 17:03:21 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 20:23:13 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_reverse(int *st, int size)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = 1;
+	j = size;
+	while (i <= size / 2)
+	{
+		tmp = st[i];
+		st[i] = st[j];
+		st[j] = tmp;
+		i++;
+		j--;
+	}
+}
 
 int	count_data(int argc, char **argv)
 {
@@ -36,6 +54,18 @@ int	count_data(int argc, char **argv)
 	return (cnt);
 }
 
+void	save_data(t_ps *st, int *tmp, char **splited, int split_idx)
+{
+	while (splited[split_idx])
+	{
+		st->a[++(st->a_idx)] = ft_atoi(splited[split_idx]);
+		tmp[st->a_idx] = ft_atoi(splited[split_idx++]);
+		if (tmp[st->a_idx] == 0)
+			ft_exit(st, tmp);
+	}
+	free_twoptr((void **)splited, split_idx);
+}
+
 void	data_load(t_ps *st, int argc, char **argv)
 {
 	char	**splited;
@@ -44,21 +74,21 @@ void	data_load(t_ps *st, int argc, char **argv)
 	int		split_idx;
 
 	st->size = count_data(argc, argv);
-	st->a = (int *)ft_calloc(st->size + 1, sizeof(int));
-	st->b = (int *)ft_calloc(st->size + 1, sizeof(int));
+	init_stack(st);
 	tmp = (int *)ft_calloc(st->size + 1, sizeof(int));
-	i = 1;
-	while (i < argc)
+	if (tmp == NULL)
+		ft_exit(st, NULL);
+	i = 0;
+	while (++i < argc)
 	{
 		split_idx = 0;
 		splited = ft_split(argv[i], ' ');
-		while (splited[split_idx])
+		if (splited == NULL || splited[0] == NULL)
 		{
-			st->a[++(st->a_idx)] = ft_atoi(splited[split_idx]);
-			tmp[st->a_idx] = ft_atoi(splited[split_idx++]);
+			free_twoptr((void **)splited, split_idx);
+			ft_exit(st, tmp);
 		}
-		free_twoptr((void **)splited, split_idx);
-		i++;
+		save_data(st, tmp, splited, split_idx);
 	}
 	ft_reverse(st->a, st->size);
 	merge_sort(tmp, st->b, 1, st->size);

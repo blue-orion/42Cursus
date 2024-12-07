@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 00:51:10 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/06 17:02:40 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 19:22:26 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	push_b(t_ps *st, int *cnt, int div1, int div2)
 {
 	if (st->a[st->a_idx] < div1)
 	{
-		*cnt += pb(st);
+		*cnt += pb(st, 1);
 		*cnt += rb(st, 1);
 		return ;
 	}
 	if (st->a[st->a_idx] >= div1 && st->a[st->a_idx] < div2)
 	{
-		*cnt += pb(st);
+		*cnt += pb(st, 1);
 		if (st->b[st->b_idx] < st->b[st->b_idx - 1])
-			*cnt += sb(st);
+			*cnt += sb(st, 1);
 		return ;
 	}
 	if (st->a[st->a_idx] >= div2)
@@ -57,7 +57,7 @@ void	divide(t_ps *st, int *cnt)
 	div2 = 2 * (st->a_idx / 3);
 	while (st->a[st->a_idx] >= div2)
 		*cnt += ra(st, 1);
-	*cnt += pb(st);
+	*cnt += pb(st, 1);
 	while (st->a_idx > 0)
 	{
 		if (all_part3(st, div2))
@@ -65,5 +65,5 @@ void	divide(t_ps *st, int *cnt)
 		push_b(st, cnt, div1, div2);
 	}
 	while (st->a_idx > 3)
-		*cnt += pb(st);
+		*cnt += pb(st, 1);
 }

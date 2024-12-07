@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:30:50 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/06 22:54:21 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 20:23:27 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,25 @@ void	*free_twoptr(void **ptr, int size)
 	int	i;
 
 	i = 0;
+	if (ptr == NULL)
+		return (NULL);
 	while (i < size)
 		free(ptr[i++]);
 	free(ptr);
 	return (NULL);
 }
 
-int	is_interval(int n, int *st, int a, int b)
-{
-	if (st[a] + n == st[b] || st[a] - n == st[b])
-		return (1);
-	return (0);
-}
-
-int	is_sorted(int order, int *st, int size)
+int	is_sorted(int *st, int size)
 {
 	int	i;
 
-	i = 1;
-	while (i < size)
+	i = size;
+	while (i > 1)
 	{
-		if (st[i] + order == st[i + 1])
-			i++;
+		if (st[i] < st[i - 1])
+			i--;
 		else
 			return (0);
 	}
 	return (1);
-}
-
-int	free_stack(t_ps *st)
-{
-	free(st->a);
-	free(st->b);
-	free(st);
-	return (0);
 }
