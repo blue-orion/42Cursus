@@ -6,9 +6,10 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/20 23:38:16 by takwak            #+#    #+#              #
-#    Updated: 2024/12/07 21:59:59 by takwak           ###   ########.fr        #
+#    Updated: 2024/12/07 22:13:29 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+MAKEFLAGS += --no-print-directory
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g
@@ -42,7 +43,7 @@ OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_BONUS = $(addprefix $(OBJS_DIR), $(SRCS_BONUS:.c=.o))
 
-ifdef BONUS
+ifdef WITH_BONUS
 	OBJ = $(OBJS) $(OBJS_BONUS)
 	NAME = checker
 else
@@ -64,16 +65,16 @@ $(OBJS_DIR) :
 
 clean :
 	make -C $(LIBFT) clean
-	rm -rf $(OBJ) $(OBJS_BONUS)
+	rm -rf $(OBJS_DIR)
 
 fclean : clean
 	make -C $(LIBFT) fclean
-	rm -rf $(NAME)
+	rm -rf push_swap
 	rm -rf checker
 
 re : fclean all
 
 bonus :
-	@make BONUS=1 all
+	@make WITH_BONUS=1 all
 
 .PHONY : NAME all clean fclean re bonus

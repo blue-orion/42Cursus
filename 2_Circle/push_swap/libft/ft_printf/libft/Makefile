@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 21:53:58 by takwak            #+#    #+#              #
-#    Updated: 2024/10/31 06:17:06 by takwak           ###   ########.fr        #
+#    Updated: 2024/12/07 22:09:51 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 MAKEFLAGS += --no-print-directory
@@ -38,7 +38,7 @@ OBJ = $(OBJS) $(BONUS_OBJS)
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) $(GNL_OBJS)
+$(NAME) : $(OBJ)
 	ar rcs $@ $^
 
 %.o : %.c
@@ -48,15 +48,15 @@ $(GNL_OBJS) : $(GNL_SRCS)
 	$(CC) $(FLAGS) -c $^ -o $@
 
 clean :
-	rm -rf $(OBJS) $(BONUS_OBJS)
+	rm -rf $(OBJ)
 
 fclean : clean
 	rm -rf $(NAME)
 
 re : fclean all
 
-bonus :
-	make WITH_BONUS=1 all
+# bonus :
+# 	make WITH_BONUS=1 all
 
 # bonus : $(OBJS) $(BONUS_OBJS)
 # 	ar rcs $(NAME) $^
