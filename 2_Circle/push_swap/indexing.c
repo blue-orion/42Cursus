@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:26:15 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/07 16:25:03 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/07 22:29:57 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	indexing(t_ps *st)
 			if (st->a[i] == st->b[j])
 			{
 				st->a[i] = j;
-				st->b[j] = 0;
 				break ;
 			}
 			j++;

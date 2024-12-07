@@ -6,11 +6,19 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:47:25 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/07 20:20:35 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/08 01:36:07 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_isspace(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\r' || c == '\f' || c == '\v')
+		return (1);
+	return (0);
+}
 
 int	free_stack(t_ps *st)
 {

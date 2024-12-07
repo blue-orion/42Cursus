@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 07:27:06 by takwak            #+#    #+#              #
-#    Updated: 2024/10/31 07:27:06 by takwak           ###   ########.fr        #
+#    Updated: 2024/12/08 01:06:13 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ CC = cc
 FLAGS = -Wall -Werror -Wextra
 
 NAME = gnl.a
-SRCS = get_next_line_bonus.c get_next_line_utils_bonus.c
+SRCS = get_next_line.c get_next_line_utils.c
+SRC_B = get_next_line_bonus.c get_next_line_utils_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 

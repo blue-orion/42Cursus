@@ -6,38 +6,52 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 19:00:29 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/07 20:15:38 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/08 01:20:04 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
-void	run_instruct(char *inst, t_ps *st)
+void	free_gnl(int fd)
 {
-	if (!ft_strncmp(inst, "rra", 3))
+	char	*buf;
+
+	buf = get_next_line(fd);
+	while (buf != NULL)
+	{
+		free(buf);
+		buf = get_next_line(fd);
+	}
+	free(buf);
+}
+
+int	run_instruct(char *inst, t_ps *st)
+{
+	if (!ft_strncmp(inst, "rra\n", 4))
 		rra(st, 0);
-	else if (!ft_strncmp(inst, "rrb", 3))
+	else if (!ft_strncmp(inst, "rrb\n", 4))
 		rrb(st, 0);
-	else if (!ft_strncmp(inst, "rrr", 3))
+	else if (!ft_strncmp(inst, "rrr\n", 4))
 		rrr(st, 0);
-	else if (!ft_strncmp(inst, "ra", 2))
+	else if (!ft_strncmp(inst, "ra\n", 3))
 		ra(st, 0);
-	else if (!ft_strncmp(inst, "rb", 2))
+	else if (!ft_strncmp(inst, "rb\n", 3))
 		rb(st, 0);
-	else if (!ft_strncmp(inst, "rr", 2))
+	else if (!ft_strncmp(inst, "rr\n", 3))
 		rr(st, 0);
-	else if (!ft_strncmp(inst, "sa", 2))
+	else if (!ft_strncmp(inst, "sa\n", 3))
 		sa(st, 0);
-	else if (!ft_strncmp(inst, "sb", 2))
+	else if (!ft_strncmp(inst, "sb\n", 3))
 		sb(st, 0);
-	else if (!ft_strncmp(inst, "ss", 2))
+	else if (!ft_strncmp(inst, "ss\n", 3))
 		ss(st, 0);
-	else if (!ft_strncmp(inst, "pa", 2))
+	else if (!ft_strncmp(inst, "pa\n", 3))
 		pa(st, 0);
-	else if (!ft_strncmp(inst, "pb", 2))
+	else if (!ft_strncmp(inst, "pb\n", 3))
 		pb(st, 0);
 	else
-		ft_exit(st, NULL);
+		return (0);
+	return (1);
 }
 
 int	check_instruct(t_ps *st)
@@ -47,7 +61,13 @@ int	check_instruct(t_ps *st)
 	inst = get_next_line(0);
 	while (inst != NULL)
 	{
-		run_instruct(inst, st);
+		if (!run_instruct(inst, st))
+		{
+			free(inst);
+			free_gnl(-1);
+			ft_exit(st, NULL);
+		}
+		free(inst);
 		inst = get_next_line(0);
 	}
 	if (st->b_idx == 0 && is_sorted(st->a, st->a_idx))

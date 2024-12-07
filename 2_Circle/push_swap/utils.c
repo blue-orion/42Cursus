@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:30:50 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/07 20:23:27 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/08 01:36:17 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,43 @@ int	is_sorted(int *st, int size)
 			return (0);
 	}
 	return (1);
+}
+
+int	str_isdigit(char *s)
+{
+	while (*s)
+	{
+		if (*s == '+' || *s == '-')
+		{
+			s++;
+			continue ;
+		}
+		if (*s < '0' || *s > '9')
+			return (0);
+		s++;
+	}
+	return (1);
+}
+
+long long	ft_atoll(char *nptr)
+{
+	long long	res;
+	int			fl;
+
+	res = 0;
+	fl = 1;
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+	{
+		if (*nptr == '-')
+			fl *= -1;
+		nptr++;
+	}
+	while (ft_isdigit(*nptr) && *nptr != '\0')
+	{
+		res = res * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (fl * res);
 }

@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 21:53:58 by takwak            #+#    #+#              #
-#    Updated: 2024/10/31 06:17:06 by takwak           ###   ########.fr        #
+#    Updated: 2024/12/08 01:17:29 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ $(NAME) :
 	make -C ./ft_printf
 	cp -r ./ft_printf/libftprintf.a ./$(NAME)
 	make -C ./get_next_line
-	ar rcs $@ get_next_line/get_next_line_bonus.o get_next_line/get_next_line_utils_bonus.o
+	ar rcs $@ get_next_line/get_next_line.o get_next_line/get_next_line_utils.o
 
 %.o : %.c
 	$(CC) $(FLAGS) -c $^ -o $@

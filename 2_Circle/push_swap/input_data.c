@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:03:19 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/07 20:23:13 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/08 01:33:04 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,15 @@ void	save_data(t_ps *st, int *tmp, char **splited, int split_idx)
 {
 	while (splited[split_idx])
 	{
-		st->a[++(st->a_idx)] = ft_atoi(splited[split_idx]);
-		tmp[st->a_idx] = ft_atoi(splited[split_idx++]);
-		if (tmp[st->a_idx] == 0)
+		if (str_isdigit(splited[split_idx]))
+		{
+			st->a[++(st->a_idx)] = ft_atoi(splited[split_idx]);
+			tmp[st->a_idx] = ft_atoi(splited[split_idx]);
+			if (tmp[st->a_idx] != ft_atoll(splited[split_idx]))
+				ft_exit(st, tmp);
+			split_idx++;
+		}
+		else
 			ft_exit(st, tmp);
 	}
 	free_twoptr((void **)splited, split_idx);
