@@ -6,11 +6,24 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:03:19 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/08 01:33:04 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/10 01:26:50 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	free_split(char **splited)
+{
+	int	i;
+
+	i = 0;
+	while (splited[i])
+	{
+		free(splited[i]);
+		i++;
+	}
+	free(splited);
+}
 
 void	ft_reverse(int *st, int size)
 {
@@ -63,7 +76,10 @@ void	save_data(t_ps *st, int *tmp, char **splited, int split_idx)
 			st->a[++(st->a_idx)] = ft_atoi(splited[split_idx]);
 			tmp[st->a_idx] = ft_atoi(splited[split_idx]);
 			if (tmp[st->a_idx] != ft_atoll(splited[split_idx]))
+			{
+				free_split(splited);
 				ft_exit(st, tmp);
+			}
 			split_idx++;
 		}
 		else
@@ -91,7 +107,7 @@ void	data_load(t_ps *st, int argc, char **argv)
 		splited = ft_split(argv[i], ' ');
 		if (splited == NULL || splited[0] == NULL)
 		{
-			free_twoptr((void **)splited, split_idx);
+			free_split(splited);
 			ft_exit(st, tmp);
 		}
 		save_data(st, tmp, splited, split_idx);

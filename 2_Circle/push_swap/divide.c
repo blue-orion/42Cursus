@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 00:51:10 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/07 19:22:26 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/10 01:35:16 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	divide(t_ps *st, int *cnt)
 	int	div1;
 	int	div2;
 
+	if (st->a_idx <= 3)
+		return ;
 	div1 = st->a_idx / 3;
 	div2 = 2 * (st->a_idx / 3);
 	while (st->a[st->a_idx] >= div2)

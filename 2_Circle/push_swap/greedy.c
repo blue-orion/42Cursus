@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 21:03:58 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/07 19:22:39 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/10 01:35:31 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,17 @@ void	greedy_sort(t_ps *st, int *cnt)
 	int	size;
 
 	size = st->size;
-	if (size <= 5)
+	if (size == 2 && (st->a[2] > st->a[1]))
 	{
-		while (size > 3)
-		{
-			*cnt += pb(st, 1);
-			size--;
-		}
+		*cnt += ra(st, 1);
+		return ;
 	}
-	else
-		divide(st, cnt);
+	while (size <= 5 && size > 3)
+	{
+		*cnt += pb(st, 1);
+		size--;
+	}
+	divide(st, cnt);
 	first_three_sort(st, cnt);
 	while (st->b_idx > 0)
 	{
