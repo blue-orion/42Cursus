@@ -1,0 +1,13 @@
+in parent
+/home/takwak/bin
+/home/takwak/bin
+in child
+asdf
+zxcv
+asdf
+qwer
+asdf
+bgsfdg
+ asdfa
+ czxcve
+
