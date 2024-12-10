@@ -23,6 +23,5 @@ char	**find_path(char **env)
 		}
 		env++;
 	}
-	printf("%s\n", *env);
 	return (ft_split(*env, ':'));
 }

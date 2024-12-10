@@ -18,6 +18,7 @@ NAME = pipex
 SRC_MAIN = main.c
 SRC_DIR = srcs/
 SRCS = child_process.c	\
+	   parent_process.c	\
 	   read_data.c		\
 	   utils.c			\
 	   validate_cmd.c	\

@@ -42,7 +42,8 @@ char	*read_data(int fd);
 char	**find_path(char **env);
 //Exe Command
 char	*validate_cmd(char **cmd, char **path);
-int		child_process(t_proc *pr);
+int		child_process(t_proc *pr, char **argv);
+int		parent_process(t_proc *pr, char **argv);
 
 //Utils
 void	ft_exit(char *errstr);
