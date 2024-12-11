@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:55:35 by takwak            #+#    #+#             */
-/*   Updated: 2024/10/29 18:30:55 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/11 16:40:33 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef struct s_buffer
 	int				last;
 	struct s_buffer	*next;
 }	t_buffer;
-t_buffer	*ft_newlst(t_buffer **list, t_buffer *new, int fd);
+t_buffer	*ft_gnl_newlst(t_buffer **list, t_buffer *new, int fd);
 void		*free_lst(t_buffer **lst, int fd);
-char		*ft_strchr(const char *s, int c);
+char		*ft_gnl_strchr(const char *s, int c);
 int			init_(t_buffer *list, int type);
 char		*get_next_line(int fd);
 #endif

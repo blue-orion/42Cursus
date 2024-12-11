@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 00:11:00 by takwak            #+#    #+#             */
-/*   Updated: 2024/10/29 18:29:18 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/11 16:40:16 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	init_(t_buffer *list, int type)
 	return (1);
 }
 
-t_buffer	*ft_newlst(t_buffer **list, t_buffer *new_list, int fd)
+t_buffer	*ft_gnl_newlst(t_buffer **list, t_buffer *new_list, int fd)
 {
 	t_buffer	*cur;
 
@@ -93,7 +93,7 @@ void	*free_lst(t_buffer **lst, int fd)
 	return (NULL);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_gnl_strchr(const char *s, int c)
 {
 	if (s == NULL)
 		return (NULL);

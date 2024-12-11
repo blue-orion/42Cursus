@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_process.c                                    :+:      :+:    :+:   */
+/*   cmd_exe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 18:22:34 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/10 20:31:11 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/12 02:00:33 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/12 02:00:33 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-int	child_process(t_proc *pr, char **argv)
+char	*validate_cmd(char **split_cmd, char **path)
 {
-	int	input_fd;
+	char	*p_path;
+	char	*n_path;
 
-	input_fd = open(argv[1], O_RDONLY);
-	dup2(input_fd, 0);
-	dup2(pr->p1[1], 1);
-	close(input_fd);
-	close(pr->p1[0]);
-	close(pr->p1[1]);
-	pr->cmd_path = validate_cmd(ft_split(argv[2], ' '), pr->env_path);
-	if (!pr->cmd_path)
-		ft_exit("cmd error: ");
-	if (execve(pr->cmd_path, ft_split(argv[2], ' '), NULL) == -1)
-		ft_exit("execve error: ");
-	return (0);
+	if (!access(split_cmd[0], X_OK))
+		return (split_cmd[0]);
+	while (*path)
+	{
+		p_path = ft_strjoin(*path, "/");
+		if (!p_path)
+			return (NULL);
+		n_path = ft_strjoin(p_path, split_cmd[0]);
+		free(p_path);
+		if (!n_path)
+			return (NULL);
+		if (!access(n_path, X_OK))
+			return (n_path);
+		path++;
+	}
+	return (NULL);
 }

@@ -6,22 +6,24 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/09 18:41:57 by takwak            #+#    #+#              #
-#    Updated: 2024/12/09 21:31:55 by takwak           ###   ########.fr        #
+#    Updated: 2024/12/12 00:44:57 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g
+CFLAGS = -Werror -Wextra -Wall -g
 
 NAME = pipex
 
 SRC_MAIN = main.c
 SRC_DIR = srcs/
-SRCS = child_process.c	\
-	   parent_process.c	\
-	   read_data.c		\
+SRCS = process.c		\
 	   utils.c			\
-	   validate_cmd.c	\
+	   utils_free.c		\
+	   cmd_exe.c		\
+	   cmd_list.c		\
+	   cmd_parse.c		\
+	   debugging.c		\
 	   find_path_env.c	
 
 INCLUDES = includes

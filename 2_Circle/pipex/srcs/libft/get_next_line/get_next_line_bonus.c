@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:59:47 by takwak            #+#    #+#             */
-/*   Updated: 2024/10/29 18:30:17 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/11 16:42:11 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ static int	exist_line(char **res, t_buffer *info)
 	if (info->last)
 	{
 		start_adr = info->buf + info->idx;
-		if (ft_strchr(start_adr, '\n') != NULL)
+		if (ft_gnl_strchr(start_adr, '\n') != NULL)
 		{
-			len = ft_strchr(start_adr, '\n') + 1 - start_adr;
+			len = ft_gnl_strchr(start_adr, '\n') + 1 - start_adr;
 			*res = make_line(*res, info, len);
 			info->idx += len;
 			if (*(start_adr + len) == '\0')
@@ -106,12 +106,12 @@ char	*get_next_line(int fd)
 
 	res = NULL;
 	if (info == NULL)
-		info = ft_newlst(&info, info, fd);
+		info = ft_gnl_newlst(&info, info, fd);
 	list = info;
 	while (list != NULL && list->label != fd)
 		list = list->next;
 	if (list == NULL)
-		list = ft_newlst(&info, list, fd);
+		list = ft_gnl_newlst(&info, list, fd);
 	if (exist_line(&res, list))
 		return (res);
 	read_size = read(fd, list->buf, BUFFER_SIZE);
