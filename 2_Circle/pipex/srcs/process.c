@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 00:44:10 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/12 02:24:29 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/12 02:35:55 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	parent_process(t_proc *pr, char **argv)
 		ft_exit(pr, "failed split in ft_split_cmd", 0);
 	pr->cmd_path = validate_cmd(pr->cmd, pr->env_path);
 	if (!pr->cmd_path)
-		ft_exit(pr, "cmd error" , 0);
+		ft_exit(pr, "cmd error", 0);
 	if (execve(pr->cmd_path, pr->cmd, NULL) == -1)
 		ft_exit(pr, "execve error", errno);
 	return (0);
