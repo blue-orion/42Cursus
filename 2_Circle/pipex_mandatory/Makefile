@@ -13,22 +13,39 @@
 CC = cc
 CFLAGS = -Werror -Wextra -Wall -g
 
-INCLUDES = includes
-SRC_DIR = srcs/
-OBJ_DIR = objs/
-LIBFT = srcs/libft
-
 NAME = pipex
 
-SRC_MAIN = pipex.c
-SRCS = command_exec_bonus.c		\
-	   command_split_bonus.c	\
-	   find_paths_bonus.c		\
-	   here_doc_bonus.c			\
-	   process_bonus.c			\
-	   utils_bonus.c			\
-	   utils_free_bonus.c	
-OBJS = $(addprefix $(OBJ_DIR), $(SRC_MAIN:.c=.o) $(SRCS:.c=.o))
+SRC_MAIN = main.c
+SRC_MAIN_BONUS = main_bonus.c
+
+SRC_DIR = srcs/
+SRCS = process.c		\
+	   utils.c			\
+	   utils_free.c		\
+	   cmd_exe.c		\
+	   cmd_list.c		\
+	   cmd_parse.c		\
+	   debugging.c		\
+	   find_path_env.c	
+
+SRCS_BONUS = command_exec_bonus.c	\
+			 command_split_bonus.c	\
+			 find_paths_bonus.c		\
+			 here_doc_bonus.c		\
+			 process_bonus.c		\
+			 utils_bonus.c			\
+			 utils_free_bonus.c	
+
+INCLUDES = includes
+OBJ_DIR = objs/
+
+ifdef WITH_BONUS
+	OBJS = $(addprefix $(OBJ_DIR), $(SRC_MAIN_BONUS:.c=.o) $(SRCS_BONUS:.c=.o))
+else
+	OBJS = $(addprefix $(OBJ_DIR), $(SRC_MAIN:.c=.o) $(SRCS:.c=.o))
+endif
+
+LIBFT = srcs/libft
 
 all : $(NAME)
 
@@ -54,3 +71,6 @@ fclean : clean
 	rm -rf $(NAME)
 
 re : fclean all
+
+bonus : fclean
+	make WITH_BONUS=1 all
