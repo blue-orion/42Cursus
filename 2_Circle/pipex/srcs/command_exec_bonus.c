@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 00:57:22 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/15 16:38:15 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:26:11 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	exec_first_cmd(char *file, char **split_cmd, t_pipex *info, char **env)
 	path = find_exec_path(split_cmd[0], env);
 	if (!path)
 		command_not_found(info, path, split_cmd);
-	perror(path);
 	if (execve(path, split_cmd, env) == -1)
 	{
 		free(path);
@@ -86,7 +85,6 @@ void	exec_last_cmd(char *file, char **split_cmd, t_pipex *info, char **env)
 	path = find_exec_path(split_cmd[0], env);
 	if (!path)
 		command_not_found(info, path, split_cmd);
-	perror(path);
 	if (execve(path, split_cmd, env) == -1)
 	{
 		free(path);
