@@ -1,9 +1,12 @@
-Makefile
-includes
-input.txt
-main.c
-main_bonus.c
-objs
-output.txt
-pipex
-srcs
+total 64
+drwxr-xr-x 5 takwak 2024_gyeongsan   144 Dec 15 16:38 .
+drwxr-xr-x 6 takwak 2024_gyeongsan    70 Dec 13 07:09 ..
+drwxr-xr-x 2 takwak 2024_gyeongsan    42 Dec 13 07:15 includes
+-rw-r--r-- 1 takwak 2024_gyeongsan     0 Dec 12 00:24 input.txt
+-rw-r--r-- 1 takwak 2024_gyeongsan  1703 Dec 13 07:19 Makefile
+drwxr-xr-x 2 takwak 2024_gyeongsan  4096 Dec 15 16:38 objs
+-rw-r--r-- 1 takwak 2024_gyeongsan   163 Dec 15 16:43 output2.txt
+-rw-r--r-- 1 takwak 2024_gyeongsan   683 Dec 15 16:43 output.txt
+-rwxr-xr-x 1 takwak 2024_gyeongsan 39784 Dec 15 16:38 pipex
+-rw-r--r-- 1 takwak 2024_gyeongsan  1496 Dec 13 07:01 pipex.c
+drwxr-xr-x 3 takwak 2024_gyeongsan  4096 Dec 15 16:38 srcs

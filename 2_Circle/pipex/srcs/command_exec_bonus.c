@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_exec.c                                     :+:      :+:    :+:   */
+/*   command_exec_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 00:57:22 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/13 02:43:10 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/15 16:38:15 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exec_here_doc_cmd(char **split_cmd, t_pipex *info, char **env)
 	path = find_exec_path(split_cmd[0], env);
 	if (!path)
 		command_not_found(info, path, split_cmd);
-	if (execve(path, split_cmd, NULL) == -1)
+	if (execve(path, split_cmd, env) == -1)
 	{
 		free(path);
 		ft_exit(info, "execve", errno);
@@ -44,7 +44,8 @@ void	exec_first_cmd(char *file, char **split_cmd, t_pipex *info, char **env)
 	path = find_exec_path(split_cmd[0], env);
 	if (!path)
 		command_not_found(info, path, split_cmd);
-	if (execve(path, split_cmd, NULL) == -1)
+	perror(path);
+	if (execve(path, split_cmd, env) == -1)
 	{
 		free(path);
 		ft_exit(info, "execve", errno);
@@ -61,7 +62,7 @@ void	exec_middle_cmd(char **split_cmd, t_pipex *info, char **env)
 	path = find_exec_path(split_cmd[0], env);
 	if (!path)
 		command_not_found(info, path, split_cmd);
-	if (execve(path, split_cmd, NULL) == -1)
+	if (execve(path, split_cmd, env) == -1)
 	{
 		free(path);
 		ft_exit(info, "execve", errno);
@@ -85,7 +86,8 @@ void	exec_last_cmd(char *file, char **split_cmd, t_pipex *info, char **env)
 	path = find_exec_path(split_cmd[0], env);
 	if (!path)
 		command_not_found(info, path, split_cmd);
-	if (execve(path, split_cmd, NULL) == -1)
+	perror(path);
+	if (execve(path, split_cmd, env) == -1)
 	{
 		free(path);
 		ft_exit(info, "execve", errno);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_paths.c                                       :+:      :+:    :+:   */
+/*   find_paths_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:20:05 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/13 02:48:21 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/15 16:43:54 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ char	**find_path(char **env)
 	while (*env)
 	{
 		if (!ft_strncmp(*env, "PATH=", 5))
-		{
-			*env += 5;
-			return (ft_split(*env, ':'));
-		}
+			return (ft_split(*env + 5, ':'));
 		env++;
 	}
 	return (NULL);
