@@ -1,0 +1,1 @@
+{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "srcs/make_thread.c", "output": "objs/make_thread.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "srcs/make_thread.c", "-g", "-c", "-I", "includes", "-o", "objs/make_thread.o", "--target=x86_64-pc-linux-gnu"]},

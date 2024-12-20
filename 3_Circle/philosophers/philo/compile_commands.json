@@ -1,0 +1,8 @@
+[
+{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "srcs/ft_atoi.c", "output": "objs/ft_atoi.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "srcs/ft_atoi.c", "-g", "-c", "-I", "includes", "-o", "objs/ft_atoi.o", "--target=x86_64-pc-linux-gnu"]},
+{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "srcs/log.c", "output": "objs/log.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "srcs/log.c", "-g", "-c", "-I", "includes", "-o", "objs/log.o", "--target=x86_64-pc-linux-gnu"]},
+{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "srcs/make_thread.c", "output": "objs/make_thread.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "srcs/make_thread.c", "-g", "-c", "-I", "includes", "-o", "objs/make_thread.o", "--target=x86_64-pc-linux-gnu"]},
+{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "philosophers.c", "output": "objs/philosophers.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "philosophers.c", "-g", "-c", "-I", "includes", "-o", "objs/philosophers.o", "--target=x86_64-pc-linux-gnu"]},
+{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "srcs/save_info.c", "output": "objs/save_info.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "srcs/save_info.c", "-g", "-c", "-I", "includes", "-o", "objs/save_info.o", "--target=x86_64-pc-linux-gnu"]},
+{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "srcs/timestamp.c", "output": "objs/timestamp.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "srcs/timestamp.c", "-g", "-c", "-I", "includes", "-o", "objs/timestamp.o", "--target=x86_64-pc-linux-gnu"]},
+]
