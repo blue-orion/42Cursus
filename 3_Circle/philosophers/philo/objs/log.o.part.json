@@ -1,1 +1,0 @@
-{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "srcs/log.c", "output": "objs/log.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "srcs/log.c", "-g", "-c", "-I", "includes", "-o", "objs/log.o", "--target=x86_64-pc-linux-gnu"]},
