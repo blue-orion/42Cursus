@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/19 22:11:52 by takwak            #+#    #+#              #
-#    Updated: 2024/12/21 00:48:56 by takwak           ###   ########.fr        #
+#    Updated: 2024/12/21 23:00:05 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,16 +20,19 @@ SRC_DIR = srcs/
 OBJ_DIR = objs/
 
 MAIN = philosophers.c
-SRCS = log.c		\
+SRCS = monitoring.c		\
 	   timestamp.c	\
 	   ft_atoi.c	\
 	   make_thread.c	\
+	   behavior.c			\
+	   fork.c			\
 	   save_info.c
 OBJS = $(addprefix $(OBJ_DIR), $(MAIN:.c=.o) $(SRCS:.c=.o))
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
+	export ASAN_OPTIONS=detect_leaks=1 
 	$(CC) $(CFLAGS) $^ -o $@ -MJ $@.part.json
 
 $(OBJ_DIR)%.o : %.c | $(OBJ_DIR)
