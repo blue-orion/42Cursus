@@ -6,13 +6,13 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 21:23:52 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/22 02:17:05 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/23 01:52:48 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	*new_philo(void *philo_info)
+void	*thread_main(void *philo_info)
 {
 	t_philo	*philo;
 
@@ -21,6 +21,8 @@ void	*new_philo(void *philo_info)
 		philo_think(philo);
 	while (1)
 	{
+		if (check_dead_flag(philo))
+			break ;
 		if (philo->left_fork && philo->right_fork)
 			philo_eat(philo);
 		if (philo->status == EAT)
@@ -53,11 +55,15 @@ t_philo	*make_philo(t_info *info)
 	int		i;
 
 	philoes = (t_philo *)malloc(sizeof(t_philo) * info->num_of_philo);
+	if (!philoes)
+		error_in_make_threads(info, philoes, 0);
 	i = 0;
 	while (i < info->num_of_philo)
 	{
 		init_philo_info(i + 1, info, &philoes[i]);
-		pthread_create(&philoes[i].tid, NULL, new_philo, (void *)&philoes[i]);
+		if (pthread_create(&philoes[i].tid, NULL,
+				thread_main, (void *)&philoes[i]))
+			error_in_make_threads(info, philoes, i);
 		i++;
 	}
 	return (philoes);
