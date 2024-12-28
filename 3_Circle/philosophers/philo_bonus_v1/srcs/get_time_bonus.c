@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_behavior_bonus.c                             :+:      :+:    :+:   */
+/*   get_time_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 04:21:45 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 04:28:21 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/26 17:44:04 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/28 01:51:58 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus.h>
 
-void	start_behavior(t_philo *philo)
+int	get_runtime(struct timeval cur, struct timeval start)
 {
-	if (philo->id & 0)
-		;
-		// philo_think(philo);
-	while (1)
-	{
-		// philo_take_fork(philo);
-		// philo_eat;
-		// philo_sleep;
-		// philo_think;
-	}
+	int	runtime;
+	int	sec;
+	int	usec;
+
+	sec = cur.tv_sec - start.tv_sec;
+	usec = cur.tv_usec - start.tv_usec;
+	runtime = sec * 1000 + usec / 1000;
+	return (runtime);
 }

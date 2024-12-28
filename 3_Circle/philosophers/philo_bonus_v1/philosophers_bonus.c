@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_behavior_bonus.c                             :+:      :+:    :+:   */
+/*   philosophers_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 04:21:45 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 04:28:21 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/24 15:33:33 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/28 17:56:51 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus.h>
 
-void	start_behavior(t_philo *philo)
+int	main(int argc, char **argv)
 {
-	if (philo->id & 0)
-		;
-		// philo_think(philo);
-	while (1)
-	{
-		// philo_take_fork(philo);
-		// philo_eat;
-		// philo_sleep;
-		// philo_think;
-	}
+	t_philo	*philos;
+
+	if (argc < 5 || argc > 6)
+		return (write(2, "Invalid argument\n", 17), 0);
+	philos = set_initial_state(argc, argv);
+	if (!philos)
+		error_exit();
+	if (wait_end_philo(philos))
+		success_exit(philos);
+	return (0);
 }

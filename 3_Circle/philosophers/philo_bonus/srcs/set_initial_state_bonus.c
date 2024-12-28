@@ -5,59 +5,92 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 19:26:21 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 01:27:20 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/29 02:39:57 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/29 04:04:36 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus.h>
 
-void	init_philo(t_philo *philo, int id, t_info *info, t_common *common)
+int	save_info(t_info *info, int argc, char **argv)
 {
-	philo->id = id;
-	philo->status = -1;
-	philo->eat_cnt = 0;
-	philo->having_fork_num = 0;
-	philo->flag = 0;
-	philo->info = info;
-	philo->common = common;
-	philo->last_eat_time.tv_sec = common->start_time.tv_sec;
-	philo->last_eat_time.tv_usec = common->start_time.tv_usec;
-	philo->time_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	philo->flag_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(philo->time_mutex, NULL);
-	pthread_mutex_init(philo->flag_mutex, NULL);
+	info->num_of_philo = ft_atoi(argv[1]);
+	info->time_to_die = ft_atoi(argv[2]);
+	info->time_to_eat = ft_atoi(argv[3]);
+	info->time_to_sleep = ft_atoi(argv[4]);
+	if (info->num_of_philo <= 0 || info->time_to_die <= 0 ||
+		info->time_to_eat <= 0 || info->time_to_sleep <= 0)
+		return (1);
+	if (argc == 6)
+	{
+		info->must_eat_time = ft_atoi(argv[5]);
+		if (info->must_eat_time <= 0)
+			return (1);
+	}
+	else
+		info->must_eat_time = -1;
+	gettimeofday(&info->start_time, NULL);
+	return (1);
 }
 
-t_philo	*set_initial_state(int argc, char **argv)
+int	make_common_resource(t_common *common, t_info info)
 {
-	pid_t		pid;
-	t_info		*info;
-	t_common	common;
-	t_philo		*philos;
-	int			i;
-
-	info = save_info(argc, argv);
-	if (!info)
-		return (NULL);
-	if (make_common_source(&common, info))
-		return (free(info), NULL);
-	philos = (t_philo *)malloc(sizeof(t_philo) * info->num_of_philo);
-	if (!philos)
-		return (free(info), free_common(&common), NULL);
-	i = 0;
-	pid = 1;
-	while (pid > 0 && i < info->num_of_philo)
+	common->fork_sem = sem_open("fork", O_CREAT | O_EXCL,
+							 0644, info.num_of_philo);
+	if (!common->fork_sem)
 	{
-		init_philo(&philos[i], i + 1, info, &common);
-		pid = fork();
-		if (pid == -1)
-			perror("fork error");
-		if (pid == 0)
-			start_action(&philos[i]);
+		sem_unlink("fork");
+		common->fork_sem = sem_open("fork", O_CREAT | O_EXCL,
+								0644, info.num_of_philo);
+	}
+	if (!common->fork_sem)
+		return (-1);
+	common->print_sem = sem_open("print", O_CREAT | O_EXCL,
+							  0644, 1);
+	if (!common->print_sem)
+	{
+		sem_unlink("print");
+		common->print_sem = sem_open("print", O_CREAT | O_EXCL,
+								0644, info.num_of_philo);
+	}
+	if (!common->print_sem)
+	{
+		sem_unlink("fork");
+		return (-1);
+	}
+	return (0);
+}
+
+int	init_philo(t_philo *philo, int idx, t_info *info, t_common *common)
+{
+	philo = (t_philo *)memset(philo, 0, sizeof(t_philo));
+	if (!philo)
+		return (-1);
+	philo->id = idx + 1;
+	philo->status = -1;
+	philo->info = info;
+	philo->common = common;
+	return (1);
+}
+
+t_philo	*set_initial_state(t_info *info, t_common *common)
+{
+	int		i;
+	t_philo	*philos;
+
+	philos = (t_philo *)malloc(sizeof(t_philo) * info->num_of_philo + 1);
+	i = 0;
+	while (i < info->num_of_philo)
+	{
+		if (init_philo(&philos[i], i, info, common))
+			break ;
+		philos[i].pid = fork();
+		if (philos[i].pid < 0)
+			break ;
+		else if (philos[i].pid == 0)
+			philo_main(&philos[i]);
 		else
-			philos[i].pid = pid;
-		i++;
+			i++;
 	}
 	return (philos);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/26 18:15:05 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 01:41:13 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/29 03:33:54 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/29 04:25:39 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,41 @@
 
 int	is_philo_dead(t_philo *philo)
 {
-	int	tmp;
 	int	runtime;
 
-	pthread_mutex_lock(philo->time_mutex);
-	gettimeofday(&philo->dead_time, NULL);
-	runtime = get_runtime(philo->dead_time, philo->last_eat_time);
+	pthread_mutex_lock(&philo->mutex->time_mutex);
+	gettimeofday(&philo->cur_time, NULL);
+	runtime = get_runtime(philo->cur_time, philo->last_eat_time);
 	if (runtime > philo->info->time_to_die)
 	{
-		philo->status = DIE;
-		runtime = get_runtime(philo->dead_time, philo->common->start_time);
-		print_log(philo, runtime);
-		pthread_mutex_unlock(philo->time_mutex);
-		return (-1);
+		runtime = get_runtime(philo->cur_time, philo->info->start_time);
+		pthread_mutex_lock(&philo->mutex->status_mutex);
+		set_status(philo, DIE);
+		print_log(runtime, philo->id, philo->status, philo->common->print_sem);
+		pthread_mutex_unlock(&philo->mutex->status_mutex);
+		pthread_mutex_unlock(&philo->mutex->time_mutex);
+		return (1);
 	}
-	pthread_mutex_unlock(philo->time_mutex);
+	pthread_mutex_unlock(&philo->mutex->time_mutex);
 	return (0);
 }
 
-void	kill_all_philo(t_philo *philos)
+void	*monitoring(void *data)
 {
-	int	i;
+	t_philo	*philo;
 
-	i = 0;
-	while (i < philos->info->num_of_philo)
+	philo = (t_philo *)data;
+	while (1)
 	{
-		kill(philos[i].pid, SIGKILL);
-		i++;
-	}
-	// sem_post(philos->common->print_sem);
-}
-
-int	wait_end_philo(t_philo *philos)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	while (i < philos->info->num_of_philo)
-	{
-		waitpid(0, &status, 0);
-		if (status)
+		if (is_philo_dead(philo))
+			break ;
+		pthread_mutex_lock(&philo->mutex->eat_cnt_mutex);
+		if (philo->eat_cnt == philo->info->must_eat_time)
 		{
-			kill_all_philo(philos);
-			return (1);
+			pthread_mutex_unlock(&philo->mutex->eat_cnt_mutex);
+			break ;
 		}
-		i++;
+		pthread_mutex_unlock(&philo->mutex->eat_cnt_mutex);
 	}
-	return (1);
+	return (0);
 }
