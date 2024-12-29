@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_philo_bonus.c                                :+:      :+:    :+:   */
+/*   wait_childs_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 04:15:39 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 20:19:19 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/30 02:41:59 by takwak            #+#    #+#             */
+/*   Updated: 2024/12/30 02:41:59 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus.h>
 
-int	is_iam_end(t_philo *philo)
+void	wait_childs(t_philo *philo)
 {
-	sem_wait(philo->flag_sem->adr);
-	if (philo->flag == FINISH)
+	int	end_status;
+	int	i;
+
+	waitpid(0, &end_status, 0);
+	i = 1;
+	while (i < philo->info->num_of_philo)
 	{
-		philo->status = FINISH;
-		sem_post(philo->flag_sem->adr);
-		return (1);
+		if (end_status)
+			kill(philo[i].pid, SIGKILL);
+		else
+			waitpid(0, &end_status, 0);
+		i++;
 	}
-	if (philo->flag == DIE)
-	{
-		philo->status = DIE;
-		sem_post(philo->flag_sem->adr);
-		return (1);
-	}
-	sem_post(philo->flag_sem->adr);
-	return (0);
 }

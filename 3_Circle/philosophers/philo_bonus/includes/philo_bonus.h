@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 02:05:40 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 04:39:18 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/29 23:41:24 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,36 @@ typedef struct s_info
 	struct timeval	start_time;
 }	t_info;
 
+typedef struct	s_name_sem
+{
+	sem_t	*adr;
+	char	*name;
+}	t_sem;
+
 typedef struct s_common
 {
-	sem_t	*fork_sem;
-	sem_t	*print_sem;
+	t_sem	*fork_sem;
+	t_sem	*print_sem;
 }	t_common;
-
-typedef struct s_mutex
-{
-	pthread_mutex_t eat_cnt_mutex;
-	pthread_mutex_t time_mutex;
-	pthread_mutex_t status_mutex;
-}	t_mutex;
-
 typedef struct s_philo
 {
 	int				id;
-	int				eat_cnt;
 	t_status		status;
+	int				eat_cnt;
+	t_sem			*eat_cnt_sem;
+	int				flag;
+	t_sem			*flag_sem;
 	struct timeval	cur_time;
 	struct timeval	last_eat_time;
+	t_sem			*time_sem;
 	pid_t			pid;
 	pthread_t		tid;
 	t_info			*info;
 	t_common		*common;
-	t_mutex			*mutex;
 }	t_philo;
+
+//Main
+void	wait_childs(t_philo *philo);
 
 //Set initial state
 int	save_info(t_info *info, int argc, char **argv);
@@ -79,14 +83,22 @@ t_philo	*set_initial_state(t_info *info, t_common *common);
 void	*monitoring(void *data);
 void	start_behavior(t_philo *philo);
 void	philo_main(t_philo *philo);
+int		philo_take_fork(t_philo *philo);
+int		philo_eat(t_philo *philo);
+int		philo_sleep(t_philo *philo);
+int		philo_think(t_philo *philo);
 
 //Exit
 int	error_exit(char *s, t_philo *philos);
 
 //Philo Utils
 void	set_status(t_philo *philo, t_status status);
+int		is_iam_end(t_philo *philo);
 //Utils
-int	print_log(int runtime, int id, t_status status, sem_t *print_sem);
-int	get_runtime(struct timeval cur, struct timeval start);
-int	ft_atoi(const char *nptr);
+int	print_log(int runtime, t_philo *philo);
+int	get_runtime(t_philo *philo);
+int		philo_atoi(const char *nptr);
+sem_t	*open_semaphore(char *name, int value);
+char	*make_sema_name(char *sem_name, int num);
+void	free_resources(t_philo *philo);
 #endif

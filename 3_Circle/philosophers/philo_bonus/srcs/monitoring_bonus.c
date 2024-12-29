@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 03:33:54 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 04:25:39 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/29 20:09:35 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,32 @@ int	is_philo_dead(t_philo *philo)
 {
 	int	runtime;
 
-	pthread_mutex_lock(&philo->mutex->time_mutex);
-	gettimeofday(&philo->cur_time, NULL);
-	runtime = get_runtime(philo->cur_time, philo->last_eat_time);
+	runtime = get_runtime(philo);
 	if (runtime > philo->info->time_to_die)
 	{
-		runtime = get_runtime(philo->cur_time, philo->info->start_time);
-		pthread_mutex_lock(&philo->mutex->status_mutex);
-		set_status(philo, DIE);
-		print_log(runtime, philo->id, philo->status, philo->common->print_sem);
-		pthread_mutex_unlock(&philo->mutex->status_mutex);
-		pthread_mutex_unlock(&philo->mutex->time_mutex);
+		sem_wait(philo->flag_sem->adr);
+		philo->flag = DIE;
+		philo->status = DIE;
+		print_log(runtime, philo);
+		sem_post(philo->flag_sem->adr);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->mutex->time_mutex);
+	return (0);
+}
+
+int	is_philo_eat_finish(t_philo *philo)
+{
+	sem_wait(philo->eat_cnt_sem->adr);
+	printf("%d eat cnt = %d\n", philo->id, philo->eat_cnt);
+	if (philo->eat_cnt == philo->info->must_eat_time)
+	{
+		sem_wait(philo->flag_sem->adr);
+		philo->flag = FINISH;
+		sem_post(philo->flag_sem->adr);
+		sem_post(philo->eat_cnt_sem->adr);
+		return (1);
+	}
+	sem_post(philo->eat_cnt_sem->adr);
 	return (0);
 }
 
@@ -40,15 +52,11 @@ void	*monitoring(void *data)
 	philo = (t_philo *)data;
 	while (1)
 	{
+		usleep(3000000);
 		if (is_philo_dead(philo))
 			break ;
-		pthread_mutex_lock(&philo->mutex->eat_cnt_mutex);
-		if (philo->eat_cnt == philo->info->must_eat_time)
-		{
-			pthread_mutex_unlock(&philo->mutex->eat_cnt_mutex);
+		if (is_philo_eat_finish(philo))
 			break ;
-		}
-		pthread_mutex_unlock(&philo->mutex->eat_cnt_mutex);
 	}
 	return (0);
 }

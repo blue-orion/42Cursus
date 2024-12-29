@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 02:39:57 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 04:04:36 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/29 20:38:25 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,39 @@
 
 int	save_info(t_info *info, int argc, char **argv)
 {
-	info->num_of_philo = ft_atoi(argv[1]);
-	info->time_to_die = ft_atoi(argv[2]);
-	info->time_to_eat = ft_atoi(argv[3]);
-	info->time_to_sleep = ft_atoi(argv[4]);
+	info->num_of_philo = philo_atoi(argv[1]);
+	info->time_to_die = philo_atoi(argv[2]);
+	info->time_to_eat = philo_atoi(argv[3]);
+	info->time_to_sleep = philo_atoi(argv[4]);
 	if (info->num_of_philo <= 0 || info->time_to_die <= 0 ||
 		info->time_to_eat <= 0 || info->time_to_sleep <= 0)
 		return (1);
 	if (argc == 6)
 	{
-		info->must_eat_time = ft_atoi(argv[5]);
+		info->must_eat_time = philo_atoi(argv[5]);
 		if (info->must_eat_time <= 0)
 			return (1);
 	}
 	else
 		info->must_eat_time = -1;
 	gettimeofday(&info->start_time, NULL);
-	return (1);
+	return (0);
 }
 
 int	make_common_resource(t_common *common, t_info info)
 {
-	common->fork_sem = sem_open("fork", O_CREAT | O_EXCL,
-							 0644, info.num_of_philo);
-	if (!common->fork_sem)
+	common->fork_sem = (t_sem *)malloc(sizeof(t_sem));
+	common->fork_sem->adr = open_semaphore("fork", info.num_of_philo);
+	common->fork_sem->name = "fork";
+	common->print_sem = (t_sem *)malloc(sizeof(t_sem));
+	common->print_sem->adr = open_semaphore("print", 1);
+	common->print_sem->name = "print";
+	if (!common->fork_sem || !common->print_sem)
 	{
+		sem_close(common->fork_sem->adr);
 		sem_unlink("fork");
-		common->fork_sem = sem_open("fork", O_CREAT | O_EXCL,
-								0644, info.num_of_philo);
-	}
-	if (!common->fork_sem)
-		return (-1);
-	common->print_sem = sem_open("print", O_CREAT | O_EXCL,
-							  0644, 1);
-	if (!common->print_sem)
-	{
+		sem_close(common->print_sem->adr);
 		sem_unlink("print");
-		common->print_sem = sem_open("print", O_CREAT | O_EXCL,
-								0644, info.num_of_philo);
-	}
-	if (!common->print_sem)
-	{
-		sem_unlink("fork");
 		return (-1);
 	}
 	return (0);
@@ -67,10 +58,23 @@ int	init_philo(t_philo *philo, int idx, t_info *info, t_common *common)
 	if (!philo)
 		return (-1);
 	philo->id = idx + 1;
-	philo->status = -1;
 	philo->info = info;
 	philo->common = common;
-	return (1);
+	philo->flag = -1;
+	philo->eat_cnt_sem = (t_sem *)malloc(sizeof(t_sem));
+	philo->eat_cnt_sem->name = make_sema_name("/eat_cnt", idx); 
+	philo->eat_cnt_sem->adr = open_semaphore(philo->eat_cnt_sem->name, 1);
+	philo->flag_sem = (t_sem *)malloc(sizeof(t_sem));
+	philo->flag_sem->name = make_sema_name("/flag", idx);
+	philo->flag_sem->adr = open_semaphore(philo->flag_sem->name, 1);
+	philo->time_sem = (t_sem *)malloc(sizeof(t_sem));
+	philo->time_sem->name = make_sema_name("/time", idx);
+	philo->time_sem->adr = open_semaphore(philo->time_sem->name, 1);
+	if (!philo->eat_cnt_sem->adr || !philo->eat_cnt_sem->name
+		|| !philo->flag_sem->adr || !philo->flag_sem->name
+		|| !philo->time_sem->adr || !philo->time_sem->name)
+		return (-1);
+	return (0);
 }
 
 t_philo	*set_initial_state(t_info *info, t_common *common)
@@ -78,7 +82,7 @@ t_philo	*set_initial_state(t_info *info, t_common *common)
 	int		i;
 	t_philo	*philos;
 
-	philos = (t_philo *)malloc(sizeof(t_philo) * info->num_of_philo + 1);
+	philos = (t_philo *)malloc(sizeof(t_philo) * info->num_of_philo);
 	i = 0;
 	while (i < info->num_of_philo)
 	{

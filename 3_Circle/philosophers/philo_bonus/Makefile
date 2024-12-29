@@ -12,7 +12,7 @@
 
 NAME = philo
 
-CC = clang
+CC = cc
 CFLAG = -g
 
 SRC_DIR = srcs/
@@ -21,28 +21,30 @@ INCLUDE = includes/
 
 MAIN = philosophers_bonus.c
 SRCS = exit_bonus.c 				\
-       ft_atoi_bonus.c				\
+	   free_resources_bonus.c		\
        get_time_bonus.c				\
        monitoring_bonus.c			\
        philo_behavior_bonus.c		\
+       philo_libft_bonus.c			\
        philo_main_bonus.c			\
        print_log_bonus.c			\
        set_initial_state_bonus.c	\
 	   utils_bonus.c				\
-	   utils_philo_bonus.c
+	   utils_philo_bonus.c			\
+	   wait_childs_bonus.c
 
 OBJS = $(addprefix $(OBJ_DIR), $(MAIN:.c=.o) $(SRCS:.c=.o))
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAG) -c $^ -I$(INCLUDE) -o $@ -MJ $@.part.json
+	$(CC) $(CFLAG) $^ -I$(INCLUDE) -o $@
 
 $(OBJ_DIR)%.o : %.c | $(OBJ_DIR)
-	$(CC) $(CFLAG) -c $^ -I$(INCLUDE) -o $@ -MJ $@.part.json
+	$(CC) $(CFLAG) -I$(INCLUDE) -c $^ -o $@
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAG) -c $^ -I$(INCLUDE) -o $@ -MJ $@.part.json
+	$(CC) $(CFLAG) -c $^ -I$(INCLUDE) -o $@
 
 $(OBJ_DIR) :
 	mkdir -p $@
@@ -55,8 +57,4 @@ fclean : clean
 
 re : fclean all
 
-compile_commands.json:
-	-$(MAKE) --always-make --keep-going all
-	(echo '[' && cat $(OBJ_DIR)*.part.json && echo ']') > $@
-
-.PHONY: NAME all clean fclean re compile_commands.json
+.PHONY: NAME all clean fclean re

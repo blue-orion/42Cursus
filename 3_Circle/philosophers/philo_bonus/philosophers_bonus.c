@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 01:56:05 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 02:55:00 by takwak           ###   ########.fr       */
+/*   Updated: 2024/12/29 20:04:33 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ int	main(int argc, char **argv)
 	philos = set_initial_state(&info, &common);
 	if (!philos)
 		return (error_exit("Error in making philos", NULL));
-		
+	wait_childs(philos);
+	free_resources(philos);
+	//wati child exit
+	//and exit main
 }

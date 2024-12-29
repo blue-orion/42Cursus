@@ -12,25 +12,26 @@
 
 #include <philo_bonus.h>
 
-int	print_log(int runtime, int id, t_status status, sem_t *print_sem)
+int	print_log(int runtime, t_philo *philo)
 {
-	if (status == DIE)
-		return (-1);
-	sem_wait(print_sem);
+	if (is_iam_end(philo))
+		return (1);
+	sem_wait(philo->common->print_sem->adr);
 	printf("%d ", runtime);
-	if (status == FORK)
-		printf("%d has taken a fork\n", id);
-	if (status == EAT)
-		printf("%d is eating\n", id);
-	if (status == SLEEP)
-		printf("%d is sleeping\n", id);
-	if (status == THINK)
-		printf("%d is thinking\n", id);
-	if (status == DIE)
+	if (philo->status == FORK)
+		printf("%d has taken a fork\n", philo->id);
+	if (philo->status == EAT)
+		printf("%d is eating\n", philo->id);
+	if (philo->status == SLEEP)
+		printf("%d is sleeping\n", philo->id);
+	if (philo->status == THINK)
+		printf("%d is thinking\n", philo->id);
+	if (philo->status == DIE)
 	{
-		printf("%d is died\n", id);
+		printf("%d is died\n", philo->id);
+		sem_post(philo->common->print_sem->adr);
 		return (0);
 	}
-	sem_post(print_sem);
+	sem_post(philo->common->print_sem->adr);
 	return (0);
 }
