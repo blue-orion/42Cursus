@@ -15,13 +15,12 @@ char	*make_sema_name(char *sem_name, int num)
 {
 	char	*res;
 	int		len;
-	int		num_len;
 	int		i;
 
 	len = 0;
 	while (sem_name[len])
 		len++;
-	res = (char *)malloc(sizeof(char) * len + 4);
+	res = (char *)malloc(sizeof(char) * (len + 4));
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -51,4 +50,10 @@ sem_t	*open_semaphore(char *name, int value)
 		dst = sem_open(name, O_CREAT | O_EXCL, 0644, value);
 	}
 	return (dst);
+}
+
+int	error_exit(char *s)
+{
+	perror(s);
+	exit(EXIT_FAILURE);
 }

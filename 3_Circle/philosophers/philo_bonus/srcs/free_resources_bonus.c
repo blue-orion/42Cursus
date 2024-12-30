@@ -14,16 +14,6 @@
 
 void	free_common_resource(t_common *common)
 {
-	sem_post(common->fork_sem->adr);
-	sem_post(common->fork_sem->adr);
-	sem_post(common->fork_sem->adr);
-	sem_post(common->fork_sem->adr);
-	sem_post(common->fork_sem->adr);
-	sem_post(common->fork_sem->adr);
-	sem_post(common->fork_sem->adr);
-	sem_post(common->fork_sem->adr);
-	sem_post(common->fork_sem->adr);
-	sem_post(common->print_sem->adr);
 	sem_close(common->fork_sem->adr);
 	sem_close(common->print_sem->adr);
 	sem_unlink("fork");
@@ -37,9 +27,6 @@ void	free_philo_resource(t_philo *philo)
 	sem_close(philo->eat_cnt_sem->adr);
 	sem_close(philo->flag_sem->adr);
 	sem_close(philo->time_sem->adr);
-	sem_unlink(philo->eat_cnt_sem->name);
-	sem_unlink(philo->flag_sem->name);
-	sem_unlink(philo->time_sem->name);
 	free(philo->eat_cnt_sem->name);
 	free(philo->flag_sem->name);
 	free(philo->time_sem->name);
@@ -48,16 +35,30 @@ void	free_philo_resource(t_philo *philo)
 	free(philo->time_sem);
 }
 
-void	free_resources(t_philo *philo)
+void	unlink_philo_sem(int id)
+{
+	char	*name;
+
+	name = make_sema_name("/flag", id);
+	sem_unlink(name);
+	free(name);
+	name = make_sema_name("/eat_cnt", id);
+	sem_unlink(name);
+	free(name);
+	name = make_sema_name("/time", id);
+	sem_unlink(name);
+	free(name);
+}
+
+void	free_resources(t_info *info, t_common *common)
 {
 	int	i;
 
-	free_common_resource(philo->common);
 	i = 0;
-	while (i < philo->info->num_of_philo)
+	free_common_resource(common);
 	{
-		free_philo_resource(&philo[i]);
+		unlink_philo_sem(i + 1);
 		i++;
 	}
-	free(philo);
+	free(info->pid);
 }

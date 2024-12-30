@@ -11,10 +11,12 @@
 /* ************************************************************************** */
 
 #include <philo_bonus.h>
+#include <pthread.h>
 
 void	philo_main(t_philo *philo)
 {
-	pthread_create(&philo->tid, NULL, monitoring, (void *)philo);
+	if (pthread_create(&philo->tid, NULL, monitoring, (void *)philo))
+		end_process(philo);
 	if (philo->id % 2 == 0)
 		philo_think(philo);
 	while (1)
@@ -26,5 +28,6 @@ void	philo_main(t_philo *philo)
 		if (is_iam_end(philo))
 			break ;
 	}
-	exit(philo->status);
+	pthread_join(philo->tid, NULL);
+	end_process(philo);
 }

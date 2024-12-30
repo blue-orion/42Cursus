@@ -29,7 +29,6 @@ int	print_log(int runtime, t_philo *philo)
 	if (philo->status == DIE)
 	{
 		printf("%d is died\n", philo->id);
-		sem_post(philo->common->print_sem->adr);
 		return (0);
 	}
 	sem_post(philo->common->print_sem->adr);

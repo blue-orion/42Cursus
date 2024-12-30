@@ -35,12 +35,13 @@ typedef enum e_status
 
 typedef struct s_info
 {
-	int	num_of_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	must_eat_time;
+	int				num_of_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				must_eat_time;
 	struct timeval	start_time;
+	pid_t			*pid;
 }	t_info;
 
 typedef struct	s_name_sem
@@ -54,6 +55,7 @@ typedef struct s_common
 	t_sem	*fork_sem;
 	t_sem	*print_sem;
 }	t_common;
+
 typedef struct s_philo
 {
 	int				id;
@@ -65,40 +67,46 @@ typedef struct s_philo
 	struct timeval	cur_time;
 	struct timeval	last_eat_time;
 	t_sem			*time_sem;
-	pid_t			pid;
 	pthread_t		tid;
 	t_info			*info;
 	t_common		*common;
 }	t_philo;
 
 //Main
-void	wait_childs(t_philo *philo);
+void	wait_childs(t_info *info);
+void	free_resources(t_info *info, t_common *common);
 
 //Set initial state
-int	save_info(t_info *info, int argc, char **argv);
-int	make_common_resource(t_common *common, t_info info);
-t_philo	*set_initial_state(t_info *info, t_common *common);
+int		save_info(t_info *info, int argc, char **argv);
+int		make_common_resource(t_common *common, t_info info);
+int 	set_initial_state(t_info *info, t_common *common);
 
 //Philo main
-void	*monitoring(void *data);
-void	start_behavior(t_philo *philo);
 void	philo_main(t_philo *philo);
+void	start_behavior(t_philo *philo);
 int		philo_take_fork(t_philo *philo);
 int		philo_eat(t_philo *philo);
 int		philo_sleep(t_philo *philo);
 int		philo_think(t_philo *philo);
 
+//Philo monitoring
+void	*monitoring(void *data);
+int		is_philo_dead(t_philo *philo);
+int		is_philo_eat_finish(t_philo *philo);
+
 //Exit
-int	error_exit(char *s, t_philo *philos);
+int		error_exit(char *s);
 
 //Philo Utils
-void	set_status(t_philo *philo, t_status status);
+int		end_process(t_philo *philo);
 int		is_iam_end(t_philo *philo);
+void	free_philo_resource(t_philo *philo);
+
 //Utils
-int	print_log(int runtime, t_philo *philo);
-int	get_runtime(t_philo *philo);
+int		print_log(int runtime, t_philo *philo);
+int		get_runtime(t_philo *philo, struct timeval start_time);
 int		philo_atoi(const char *nptr);
 sem_t	*open_semaphore(char *name, int value);
 char	*make_sema_name(char *sem_name, int num);
-void	free_resources(t_philo *philo);
+
 #endif

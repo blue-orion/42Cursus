@@ -30,3 +30,18 @@ int	is_iam_end(t_philo *philo)
 	sem_post(philo->flag_sem->adr);
 	return (0);
 }
+
+int	end_process(t_philo *philo)
+{
+	int	end_status;
+
+	end_status = philo->status;
+	sem_close(philo->common->print_sem->adr);
+	sem_close(philo->common->fork_sem->adr);
+	free(philo->common->fork_sem);
+	free(philo->common->print_sem);
+	free_philo_resource(philo);
+	free(philo->info->pid);
+	free(philo);
+	exit(end_status);
+}

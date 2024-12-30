@@ -12,17 +12,17 @@
 
 #include <philo_bonus.h>
 
-void	wait_childs(t_philo *philo)
+void	wait_childs(t_info *info)
 {
 	int	end_status;
 	int	i;
 
 	waitpid(0, &end_status, 0);
 	i = 1;
-	while (i < philo->info->num_of_philo)
+	while (i < info->num_of_philo)
 	{
 		if (end_status)
-			kill(philo[i].pid, SIGKILL);
+			kill(info->pid[i], SIGKILL);
 		else
 			waitpid(0, &end_status, 0);
 		i++;

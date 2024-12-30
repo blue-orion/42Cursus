@@ -12,7 +12,7 @@
 
 #include <philo_bonus.h>
 
-int	get_runtime(t_philo *philo)
+int	get_runtime(t_philo *philo, struct timeval start_time)
 {
 	int	runtime;
 	int	sec;
@@ -20,10 +20,8 @@ int	get_runtime(t_philo *philo)
 
 	sem_wait(philo->time_sem->adr);
 	gettimeofday(&philo->cur_time, NULL);
-	if (philo->status == EAT)
-		gettimeofday(&philo->last_eat_time, NULL);
-	sec = philo->cur_time.tv_sec - philo->info->start_time.tv_sec;
-	usec = philo->cur_time.tv_usec - philo->info->start_time.tv_usec;
+	sec = philo->cur_time.tv_sec - start_time.tv_sec;
+	usec = philo->cur_time.tv_usec - start_time.tv_usec;
 	runtime = sec * 1000 + usec / 1000;
 	sem_post(philo->time_sem->adr);
 	return (runtime);

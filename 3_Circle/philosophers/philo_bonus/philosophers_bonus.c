@@ -16,19 +16,16 @@ int	main(int argc, char **argv)
 {
 	t_info		info;
 	t_common	common;
-	t_philo		*philos;
 
 	if (argc < 5 || argc > 6)
-		return (error_exit("Too few or many arguments", NULL));
+		return (error_exit("Too few or many arguments"));
 	if (save_info(&info, argc, argv))
-		return (error_exit("Invalid argv value", NULL));
+		return (error_exit("Invalid argv value"));
 	if (make_common_resource(&common, info))
-		return (error_exit("Error in making common resources", NULL));
-	philos = set_initial_state(&info, &common);
-	if (!philos)
-		return (error_exit("Error in making philos", NULL));
-	wait_childs(philos);
-	free_resources(philos);
-	//wati child exit
-	//and exit main
+		return (error_exit("Error in making common resources"));
+	if (set_initial_state(&info, &common))
+		return (error_exit("Error in setting initial state"));
+	wait_childs(&info);
+	free_resources(&info, &common);
+	return (0);
 }

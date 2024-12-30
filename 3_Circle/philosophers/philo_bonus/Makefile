@@ -13,15 +13,14 @@
 NAME = philo
 
 CC = cc
-CFLAG = -g
+CFLAG = -Wall -Werror -Wextra -g
 
 SRC_DIR = srcs/
 OBJ_DIR = objs/
 INCLUDE = includes/
 
 MAIN = philosophers_bonus.c
-SRCS = exit_bonus.c 				\
-	   free_resources_bonus.c		\
+SRCS = free_resources_bonus.c		\
        get_time_bonus.c				\
        monitoring_bonus.c			\
        philo_behavior_bonus.c		\
