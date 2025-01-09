@@ -1,0 +1,1 @@
+{ "directory": "/root/42Cursus/3_Circle/philosophers/philo", "file": "srcs/utils.c", "output": "objs/utils.o", "arguments": ["/usr/lib/llvm-14/bin/clang", "-xc", "srcs/utils.c", "-Wall", "-Werror", "-Wextra", "-g", "-c", "-I", "includes", "-o", "objs/utils.o", "--target=x86_64-pc-linux-gnu"]},

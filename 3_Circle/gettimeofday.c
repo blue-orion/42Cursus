@@ -17,5 +17,4 @@ int	main(void)
 		perror("gettimeofday error");
 	printf("t = %ld, tv_sec = %ld, tv_usec = %ld\n", t, tv.tv_sec/31536000 + 1970, tv.tv_usec);
 
-
 }

@@ -12,7 +12,7 @@
 
 NAME = philo
 
-CC = cc
+CC = clang
 CFLAGS = -Wall -Werror -Wextra -g
 
 INCLUDES = includes
@@ -37,11 +37,11 @@ $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ_DIR)%.o : %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ -I$(INCLUDES) -o $@
+	$(CC) $(CFLAGS) -c $^ -I$(INCLUDES) -o $@ -MJ $@.part.json
 
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ -I$(INCLUDES) -o $@
+	$(CC) $(CFLAGS) -c $^ -I$(INCLUDES) -o $@ -MJ $@.part.json
 
 $(OBJ_DIR) :
 	mkdir -p $@
@@ -52,5 +52,10 @@ clean :
 fclean : clean
 	rm -rf $(NAME)
 re : fclean all
+
+.PHONY: compile_commands.json
+compile_commands.json:
+	-$(MAKE) --always-make --keep-going all
+	(echo '[' && cat $(OBJ_DIR)*.part.json && echo ']') > $@
 
 .PHONY: NAME all clean fclean re
