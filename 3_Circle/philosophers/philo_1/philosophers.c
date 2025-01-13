@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitoring.c                                       :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 17:50:40 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/13 17:51:13 by takwak           ###   ########.fr       */
+/*   Created: 2024/12/19 22:22:24 by takwak            #+#    #+#             */
+/*   Updated: 2025/01/08 20:58:58 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int	monitoring(t_philo *philo)
+int	main(int argc, char **argv)
 {
-	
+	t_info	*info;
+	t_philo	*philo;
+
+	if (argc < 5)
+		return (printf("Invalid argv\n"));
+	info = save_info(argv);
+	philo = make_philo(info);
+	if (monitoring(philo))
+	{
+		pthread_mutex_lock(&info->end_flag_mutex);
+		info->end_flag = 1;
+		pthread_mutex_unlock(&info->end_flag_mutex);
+	}
+	end_process(info, philo);
+	return (0);
 }

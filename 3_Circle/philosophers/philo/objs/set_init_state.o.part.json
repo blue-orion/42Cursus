@@ -1,0 +1,1 @@
+{ "directory": "/home/takwak/Projects/mygit/3_Circle/philosophers/philo", "file": "srcs/set_init_state.c", "output": "objs/set_init_state.o", "arguments": ["/usr/lib/llvm-12/bin/clang", "-xc", "srcs/set_init_state.c", "-g", "-c", "-I", "includes/", "-o", "objs/set_init_state.o", "--target=x86_64-pc-linux-gnu"]},

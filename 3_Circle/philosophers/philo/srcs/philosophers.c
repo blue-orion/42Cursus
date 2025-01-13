@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 22:22:24 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/26 00:48:43 by takwak           ###   ########.fr       */
+/*   Created: 2025/01/12 16:11:24 by takwak            #+#    #+#             */
+/*   Updated: 2025/01/12 18:08:14 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 int	main(int argc, char **argv)
 {
-	t_info	*info;
-	t_philo	*philo;
+	t_info		info;
+	t_common	common;
+	t_philo		*philo;
 
 	if (argc < 5)
-		return (printf("Invalid argv\n"));
-	info = save_info(argv);
-	philo = make_philo(info);
-	if (monitoring(philo))
-	{
-		pthread_mutex_lock(&info->end_flag_mutex);
-		info->end_flag = 1;
-		pthread_mutex_unlock(&info->end_flag_mutex);
-	}
-	end_process(info, philo);
+		return (1);
+	if (save_info(&info, argc, argv))
+		return (-1);
+	if (make_common_resource(&common, &info))
+		return (-1);
+	philo = set_init_state(&info, &common);
 	return (0);
 }
+

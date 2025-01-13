@@ -5,90 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 22:18:54 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/23 01:52:50 by takwak           ###   ########.fr       */
+/*   Created: 2025/01/12 16:06:26 by takwak            #+#    #+#             */
+/*   Updated: 2025/01/13 18:12:16 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>
-# include <sys/time.h>
-# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <pthread.h>
+# include <sys/wait.h>
+# include <sys/time.h>
 
-typedef enum c_status
+enum
 {
-	FORK,
+	DIE = 0,
 	EAT,
 	SLEEP,
-	DIE,
-	THINK
-}	t_status;
+	THINK,
+	FINISH,
+	FORK
+};
 
 typedef struct s_info
 {
-	int				num_of_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				have_to_eat;
-	struct timeval	start_time;
-	int				*fork;
-	pthread_mutex_t	*fork_mutex;
-	pthread_mutex_t	print_mutex;
-	int				eat_finish;
-	int				end_flag;
-	pthread_mutex_t	end_flag_mutex;
+	int		num_of_philo;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		must_eat;
 }	t_info;
+
+typedef struct s_common
+{
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	log;
+	pthread_mutex_t die;
+}	t_common;
 
 typedef struct s_philo
 {
-	t_info			*info;
 	pthread_t		tid;
-	int				num;
-	struct timeval	last_eat_time;
-	struct timeval	cur_time;
+	int				id;
 	int				status;
-	int				left_fork;
-	int				right_fork;
-	int				eat_num;
+	int				eat_cnt;
+	struct timeval	start_time;
+	struct timeval	cur_time;
+	struct timeval	last_eat_time;
+	int				runtime;
+	t_info			*info;
+	t_common		*common;
 }	t_philo;
 
-//Philo Behavior
+//Set init state
+int	save_info(t_info *dst, int argc, char **argv);
+int	make_common_resource(t_common *rsc, t_info *info);
+t_philo	*set_init_state(t_info *info, t_common *common);
+
+//Philo_routine
+void	*philo_routine(void *data);
+int		philo_fork(t_philo *philo);
 int		philo_eat(t_philo *philo);
 int		philo_sleep(t_philo *philo);
 int		philo_think(t_philo *philo);
-int		have_to_die(t_philo *philo);
+int		philo_die(t_philo *philo);
 
-//Fork
-int		pick_up_left_fork(t_philo *philo);
-int		pick_up_right_fork(t_philo *philo);
-int		put_down_left_fork(t_philo *philo);
-int		put_down_right_fork(t_philo *philo);
-
-//Monitoring.c
-int		monitoring(t_philo *philos);
-int		print_timestamp(struct timeval *tv);
-int		print_log(t_philo *philo, long cur_time);
-int		check_dead_flag(t_philo *philo);
-
-//Timestamp.c
-long	get_current_time(struct timeval *cur, struct timeval *start);
-
-//Make_thread.c
-void	*thread_main(void *cnt);
-t_philo	*make_philo(t_info *info);
-
+//Logs
+int		print_log(t_philo *philo, int runtime);
 //Utils
-t_info	*save_info(char **argv);
-int		ft_atoi(const char *nptr);
-void	error_in_print_mutex_making(t_info *info);
-void	error_in_fork_making(t_info *info, int success_num);
-void	error_in_make_threads(t_info *info, t_philo *philo, int success_num);
-void	free_info(t_info *info);
-void	end_process(t_info *info, t_philo *philos);
+int	ft_atoi(const char *nptr);
+int	get_runtime(t_philo *philo, struct timeval start_time);
+
 #endif

@@ -5,26 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/12 15:57:39 by takwak            #+#    #+#              #
-#    Updated: 2025/01/12 18:05:30 by takwak           ###   ########.fr        #
+#    Created: 2024/12/19 22:11:52 by takwak            #+#    #+#              #
+#    Updated: 2024/12/23 00:55:57 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAGS = -g
+CFLAGS = -Wall -Werror -Wextra -g
 
+INCLUDES = includes
 SRC_DIR = srcs/
 OBJ_DIR = objs/
-INCLUDES = includes/
 
-SRCS = philosophers.c	\
-	   philo_atoi.c		\
-	   print_log.c		\
-	   set_init_state.c	\
+MAIN = philosophers.c
+SRCS = monitoring.c		\
+	   timestamp.c		\
+	   ft_atoi.c		\
+	   make_thread.c	\
+	   behavior.c		\
+	   fork.c			\
+	   utils.c			\
+	   save_info.c
 
-OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
+OBJS = $(addprefix $(OBJ_DIR), $(MAIN:.c=.o) $(SRCS:.c=.o))
 
 all : $(NAME)
 
@@ -39,14 +44,13 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ -I$(INCLUDES) -o $@
 
 $(OBJ_DIR) :
-	mkdir -p $(OBJ_DIR)
+	mkdir -p $@
 
 clean :
 	rm -rf $(OBJ_DIR)
 
 fclean : clean
-	rm -f $(NAME)
-
+	rm -rf $(NAME)
 re : fclean all
 
 .PHONY: NAME all clean fclean re
