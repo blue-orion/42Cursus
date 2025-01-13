@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 18:17:42 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/14 00:48:13 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/14 01:43:55 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	*philo_routine(void *data)
 		philo_sleep(philo);
 		philo_think(philo);
 	}
-	printf("end process id = %d\n", philo->id);
+	printf("end process id = %d, status = %d\n", philo->id, philo->status);
 	return (NULL);
 }

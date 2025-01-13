@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:40 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/14 00:52:29 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/14 01:54:34 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	check_dead(t_philo *philo)
 		pthread_mutex_lock(&philo->common->die);
 		philo->common->dead_flag = 1;
 		runtime = get_runtime(philo->start_time);
+		pthread_mutex_unlock(&philo->common->die);
 		pthread_mutex_lock(&philo->common->log);
 		printf("%d %d is died\n", runtime, philo->id);
 		pthread_mutex_unlock(&philo->common->log);
-		pthread_mutex_unlock(&philo->common->die);
 		return (1);
 	}
 	return (0);

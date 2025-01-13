@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:01:56 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/14 00:40:28 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/14 01:41:03 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	philo_fork(t_philo *philo)
 	if (print_log(philo, runtime))
 		return (-1);
 	philo_think(philo);
+	if (philo->id == 21)
+		printf("21 left = %d, right = %d\n", philo->left, philo->right);
 	pthread_mutex_lock(&philo->common->fork[philo->right]);
 	philo->status = FORK;
 	runtime = get_runtime(philo->start_time);
@@ -45,10 +47,10 @@ int	philo_eat(t_philo *philo)
 		return (-1);
 	usleep(philo->info->time_to_eat * 1000);
 	philo->eat_cnt++;
-	if (philo->eat_cnt == philo->info->must_eat)
-		philo->status = FINISH;
 	pthread_mutex_unlock(&philo->common->fork[philo->left]);
 	pthread_mutex_unlock(&philo->common->fork[philo->right]);
+	if (philo->eat_cnt == philo->info->must_eat)
+		philo->status = FINISH;
 	return (0);
 }
 
