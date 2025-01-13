@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:11:24 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/12 18:08:14 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/13 23:53:30 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int	main(int argc, char **argv)
 
 	if (argc < 5)
 		return (1);
-	if (save_info(&info, argc, argv))
-		return (-1);
+	save_info(&info, argc, argv);
 	if (make_common_resource(&common, &info))
 		return (-1);
 	philo = set_init_state(&info, &common);
+	monitoring(philo);
+	end_process(philo);
 	return (0);
 }
 

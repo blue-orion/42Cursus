@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   util_atoi.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 20:51:01 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/20 19:03:48 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/13 23:31:35 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 
-int	ft_isdigit(int c)
+int	philo_isdigit(int c)
 {
 	if (c < '0' || c > '9')
 		return (0);
 	return (1);
 }
 
-int	ft_isspace(int c)
+int	philo_isspace(int c)
 {
 	if (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\r' || c == '\f' || c == '\v')
@@ -27,14 +27,14 @@ int	ft_isspace(int c)
 	return (0);
 }
 
-int	ft_atoi(const char *nptr)
+int	philo_atoi(const char *nptr)
 {
 	int	res;
 	int	fl;
 
 	res = 0;
 	fl = 1;
-	while (ft_isspace(*nptr))
+	while (philo_isspace(*nptr))
 		nptr++;
 	if (*nptr == '+' || *nptr == '-')
 	{
@@ -42,7 +42,7 @@ int	ft_atoi(const char *nptr)
 			fl *= -1;
 		nptr++;
 	}
-	while (ft_isdigit(*nptr) && *nptr != '\0')
+	while (philo_isdigit(*nptr) && *nptr != '\0')
 	{
 		if (res > (INT_MAX - (*nptr - '0')) / 10)
 			return (0);

@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/12 15:57:39 by takwak            #+#    #+#              #
-#    Updated: 2025/01/12 18:05:30 by takwak           ###   ########.fr        #
+#    Updated: 2025/01/13 23:32:54 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,15 @@ OBJ_DIR = objs/
 INCLUDES = includes/
 
 SRCS = philosophers.c	\
-	   philo_atoi.c		\
+	   end_process.c	\
+	   get_time.c		\
+	   monitoring.c		\
+	   philo_act.c		\
+	   philo_routine.c	\
+	   philo_utils.c	\
 	   print_log.c		\
 	   set_init_state.c	\
+	   util_atoi.c
 
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 

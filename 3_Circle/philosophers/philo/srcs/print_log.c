@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:12:35 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/13 17:05:49 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/14 00:26:15 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,19 @@
 int	print_log(t_philo *philo, int runtime)
 {
 	pthread_mutex_lock(&philo->common->log);
-	printf("%d ", runtime);
-	if (philo->status == DIE)
+	if (is_stop(philo))
 	{
-		printf("%d is died\n", philo->id);
-		return (0);
+		pthread_mutex_unlock(&philo->common->log);
+		return (-1);
 	}
 	if (philo->status == FORK)
-		printf("%d has taken a fork\n", philo->id);
+		printf("%d %d has taken a fork\n", runtime, philo->id);
 	if (philo->status == EAT)
-		printf("%d is eating\n", philo->id);
+		printf("%d %d is eating\n", runtime, philo->id);
 	if (philo->status == SLEEP)
-		printf("%d is sleeping\n", philo->id);
+		printf("%d %d is sleeping\n", runtime, philo->id);
 	if (philo->status == THINK)
-		printf("%d is thinking\n", philo->id);
+		printf("%d %d is thinking\n", runtime, philo->id);
 	pthread_mutex_unlock(&philo->common->log);
 	return (0);
 }

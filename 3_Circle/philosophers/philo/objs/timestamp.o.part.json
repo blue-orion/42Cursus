@@ -1,1 +1,0 @@
-{ "directory": "/root/42Cursus/3_Circle/philosophers/philo", "file": "srcs/timestamp.c", "output": "objs/timestamp.o", "arguments": ["/usr/lib/llvm-14/bin/clang", "-xc", "srcs/timestamp.c", "-Wall", "-Werror", "-Wextra", "-g", "-c", "-I", "includes", "-o", "objs/timestamp.o", "--target=x86_64-pc-linux-gnu"]},
