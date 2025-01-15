@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 23:19:42 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 15:36:40 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 16:30:32 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@ void	end_process(t_philo *philo)
 {
 	int	i;
 
-	destroy_all_mutex(philo->info, philo->common);
-	free(philo->common->fork);
 	i = 0;
+	unlock_all_mutex(philo->info, philo->common);
 	while (i < philo->info->num_of_philo)
 	{
-		if (pthread_join(philo[i].tid, NULL))
-			perror("join error");
+		if (philo[i].status == EXIT)
+		{
+			i++;
+			continue ;
+		}
+		pthread_join(philo[i].tid, NULL);
 		i++;
 	}
+	destroy_all_mutex(philo->info, philo->common);
+	free(philo->common->fork);
 	free(philo);
 }

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:15:25 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 16:00:29 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 16:31:21 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,30 @@ int	destory_fork_mutex(pthread_mutex_t *forks, int num)
 	return (-1);
 }
 
+int	unlock_all_mutex(t_info *info, t_common *common)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->num_of_philo)
+	{
+		pthread_mutex_unlock(&common->fork[i]);
+		i++;
+	}
+	pthread_mutex_unlock(&common->die);
+	pthread_mutex_unlock(&common->log);
+	return (-1);
+}
+
 int	destroy_all_mutex(t_info *info, t_common *common)
 {
 	int	i;
 
 	i = 0;
-	usleep(1000000);
 	while (i < info->num_of_philo)
 	{
-		pthread_mutex_unlock(&common->fork[i]);
-		pthread_mutex_destroy(&common->fork[i++]);
+		pthread_mutex_destroy(&common->fork[i]);
+		i++;
 	}
 	pthread_mutex_destroy(&common->die);
 	pthread_mutex_destroy(&common->log);

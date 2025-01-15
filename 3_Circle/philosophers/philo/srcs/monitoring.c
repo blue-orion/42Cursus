@@ -6,11 +6,23 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:40 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/14 01:54:34 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 16:38:00 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+
+int	is_dead(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->common->die);
+	if (philo->common->dead_flag)
+	{
+		pthread_mutex_unlock(&philo->common->die);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->common->die);
+	return (0);
+}
 
 int	check_dead(t_philo *philo)
 {
@@ -40,9 +52,7 @@ void	monitoring(t_philo *philo)
 	while (1)
 	{
 		usleep(500);
-		if (finish_cnt == philo->info->num_of_philo)
-			break ;
-		if (is_stop(philo))
+		if (is_dead(philo) || finish_cnt == philo->info->num_of_philo)
 			break ;
 		i = 0;
 		while (i < philo->info->num_of_philo)
@@ -52,6 +62,7 @@ void	monitoring(t_philo *philo)
 			if (philo[i].status == FINISH)
 			{
 				finish_cnt++;
+				pthread_join(philo[i].tid, NULL);
 				philo[i].status = EXIT;
 			}
 			i++;

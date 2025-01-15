@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:06:26 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 15:51:14 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 16:29:44 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int		philo_atoi(const char *nptr);
 int		get_runtime(struct timeval start_time);
 int		destory_fork_mutex(pthread_mutex_t *forks, int num);
 int		destroy_all_mutex(t_info *info, t_common *common);
+int		unlock_all_mutex(t_info *info, t_common *common);
 void	*detach_all(t_philo *philos, int num);
 
 #endif
