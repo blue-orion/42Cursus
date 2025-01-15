@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 02:05:40 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 23:41:24 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 21:21:32 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_info
 	pid_t			*pid;
 }	t_info;
 
-typedef struct	s_name_sem
+typedef struct s_name_sem
 {
 	sem_t	*adr;
 	char	*name;
@@ -79,7 +79,7 @@ void	free_resources(t_info *info, t_common *common);
 //Set initial state
 int		save_info(t_info *info, int argc, char **argv);
 int		make_common_resource(t_common *common, t_info info);
-int 	set_initial_state(t_info *info, t_common *common);
+int		set_initial_state(t_info *info, t_common *common);
 
 //Philo main
 void	philo_main(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 04:21:45 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 20:20:23 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 21:22:06 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	philo_take_fork(t_philo *philo)
 int	philo_eat(t_philo *philo)
 {
 	int	runtime;
-	
+
 	if (is_iam_end(philo))
 		return (1);
 	philo->status = EAT;

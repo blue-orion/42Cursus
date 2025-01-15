@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 02:39:57 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 20:38:25 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 21:22:56 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	save_info(t_info *info, int argc, char **argv)
 	info->time_to_die = philo_atoi(argv[2]);
 	info->time_to_eat = philo_atoi(argv[3]);
 	info->time_to_sleep = philo_atoi(argv[4]);
-	if (info->num_of_philo <= 0 || info->time_to_die <= 0 ||
-		info->time_to_eat <= 0 || info->time_to_sleep <= 0)
+	if (info->num_of_philo <= 0 || info->time_to_die <= 0
+		|| info->time_to_eat <= 0 || info->time_to_sleep <= 0)
 		return (1);
 	if (argc == 6)
 	{
@@ -66,7 +66,7 @@ int	init_philo(t_philo *philo, int idx, t_info *info, t_common *common)
 	philo->flag = -1;
 	philo->status = -1;
 	philo->eat_cnt_sem = (t_sem *)malloc(sizeof(t_sem));
-	philo->eat_cnt_sem->name = make_sema_name("/eat_cnt", idx); 
+	philo->eat_cnt_sem->name = make_sema_name("/eat_cnt", idx);
 	philo->eat_cnt_sem->adr = open_semaphore(philo->eat_cnt_sem->name, 1);
 	philo->flag_sem = (t_sem *)malloc(sizeof(t_sem));
 	philo->flag_sem->name = make_sema_name("/flag", idx);
@@ -83,7 +83,7 @@ int	init_philo(t_philo *philo, int idx, t_info *info, t_common *common)
 	return (0);
 }
 
-int set_initial_state(t_info *info, t_common *common)
+int	set_initial_state(t_info *info, t_common *common)
 {
 	int		i;
 	t_philo	*philo;
