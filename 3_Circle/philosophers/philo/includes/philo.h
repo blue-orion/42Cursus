@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:06:26 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/13 23:53:20 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 15:51:14 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_common
 {
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	log;
-	pthread_mutex_t die;
+	pthread_mutex_t	die;
 	int				dead_flag;
 }	t_common;
 
@@ -66,7 +66,7 @@ typedef struct s_philo
 
 //Set init state
 void	save_info(t_info *dst, int argc, char **argv);
-int	make_common_resource(t_common *rsc, t_info *info);
+int		make_common_resource(t_common *rsc, t_info *info);
 t_philo	*set_init_state(t_info *info, t_common *common);
 
 //Philo_routine
@@ -78,7 +78,7 @@ int		philo_think(t_philo *philo);
 int		philo_die(t_philo *philo);
 
 //Philo Utils
-int	is_stop(t_philo *philo);
+int		is_stop(t_philo *philo);
 //Logs
 int		print_log(t_philo *philo, int runtime);
 //Monitoring
@@ -87,10 +87,12 @@ int		check_dead(t_philo *philo);
 
 //End process
 void	end_process(t_philo *philo);
-void	destroy_all_mutex(t_info *info, t_common *common);
 
 //Utils
-int	philo_atoi(const char *nptr);
-int	get_runtime(struct timeval start_time);
+int		philo_atoi(const char *nptr);
+int		get_runtime(struct timeval start_time);
+int		destory_fork_mutex(pthread_mutex_t *forks, int num);
+int		destroy_all_mutex(t_info *info, t_common *common);
+void	*detach_all(t_philo *philos, int num);
 
 #endif

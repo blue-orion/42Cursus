@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/12 15:57:39 by takwak            #+#    #+#              #
-#    Updated: 2025/01/13 23:32:54 by takwak           ###   ########.fr        #
+#    Updated: 2025/01/15 15:33:18 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS = philosophers.c	\
 	   philo_utils.c	\
 	   print_log.c		\
 	   set_init_state.c	\
-	   util_atoi.c
+	   util_atoi.c		\
+	   util_destory.c
 
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 

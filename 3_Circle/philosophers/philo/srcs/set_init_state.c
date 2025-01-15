@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:14:24 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/14 00:11:58 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 15:52:04 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,17 @@ int	make_common_resource(t_common *rsc, t_info *info)
 	while (i < info->num_of_philo)
 	{
 		if (pthread_mutex_init(&rsc->fork[i], NULL))
-			return (-1);
+			return (destory_fork_mutex(rsc->fork, i));
 		i++;
 	}
 	if (pthread_mutex_init(&rsc->log, NULL))
-		return (-1);
+		return (destory_fork_mutex(rsc->fork, info->num_of_philo));
 	if (pthread_mutex_init(&rsc->die, NULL))
+	{
+		pthread_mutex_destroy(&rsc->log);
+		destory_fork_mutex(rsc->fork, info->num_of_philo);
 		return (-1);
+	}
 	rsc->dead_flag = 0;
 	return (0);
 }
@@ -62,7 +66,7 @@ void	init_philo_data(int id, t_philo *philo, t_info *info, t_common *common)
 t_philo	*set_init_state(t_info *info, t_common *common)
 {
 	t_philo	*philo;
-	int	i;
+	int		i;
 
 	philo = (t_philo *)malloc(sizeof(t_philo) * info->num_of_philo);
 	if (!philo)
@@ -71,9 +75,9 @@ t_philo	*set_init_state(t_info *info, t_common *common)
 	while (i < info->num_of_philo)
 	{
 		init_philo_data(i + 1, &philo[i], info, common);
-		if (pthread_create(&philo[i].tid, NULL, 
-					 philo_routine, &philo[i]))
-			return (NULL);
+		if (pthread_create(&philo[i].tid, NULL,
+				philo_routine, &philo[i]))
+			return (detach_all(philo, i));
 		i++;
 	}
 	return (philo);

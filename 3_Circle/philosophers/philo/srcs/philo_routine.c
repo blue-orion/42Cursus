@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 18:17:42 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/14 01:43:55 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/15 15:47:15 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	*philo_routine(void *data)
 	}
 	while (1)
 	{
-		if (is_stop(philo))
+		if (philo_fork(philo))
 			break ;
-		philo_fork(philo);
-		philo_eat(philo);
-		philo_sleep(philo);
-		philo_think(philo);
+		if (philo_eat(philo))
+			break ;
+		if (philo_sleep(philo))
+			break ;
+		if (philo_think(philo))
+			break ;
 	}
-	printf("end process id = %d, status = %d\n", philo->id, philo->status);
 	return (NULL);
 }
