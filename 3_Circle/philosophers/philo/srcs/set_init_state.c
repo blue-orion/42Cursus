@@ -6,22 +6,33 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:14:24 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 15:52:04 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/25 18:05:18 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	save_info(t_info *dst, int argc, char **argv)
+int	save_info(t_info *dst, int argc, char **argv)
 {
 	dst->num_of_philo = philo_atoi(argv[1]);
+	if (dst->num_of_philo <= 0)
+		return (-1);
 	dst->time_to_die = philo_atoi(argv[2]);
+	if (dst->time_to_die < 0)
+		return (-1);
 	dst->time_to_eat = philo_atoi(argv[3]);
+	if (dst->time_to_eat < 0)
+		return (-1);
 	dst->time_to_sleep = philo_atoi(argv[4]);
+	if (dst->time_to_sleep < 0)
+		return (-1);
 	if (argc == 6)
 		dst->must_eat = philo_atoi(argv[5]);
 	else
 		dst->must_eat = -1;
+	if (dst->must_eat < 0)
+		return (-1);
+	return (0);
 }
 
 int	make_common_resource(t_common *rsc, t_info *info)

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 01:56:05 by takwak            #+#    #+#             */
-/*   Updated: 2024/12/29 20:04:33 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/25 18:14:59 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	main(int argc, char **argv)
 	t_common	common;
 
 	if (argc < 5 || argc > 6)
-		return (error_exit("Too few or many arguments"));
+		return (write(2, "Too few or many arguments\n", 26));
 	if (save_info(&info, argc, argv))
-		return (error_exit("Invalid argv value"));
+		return (write(2, "Invalid argv value\n", 19));
 	if (make_common_resource(&common, info))
-		return (error_exit("Error in making common resources"));
+		return (write(2, "Error in making common resources\n", 33));
 	if (set_initial_state(&info, &common))
-		return (error_exit("Error in setting initial state"));
+		return (write(2, "Error in setting initial state\n", 31));
 	wait_childs(&info);
 	free_resources(&info, &common);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:06:26 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 16:29:44 by takwak           ###   ########.fr       */
+/*   Updated: 2025/01/25 18:05:32 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_philo
 }	t_philo;
 
 //Set init state
-void	save_info(t_info *dst, int argc, char **argv);
+int		save_info(t_info *dst, int argc, char **argv);
 int		make_common_resource(t_common *rsc, t_info *info);
 t_philo	*set_init_state(t_info *info, t_common *common);
 
