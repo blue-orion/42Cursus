@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 20:37:35 by takwak            #+#    #+#              #
-#    Updated: 2024/11/17 23:51:27 by takwak           ###   ########.fr        #
+#    Updated: 2025/02/09 19:49:22 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ LIBFT = srcs/libft
 all : $(NAME)
 
 $(NAME) : $(OBJ)
+	make -C $(MLX)
 	make -C $(LIBFT)
 	$(CC) $(FLAGS) $^ -L$(MLX) $(MLX_IN) -L$(LIBFT) -lft -o $(NAME)
 
