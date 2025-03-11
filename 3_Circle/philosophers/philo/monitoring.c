@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:40 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 16:38:00 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:07:12 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 int	is_dead(t_philo *philo)
 {

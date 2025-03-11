@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:15:25 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 16:31:21 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:07:35 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 int	destory_fork_mutex(pthread_mutex_t *forks, int num)
 {

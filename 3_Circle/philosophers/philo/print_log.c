@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:12:35 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/14 00:26:15 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:07:26 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 int	print_log(t_philo *philo, int runtime)
 {

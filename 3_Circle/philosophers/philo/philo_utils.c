@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:52:57 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/13 22:51:45 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:07:21 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 int	is_stop(t_philo *philo)
 {

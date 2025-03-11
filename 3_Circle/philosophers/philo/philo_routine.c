@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 18:17:42 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 15:47:15 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:05:29 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 void	*philo_routine(void *data)
 {

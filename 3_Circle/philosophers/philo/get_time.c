@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:44:04 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/13 22:38:16 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:07:05 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 int	get_runtime(struct timeval start_time)
 {

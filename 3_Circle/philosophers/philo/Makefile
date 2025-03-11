@@ -6,16 +6,16 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/12 15:57:39 by takwak            #+#    #+#              #
-#    Updated: 2025/01/15 15:33:18 by takwak           ###   ########.fr        #
+#    Updated: 2025/03/11 22:06:25 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-CC = cc
+CC = cc -Wall -Werror -Wextra
 CFLAGS = -g
 
-SRC_DIR = srcs/
+SRC_DIR = ./
 OBJ_DIR = objs/
 INCLUDES = includes/
 

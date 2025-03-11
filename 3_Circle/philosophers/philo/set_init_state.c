@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:14:24 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/25 18:05:18 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:07:29 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 int	save_info(t_info *dst, int argc, char **argv)
 {
@@ -30,7 +30,7 @@ int	save_info(t_info *dst, int argc, char **argv)
 		dst->must_eat = philo_atoi(argv[5]);
 	else
 		dst->must_eat = -1;
-	if (dst->must_eat < 0)
+	if (dst->must_eat <= 0)
 		return (-1);
 	return (0);
 }

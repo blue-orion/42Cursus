@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:01:56 by takwak            #+#    #+#             */
-/*   Updated: 2025/01/15 15:51:26 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:24:04 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 int	philo_fork(t_philo *philo)
 {
@@ -23,7 +23,6 @@ int	philo_fork(t_philo *philo)
 	runtime = get_runtime(philo->start_time);
 	if (print_log(philo, runtime))
 		return (-1);
-	philo_think(philo);
 	if (is_stop(philo) || philo->info->num_of_philo == 1)
 		return (-1);
 	pthread_mutex_lock(&philo->common->fork[philo->right]);
