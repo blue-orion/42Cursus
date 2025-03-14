@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:05:40 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/13 22:28:43 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/14 18:26:11 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ enum
 typedef struct	s_info
 {
 	int	num_of_philo;
-	int	time_of_die;
-	int	time_of_eat;
-	int	time_of_sleep;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
 	int	must_eat_cnt;
-	int	start_time;
+	struct timeval	start_time;
 }	t_info;
 
 typedef struct	s_mutex
@@ -54,28 +54,36 @@ typedef struct	s_common
 
 typedef struct	s_philo
 {
-	pthread_t		tid;
-	int				id;
-	int				left;
-	int				right;
-	int				eat_cnt;
-	int				last_eat_time;
-	int				cur_time;
-	t_mutex			die;
-	t_info			*info;
-	t_common		*common;
+	pthread_t	tid;
+	int			id;
+	int			left;
+	int			right;
+	struct timeval	last_eat_time;
+	int			cur_time;
+	t_mutex		stop;
+	int			eat_cnt;
+	t_info		*info;
+	t_common	*common;
 }	t_philo;
 
+t_philo	*make_philos(t_info *info, t_common *common);
 int		ft_philo_atoi(char *s);
 int		save_info(t_info *info, int ac, char **av);
 void	fork_mutex_destroy(t_mutex *fork, int i);
 int		make_common_resources(t_common *common, t_info info);
-int		get_time(void);
+int		get_runtime(struct timeval start);
 void	set_value(t_mutex *mtx, int value);
 int		get_value(t_mutex *mtx);
 void	print_log(t_philo *info, int time, int status);
 
+void	philo_fork(t_philo *philo);
+void	philo_eat(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	philo_think(t_philo *philo);
+void	*philo_routine(void *data);
+
 //Act
 int		philo_die(t_philo *philo);
 void	philo_fork(t_philo *philo);
+void	ft_usleep(int time);
 #endif

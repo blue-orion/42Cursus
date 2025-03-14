@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_runtime.c                                      :+:      :+:    :+:   */
+/*   ft_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
+/*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 21:22:43 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/14 18:23:48 by takwak           ###   ########.fr       */
+/*   Created: 2025/03/14 16:48:03 by takwak            #+#    #+#             */
+/*   Updated: 2025/03/14 16:49:06 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	get_runtime(struct timeval start)
+void	ft_usleep(int time)
 {
-	struct timeval	tv;
-	int	runtime;
-	int	sec;
-	int	usec;
+	int	i;
 
-	gettimeofday(&tv, NULL);
-	sec = tv.tv_sec - start.tv_sec;
-	usec = tv.tv_usec - start.tv_usec;
-	runtime = sec * 1000 + usec / 1000;
-	return (runtime);
+	i = 0;
+	while (i <= time)
+	{
+		usleep(20);
+		i += 20;
+	}
 }

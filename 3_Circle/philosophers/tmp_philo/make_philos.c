@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:34:43 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/13 21:58:55 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/14 18:33:04 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,21 @@ t_philo	*make_philos(t_info *info, t_common *common)
 		return (NULL);
 	while (i < info->num_of_philo)
 	{
-		init_philo(philo + i, i, info, common);
-		if (pthread_mutex_init(&philo->die.lock, NULL))
+		init_philo(&philo[i], i, info, common);
+		if (pthread_mutex_init(&philo->stop.lock, NULL))
 		{
-			philo[i].die.value = 1;
+			philo[i].stop.value = 1;
 			stop_make_philo(philo, i);
 			return (NULL);
 		}
-		if (pthread_create(&philo->tid, NULL, &philo_routine, philo))
+		if (pthread_create(&philo->tid, NULL, &philo_routine, &philo[i]))
 		{
 			stop_make_philo(philo, i);
 			return (NULL);
 		}
 		i++;
 	}
+	return (philo);
 }
 
 void	init_philo(t_philo *philo, int i, t_info *info, t_common *common)
@@ -52,7 +53,7 @@ void	init_philo(t_philo *philo, int i, t_info *info, t_common *common)
 	philo->cur_time = 0;
 	philo->info = info;
 	philo->common = common;
-	philo->die.value = 0;
+	philo->stop.value = 0;
 }
 
 void	stop_make_philo(t_philo *philo, int num)
@@ -65,8 +66,8 @@ void	stop_make_philo(t_philo *philo, int num)
 	i = num;
 	while (i >= 0)
 	{
-		if (!philo[i].die.value)
-			pthread_mutex_destroy(&philo[i].die.lock);
+		if (!philo[i].stop.value)
+			pthread_mutex_destroy(&philo[i].stop.lock);
 		i--;
 	}
 	free(philo);
