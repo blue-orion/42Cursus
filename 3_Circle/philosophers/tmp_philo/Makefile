@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 18:04:19 by takwak            #+#    #+#              #
-#    Updated: 2025/03/14 18:09:31 by takwak           ###   ########.fr        #
+#    Updated: 2025/03/16 19:00:52 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = free_resources.c	\
 	   main.c			\
 	   make_common_resources.c	\
 	   make_philos.c	\
+	   monitoring.c	\
 	   philo_act.c	\
 	   philo_routine.c	\
 	   philo_utils.c	\

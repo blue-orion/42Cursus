@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:02:12 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/14 18:31:12 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/16 21:06:14 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@ void	*philo_routine(void *data)
 	int		status;
 
 	philo = (t_philo *)data;
-	if (philo->id % 2)
-		usleep(100);
-	printf("id = %d\n", philo->id);
-	status = get_value(&philo->stop);
-	while (status != DIE)
+	if (philo->id % 2 == 0)
+		philo_think(philo);
+	while (1)
 	{
+		if (get_value(&philo->common->stop))
+			break ;
 		philo_fork(philo);
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_think(philo);
 	}
 	//memory
+	pthread_mutex_destroy(&philo->stop.lock);
 	return (NULL);
 }

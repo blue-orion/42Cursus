@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:19:07 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/14 18:18:27 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/16 19:47:49 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	save_info(t_info *info, int ac, char **av)
 {
 	info->num_of_philo = ft_philo_atoi(av[1]);
-	info->time_to_die = ft_philo_atoi(av[2]) * 1000;
-	info->time_to_eat = ft_philo_atoi(av[3]) * 1000;
-	info->time_to_sleep = ft_philo_atoi(av[4]) * 1000;
+	info->time_to_die = ft_philo_atoi(av[2]);
+	info->time_to_eat = ft_philo_atoi(av[3]);
+	info->time_to_sleep = ft_philo_atoi(av[4]);
 	if (ac == 6)
 		info->must_eat_cnt = ft_philo_atoi(av[5]);
 	else

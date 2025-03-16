@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:48:03 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/14 16:49:06 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/16 19:47:26 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 void	ft_usleep(int time)
 {
-	int	i;
+	struct timeval	start;
+	struct timeval	cur;
+	int				runtime;
 
-	i = 0;
-	while (i <= time)
+	gettimeofday(&start, NULL);
+	while (1)
 	{
-		usleep(20);
-		i += 20;
+		gettimeofday(&cur, NULL);
+		runtime = (cur.tv_sec - start.tv_sec) * 1000
+			+ (cur.tv_usec - start.tv_usec) / 1000;
+		if (runtime >= time)
+			break ;
+		usleep(30);
 	}
 }

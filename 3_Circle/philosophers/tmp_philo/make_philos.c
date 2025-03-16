@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:34:43 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/14 18:33:04 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/16 20:12:06 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ t_philo	*make_philos(t_info *info, t_common *common)
 	while (i < info->num_of_philo)
 	{
 		init_philo(&philo[i], i, info, common);
-		if (pthread_mutex_init(&philo->stop.lock, NULL))
+		if (pthread_mutex_init(&philo[i].stop.lock, NULL))
 		{
 			philo[i].stop.value = 1;
 			stop_make_philo(philo, i);
 			return (NULL);
 		}
-		if (pthread_create(&philo->tid, NULL, &philo_routine, &philo[i]))
+		if (pthread_create(&philo[i].tid, NULL, &philo_routine, &philo[i]))
 		{
 			stop_make_philo(philo, i);
 			return (NULL);

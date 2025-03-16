@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:35:20 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/13 22:29:02 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/16 18:59:42 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	make_common_resources(t_common *common, t_info info)
 		return (1);
 	}
 	common->print.value = 0;
+	common->stop.value = 0;
 	return (0);
 }
 
