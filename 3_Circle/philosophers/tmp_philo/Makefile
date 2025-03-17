@@ -6,28 +6,25 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 18:04:19 by takwak            #+#    #+#              #
-#    Updated: 2025/03/16 19:00:52 by takwak           ###   ########.fr        #
+#    Updated: 2025/03/17 16:47:45 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-CC = cc
+CC = cc -Wall -Werror -Wextra
 FLAGS = -g
 
-SRCS = free_resources.c	\
-	   ft_philo_atoi.c	\
-	   ft_usleep.c		\
-	   get_runtime.c	\
-	   main.c			\
+SRCS = ft_philo_atoi.c			\
+	   main.c					\
 	   make_common_resources.c	\
-	   make_philos.c	\
-	   monitoring.c	\
-	   philo_act.c	\
-	   philo_routine.c	\
-	   philo_utils.c	\
-	   print_log.c	\
-	   save_info.c
+	   make_philos.c			\
+	   monitoring.c				\
+	   mutex.c					\
+	   philo_act.c				\
+	   philo_routine.c			\
+	   save_info.c				\
+	   utils.c
 
 OBJ_DIR = objs/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))

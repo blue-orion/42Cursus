@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:05:40 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/16 20:00:01 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/17 16:41:01 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,71 +22,75 @@
 
 enum
 {
-	FORK,
+	FORK = 1,
 	EAT,
 	SLEEP,
 	THINK,
-	DIE
+	DIE,
+	COUNTED
 };
 
-typedef struct	s_info
+typedef struct s_info
 {
-	int	num_of_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	must_eat_cnt;
+	int				num_of_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				must_eat_cnt;
 	struct timeval	start_time;
 }	t_info;
 
-typedef struct	s_mutex
+typedef struct s_mutex
 {
 	int				value;
 	pthread_mutex_t	lock;
 }	t_mutex;
 
-typedef struct	s_common
+typedef struct s_common
 {
 	t_mutex	*fork;
 	t_mutex	print;
 	t_mutex	stop;
 }	t_common;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
-	pthread_t	tid;
-	int			id;
-	int			left;
-	int			right;
-	struct timeval	last_eat_time;
-	int			cur_time;
-	t_mutex		stop;
-	int			eat_cnt;
-	t_info		*info;
-	t_common	*common;
+	pthread_t			tid;
+	int					id;
+	int					left;
+	int					right;
+	struct timeval		last_eat_time;
+	int					cur_time;
+	t_mutex				stop;
+	int					eat_cnt;
+	t_info				*info;
+	t_common			*common;
 }	t_philo;
 
+//Main
 t_philo	*make_philos(t_info *info, t_common *common);
-int		ft_philo_atoi(char *s);
 int		save_info(t_info *info, int ac, char **av);
-void	fork_mutex_destroy(t_mutex *fork, int i);
 int		make_common_resources(t_common *common, t_info info);
 int		get_runtime(struct timeval start);
-void	set_value(t_mutex *mtx, int value);
-int		get_value(t_mutex *mtx);
 void	print_log(t_philo *info, int time, int status);
 
+//Mutex Utils
+void	set_value(t_mutex *mtx, int value);
+int		get_value(t_mutex *mtx);
+void	destroy_fork_mutex(t_mutex *fork, int i);
+
+//Philo routine
+void	*philo_routine(void *data);
 void	philo_fork(t_philo *philo);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 int		philo_stop(t_philo *philo);
-void	*philo_routine(void *data);
-
-//Act
 int		philo_die(t_philo *philo);
 void	philo_fork(t_philo *philo);
+
+int		ft_philo_atoi(char *s);
 void	ft_usleep(int time);
 void	monitoring(t_philo *philo);
-void	free_resources(t_philo *philo);
+void	end_philo(t_philo *philo);
 #endif

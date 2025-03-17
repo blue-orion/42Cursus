@@ -1,16 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_log.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
+/*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 22:07:15 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/13 22:17:39 by takwak           ###   ########.fr       */
+/*   Created: 2025/03/17 16:21:00 by takwak            #+#    #+#             */
+/*   Updated: 2025/03/17 16:27:24 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_usleep(int time)
+{
+	struct timeval	start;
+	struct timeval	cur;
+	int				runtime;
+
+	gettimeofday(&start, NULL);
+	while (1)
+	{
+		gettimeofday(&cur, NULL);
+		runtime = (cur.tv_sec - start.tv_sec) * 1000
+			+ (cur.tv_usec - start.tv_usec) / 1000;
+		if (runtime >= time)
+			break ;
+		usleep(30);
+	}
+}
+
+int	get_runtime(struct timeval start)
+{
+	struct timeval	tv;
+	int				runtime;
+	int				sec;
+	int				usec;
+
+	gettimeofday(&tv, NULL);
+	sec = tv.tv_sec - start.tv_sec;
+	usec = tv.tv_usec - start.tv_usec;
+	runtime = sec * 1000 + usec / 1000;
+	return (runtime);
+}
 
 void	print_log(t_philo *info, int time, int status)
 {

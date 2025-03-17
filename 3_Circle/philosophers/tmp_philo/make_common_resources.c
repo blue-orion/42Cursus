@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:35:20 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/16 18:59:42 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/17 16:23:56 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	make_common_resources(t_common *common, t_info info)
 		return (1);
 	if (pthread_mutex_init(&common->stop.lock, NULL))
 	{
-		fork_mutex_destroy(common->fork, info.num_of_philo);
+		destroy_fork_mutex(common->fork, info.num_of_philo);
 		return (1);
 	}
 	if (pthread_mutex_init(&common->print.lock, NULL))
 	{
-		fork_mutex_destroy(common->fork, info.num_of_philo);
+		destroy_fork_mutex(common->fork, info.num_of_philo);
 		pthread_mutex_destroy(&common->stop.lock);
 		return (1);
 	}
@@ -46,7 +46,7 @@ int	make_forks(t_common *common, t_info info)
 	{
 		common->fork[i].value = 1;
 		if (pthread_mutex_init(&common->fork[i].lock, NULL))
-			return (fork_mutex_destroy(common->fork, i), -1);
+			return (destroy_fork_mutex(common->fork, i), -1);
 		i++;
 	}
 	return (0);

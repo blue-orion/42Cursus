@@ -6,20 +6,20 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:39:52 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/16 20:10:51 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/17 16:27:44 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 void	join_threads(t_philo *philo);
+void	free_resources(t_philo *philo);
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_info		info;
 	t_common	common;
 	t_philo		*philo;
-	struct timeval	tv;
 
 	if (ac < 5 || save_info(&info, ac, av))
 		return (write(2, "Invalid input\n", 14));
@@ -43,4 +43,12 @@ void	join_threads(t_philo *philo)
 			perror("join failed");
 		i++;
 	}
+}
+
+void	free_resources(t_philo *philo)
+{
+	destroy_fork_mutex(philo->common->fork, philo->info->num_of_philo - 1);
+	pthread_mutex_destroy(&philo->common->print.lock);
+	pthread_mutex_destroy(&philo->common->stop.lock);
+	free(philo);
 }
