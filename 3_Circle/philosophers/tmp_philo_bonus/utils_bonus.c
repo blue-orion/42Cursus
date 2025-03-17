@@ -6,11 +6,11 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:21:00 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 18:28:25 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/17 20:38:23 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	ft_usleep(int time)
 {
@@ -44,23 +44,41 @@ int	get_runtime(struct timeval start)
 	return (runtime);
 }
 
-void	print_log(t_philo *info, int time, int status)
+void	print_log(t_philo *philo, int time, int status)
 {
-	pthread_mutex_lock(&info->common->print.lock);
-	if (get_value(&info->common->stop))
-	{
-		pthread_mutex_unlock(&info->common->print.lock);
-		return ;
-	}
+	sem_wait(philo->common->print);
 	if (status == FORK)
-		printf("%d %d has taken a fork\n", time, info->id);
+		printf("%d %d has taken a fork\n", time, philo->id);
 	if (status == EAT)
-		printf("%d %d is eating\n", time, info->id);
+		printf("%d %d is eating\n", time, philo->id);
 	if (status == SLEEP)
-		printf("%d %d is sleeping\n", time, info->id);
+		printf("%d %d is sleeping\n", time, philo->id);
 	if (status == THINK)
-		printf("%d %d is thinking\n", time, info->id);
+		printf("%d %d is thinking\n", time, philo->id);
 	if (status == DIE)
-		printf("%d %d is died\n", time, info->id);
-	pthread_mutex_unlock(&info->common->print.lock);
+		printf("%d %d is died\n", time, philo->id);
+	sem_post(philo->common->print);
+}
+
+char	*make_sema_name(char *dst, char *src, int num)
+{
+	int		i;
+	int		len;
+
+	len = 0;
+	while (src[len])
+		len++;
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (num)
+	{
+		dst[i] = num % 10 + '0';
+		i++;
+		num /= 10;
+	}
+	return (dst);
 }
