@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 18:17:42 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/11 22:05:29 by takwak           ###   ########.fr       */
+/*   Created: 2025/03/13 21:02:12 by takwak            #+#    #+#             */
+/*   Updated: 2025/03/17 16:48:00 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,17 @@ void	*philo_routine(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	if (!(philo->id & 1))
-	{
+	if (philo->id % 2 == 0)
 		philo_think(philo);
-		usleep(500);
-	}
 	while (1)
 	{
-		if (philo_fork(philo))
+		if (get_value(&philo->common->stop))
 			break ;
-		if (philo_eat(philo))
-			break ;
-		if (philo_sleep(philo))
-			break ;
-		if (philo_think(philo))
-			break ;
+		philo_fork(philo);
+		philo_eat(philo);
+		philo_sleep(philo);
+		philo_think(philo);
 	}
+	pthread_mutex_destroy(&philo->stop.lock);
 	return (NULL);
 }

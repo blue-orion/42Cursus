@@ -5,55 +5,45 @@
 #                                                     +:+ +:+         +:+      #
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/12 15:57:39 by takwak            #+#    #+#              #
-#    Updated: 2025/03/11 22:06:25 by takwak           ###   ########.fr        #
+#    Created: 2025/03/14 18:04:19 by takwak            #+#    #+#              #
+#    Updated: 2025/03/17 16:47:45 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc -Wall -Werror -Wextra
-CFLAGS = -g
+FLAGS = -g
 
-SRC_DIR = ./
+SRCS = ft_philo_atoi.c			\
+	   main.c					\
+	   make_common_resources.c	\
+	   make_philos.c			\
+	   monitoring.c				\
+	   mutex.c					\
+	   philo_act.c				\
+	   philo_routine.c			\
+	   save_info.c				\
+	   utils.c
+
 OBJ_DIR = objs/
-INCLUDES = includes/
-
-SRCS = philosophers.c	\
-	   end_process.c	\
-	   get_time.c		\
-	   monitoring.c		\
-	   philo_act.c		\
-	   philo_routine.c	\
-	   philo_utils.c	\
-	   print_log.c		\
-	   set_init_state.c	\
-	   util_atoi.c		\
-	   util_destory.c
-
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(FLAGS) $^ -o $(NAME)
 
 $(OBJ_DIR)%.o : %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ -I$(INCLUDES) -o $@
-
-
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ -I$(INCLUDES) -o $@
+	$(CC) $(FLAGS) -c $^ -o $@
 
 $(OBJ_DIR) :
-	mkdir -p $(OBJ_DIR)
+	mkdir $@
 
 clean :
 	rm -rf $(OBJ_DIR)
 
 fclean : clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re : fclean all
-
-.PHONY: NAME all clean fclean re

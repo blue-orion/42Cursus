@@ -3,81 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   philo_act.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 16:01:56 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/11 22:24:04 by takwak           ###   ########.fr       */
+/*   Created: 2025/03/13 21:06:32 by takwak            #+#    #+#             */
+/*   Updated: 2025/03/16 21:09:40 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	philo_fork(t_philo *philo)
-{
-	int	runtime;
+int	philo_stop(t_philo *philo);
 
-	if (is_stop(philo))
-		return (-1);
-	pthread_mutex_lock(&philo->common->fork[philo->left]);
-	philo->status = FORK;
-	runtime = get_runtime(philo->start_time);
-	if (print_log(philo, runtime))
-		return (-1);
-	if (is_stop(philo) || philo->info->num_of_philo == 1)
-		return (-1);
-	pthread_mutex_lock(&philo->common->fork[philo->right]);
-	philo->status = FORK;
-	runtime = get_runtime(philo->start_time);
-	if (print_log(philo, runtime))
-		return (-1);
-	return (0);
+void	philo_fork(t_philo *philo)
+{
+	while (!philo_stop(philo) && !get_value(&philo->common->fork[philo->left]))
+		usleep(20);
+	if (philo_stop(philo))
+		return ;
+	set_value(&philo->common->fork[philo->left], 0);
+	print_log(philo, get_runtime(philo->info->start_time), FORK);
+	while (!philo_stop(philo) && !get_value(&philo->common->fork[philo->right]))
+		usleep(20);
+	if (philo_stop(philo))
+		return ;
+	set_value(&philo->common->fork[philo->right], 0);
+	print_log(philo, get_runtime(philo->info->start_time), FORK);
 }
 
-int	philo_eat(t_philo *philo)
+void	philo_eat(t_philo *philo)
 {
-	int	runtime;
-
-	if (is_stop(philo))
-		return (-1);
-	philo->status = EAT;
-	runtime = get_runtime(philo->start_time);
+	if (philo_stop(philo))
+		return ;
+	print_log(philo, get_runtime(philo->info->start_time), EAT);
 	gettimeofday(&philo->last_eat_time, NULL);
-	if (print_log(philo, runtime))
-		return (-1);
-	usleep(philo->info->time_to_eat * 1000);
+	ft_usleep(philo->info->time_to_eat);
+	set_value(&philo->common->fork[philo->left], 1);
+	set_value(&philo->common->fork[philo->right], 1);
 	philo->eat_cnt++;
-	if (is_stop(philo))
-		return (-1);
-	pthread_mutex_unlock(&philo->common->fork[philo->left]);
-	pthread_mutex_unlock(&philo->common->fork[philo->right]);
-	if (philo->eat_cnt == philo->info->must_eat)
-		philo->status = FINISH;
-	return (0);
+	if (philo->eat_cnt == philo->info->must_eat_cnt)
+		set_value(&philo->stop, EAT);
 }
 
-int	philo_sleep(t_philo *philo)
+void	philo_sleep(t_philo *philo)
 {
-	int	runtime;
-
-	if (is_stop(philo))
-		return (-1);
-	philo->status = SLEEP;
-	runtime = get_runtime(philo->start_time);
-	if (print_log(philo, runtime))
-		return (-1);
-	usleep(philo->info->time_to_sleep * 1000);
-	return (0);
+	if (philo_stop(philo))
+		return ;
+	print_log(philo, get_runtime(philo->info->start_time), SLEEP);
+	ft_usleep(philo->info->time_to_sleep);
 }
 
-int	philo_think(t_philo *philo)
+void	philo_think(t_philo *philo)
 {
-	int	runtime;
+	if (philo_stop(philo))
+		return ;
+	print_log(philo, get_runtime(philo->info->start_time), THINK);
+	ft_usleep(100);
+}
 
-	if (is_stop(philo))
-		return (-1);
-	philo->status = THINK;
-	runtime = get_runtime(philo->start_time);
-	if (print_log(philo, runtime))
-		return (-1);
+int	philo_stop(t_philo *philo)
+{
+	if (get_value(&philo->common->stop) || get_value(&philo->stop) == DIE)
+		return (1);
+	if (get_runtime(philo->last_eat_time) >= philo->info->time_to_die)
+	{
+		print_log(philo, get_runtime(philo->info->start_time), DIE);
+		set_value(&philo->stop, DIE);
+		return (1);
+	}
 	return (0);
 }
