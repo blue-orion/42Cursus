@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:51:19 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 21:47:50 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/18 21:37:17 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_philo	*make_philos(t_philo *philo, t_info *info, t_common *common)
 			return (NULL);
 		}
 		if (philo[i].pid == 0)
-			philo_routine(&philo[i]);
+			philo_routine(philo, i);
 		if (philo[i].pid > 0)
 			i++;
 	}
@@ -49,12 +49,8 @@ int	init_philo(t_philo *philo, int idx, t_info *info, t_common *common)
 	memset(philo, 0, sizeof(t_philo));
 	philo->id = idx + 1;
 	philo->last_eat_time = info->start_time;
-	make_sema_name(philo->stop_sem_name, "/stop", idx);
-	philo->stop.lock = ft_sem_open(philo->stop_sem_name, 1);
-	if (!philo->stop.lock)
-		return (-1);
-	philo->stop.value = malloc(sizeof(int));
-	*philo->stop.value = 0;
+	make_sema_name(philo->stop_sem_name, "/stop", idx + 1);
+	sem_unlink(philo->stop_sem_name);
 	philo->info = info;
 	philo->common = common;
 	return (0);
@@ -64,7 +60,6 @@ int	stop_make_philos(t_philo *philo, int idx)
 {
 	while (idx)
 	{
-		ft_sem_destroy(philo[idx].stop.lock, philo[idx].stop_sem_name);
 		if (philo[idx].pid)
 			kill(philo[idx].pid, SIGKILL);
 		idx--;

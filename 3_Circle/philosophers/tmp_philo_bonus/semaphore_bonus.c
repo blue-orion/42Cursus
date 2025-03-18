@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:32:17 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 21:46:34 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/18 20:27:32 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,4 @@ void	ft_sem_destroy(sem_t *sem, char *name)
 {
 	sem_close(sem);
 	sem_unlink(name);
-}
-
-int	get_value(t_sema *sem)
-{
-	int	value;
-
-	sem_wait(sem->lock);
-	value = *(sem->value);
-	sem_post(sem->lock);
-	return (value);
-}
-
-void	set_value(t_sema *sem, int value)
-{
-	sem_wait(sem->lock);
-	*sem->value = value;
-	sem_post(sem->lock);
 }

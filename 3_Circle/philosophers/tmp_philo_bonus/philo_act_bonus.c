@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:36:52 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 21:23:30 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/18 21:33:04 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@ int	have_to_stop(t_philo *philo)
 {
 	int	runtime;
 
-	if (get_value(&philo->common->end))
-		return (1);
-	if (get_value(&philo->stop) == DIE)
-		return (1);
+	philo->stop = sem_open("stop", 0);
+	if (philo->stop)
+	{
+		sem_close(philo->stop);
+		return (EAT);
+	}
 	runtime = get_runtime(philo->last_eat_time);
 	if (runtime >= philo->info->time_to_die)
 	{
-		set_value(&philo->stop, DIE);
 		print_log(philo, get_runtime(philo->info->start_time), DIE);
-		return (1);
+		return (DIE);
 	}
 	return (0);
 }
@@ -56,7 +57,9 @@ void	philo_eat(t_philo *philo)
 	{
 		printf("eat_cnt = %d\n", philo->eat_cnt);
 		printf("must_eat_cnt = %d\n", philo->info->must_eat_cnt);
-		set_value(&philo->stop, EAT);
+		philo->stop = ft_sem_open(philo->stop_sem_name, 1);
+		sem_close(philo->stop);
+		printf("%d: seccess make %s sema\n", philo->id, philo->stop_sem_name);
 	}
 }
 

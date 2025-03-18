@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 17:19:21 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 21:43:58 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/18 21:35:59 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <semaphore.h>
+# include <pthread.h>
 # include <stdio.h>
 # include <sys/wait.h>
 # include <sys/time.h>
@@ -42,17 +43,11 @@ typedef struct s_info
 	struct timeval	start_time;
 }	t_info;
 
-typedef struct s_sema
-{
-	int		*value;
-	sem_t	*lock;
-}	t_sema;
-
 typedef struct s_common
 {
 	sem_t	*print;
 	sem_t	*fork;
-	t_sema	end;
+	sem_t	*die;
 }	t_common;
 
 typedef struct s_philo
@@ -62,7 +57,7 @@ typedef struct s_philo
 	int				eat_cnt;
 	struct timeval	last_eat_time;
 	char			stop_sem_name[4096];
-	t_sema			stop;
+	sem_t			*stop;
 	t_info			*info;
 	t_common		*common;
 }	t_philo;
@@ -80,13 +75,12 @@ void	monitoring(t_philo *philo);
 //Semaphore
 sem_t	*ft_sem_open(char *name, int value);
 void	ft_sem_destroy(sem_t *sem, char *name);
-void	set_value(t_sema *sem, int value);
-int		get_value(t_sema *sem);
 
 //Philo routine
-void	philo_routine(t_philo *philo);
+void	philo_routine(t_philo *philos, int id);
 void	philo_fork(t_philo *philo);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
+int		have_to_stop(t_philo *philo);
 #endif

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:44:17 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 21:48:03 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/18 23:32:41 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,7 @@ int	make_common(t_info *info, t_common *common)
 		sem_unlink("/print");
 		return (-1);
 	}
-	common->end.lock = ft_sem_open("/end", 1);
-	if (!common->end.lock)
-	{
-		sem_close(common->print);
-		sem_unlink("/print");
-		sem_close(common->fork);
-		sem_unlink("/fork");
-		return (-1);
-	}
-	common->end.value = malloc(sizeof(int));
-	*common->end.value = 0;
+	common->die = ft_sem_open("/die", 0);
+	// sem_unlink("die");
 	return (0);
 }
