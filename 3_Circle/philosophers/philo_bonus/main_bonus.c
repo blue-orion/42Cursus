@@ -5,27 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 01:56:05 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 17:14:22 by takwak           ###   ########.fr       */
+/*   Created: 2025/03/17 17:18:56 by takwak            #+#    #+#             */
+/*   Updated: 2025/03/19 16:52:48 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	main(int argc, char **argv)
+void	free_resources(t_philo *philo);
+
+int	main(int ac, char **av)
 {
 	t_info		info;
 	t_common	common;
+	t_philo		*philo;
 
-	if (argc < 5 || argc > 6)
-		return (write(2, "Too few or many arguments\n", 26));
-	if (save_info(&info, argc, argv))
-		return (write(2, "Invalid argv value\n", 19));
-	if (make_common_resource(&common, info))
-		return (write(2, "Error in making common resources\n", 33));
-	if (set_initial_state(&info, &common))
-		return (write(2, "Error in setting initial state\n", 31));
-	wait_childs(&info);
-	free_resources(&info, &common);
+	philo = NULL;
+	if (ac < 5 || save_info(&info, ac, av))
+		return (write(2, "Invalid Input\n", 14));
+	if (make_common(&info, &common))
+		return (write(2, "Failed semaphore init\n", 22));
+	philo = make_philos(philo, &info, &common);
+	monitoring(philo);
+	free_resources(philo);
 	return (0);
+}
+
+void	free_resources(t_philo *philo)
+{
+	ft_sem_destroy(philo->common->fork, "/fork");
+	ft_sem_destroy(philo->common->print, "/print");
+	free(philo);
 }

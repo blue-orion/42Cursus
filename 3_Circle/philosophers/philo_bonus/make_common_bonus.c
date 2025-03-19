@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time_bonus.c                                   :+:      :+:    :+:   */
+/*   make_common_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/26 17:44:04 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 17:15:40 by takwak           ###   ########.fr       */
+/*   Created: 2025/03/17 18:44:17 by takwak            #+#    #+#             */
+/*   Updated: 2025/03/19 16:49:31 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	get_runtime(t_philo *philo, struct timeval start_time)
+int	make_common(t_info *info, t_common *common)
 {
-	int	runtime;
-	int	sec;
-	int	usec;
-
-	sem_wait(philo->time_sem->adr);
-	gettimeofday(&philo->cur_time, NULL);
-	sec = philo->cur_time.tv_sec - start_time.tv_sec;
-	usec = philo->cur_time.tv_usec - start_time.tv_usec;
-	runtime = sec * 1000 + usec / 1000;
-	sem_post(philo->time_sem->adr);
-	return (runtime);
+	common->print = ft_sem_open("/print", 1);
+	if (!common->print)
+		return (-1);
+	common->fork = ft_sem_open("/fork", info->num_of_philo);
+	if (!common->fork)
+	{
+		sem_close(common->print);
+		sem_unlink("/print");
+		return (-1);
+	}
+	return (0);
 }

@@ -5,55 +5,45 @@
 #                                                     +:+ +:+         +:+      #
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/29 01:56:33 by takwak            #+#    #+#              #
-#    Updated: 2024/12/29 04:43:12 by takwak           ###   ########.fr        #
+#    Created: 2025/03/14 18:04:19 by takwak            #+#    #+#              #
+#    Updated: 2025/03/17 21:06:05 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-CC = cc
-CFLAG = -Wall -Werror -Wextra -g
+CC = cc -Wall -Werror -Wextra
+FLAGS = -g
 
-SRC_DIR = srcs/
+SRCS = ft_philo_atoi_bonus.c	\
+	   main_bonus.c				\
+	   make_common_bonus.c		\
+	   make_philos_bonus.c		\
+	   monitoring_bonus.c		\
+	   philo_act_bonus.c		\
+	   philo_routine_bonus.c	\
+	   save_info_bonus.c		\
+	   semaphore_bonus.c		\
+	   utils_bonus.c
+
 OBJ_DIR = objs/
-INCLUDE = includes/
-
-MAIN = philosophers_bonus.c
-SRCS = free_resources_bonus.c		\
-       get_time_bonus.c				\
-       monitoring_bonus.c			\
-       philo_behavior_bonus.c		\
-       philo_libft_bonus.c			\
-       philo_main_bonus.c			\
-       print_log_bonus.c			\
-       set_initial_state_bonus.c	\
-	   utils_bonus.c				\
-	   utils_philo_bonus.c			\
-	   wait_childs_bonus.c
-
-OBJS = $(addprefix $(OBJ_DIR), $(MAIN:.c=.o) $(SRCS:.c=.o))
+OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAG) $^ -I$(INCLUDE) -o $@
+	$(CC) $(FLAGS) $^ -o $(NAME)
 
 $(OBJ_DIR)%.o : %.c | $(OBJ_DIR)
-	$(CC) $(CFLAG) -I$(INCLUDE) -c $^ -o $@
-
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAG) -c $^ -I$(INCLUDE) -o $@
+	$(CC) $(FLAGS) -c $^ -o $@
 
 $(OBJ_DIR) :
-	mkdir -p $@
+	mkdir $@
 
 clean :
 	rm -rf $(OBJ_DIR)
 
 fclean : clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re : fclean all
-
-.PHONY: NAME all clean fclean re
