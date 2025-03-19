@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:21:00 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/19 16:46:58 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/19 22:06:42 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 void	ft_usleep(t_philo *philo, int time)
 {
 	struct timeval	start;
+	int				start_run;
 	int				runtime;
 
+	start_run = get_runtime(philo->info->start_time);
 	gettimeofday(&start, NULL);
-	while (1)
+	runtime = get_runtime(philo->info->start_time);
+	while (runtime - start_run < time)
 	{
-		runtime = get_runtime(start);
-		if (runtime >= philo->info->time_to_die)
-			break ;
-		if (runtime >= time)
+		if (runtime - start_run >= philo->info->time_to_die)
 			break ;
 		usleep(30);
+		runtime = get_runtime(philo->info->start_time);
 	}
 }
 

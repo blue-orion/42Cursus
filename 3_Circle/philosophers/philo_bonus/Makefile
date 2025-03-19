@@ -6,13 +6,13 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 18:04:19 by takwak            #+#    #+#              #
-#    Updated: 2025/03/17 21:06:05 by takwak           ###   ########.fr        #
+#    Updated: 2025/03/19 21:07:13 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-CC = cc -Wall -Werror -Wextra
+CC = cc 
 FLAGS = -g
 
 SRCS = ft_philo_atoi_bonus.c	\

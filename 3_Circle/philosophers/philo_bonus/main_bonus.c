@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 17:18:56 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/19 16:52:48 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/19 20:37:14 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,15 @@ int	main(int ac, char **av)
 
 void	free_resources(t_philo *philo)
 {
+	int	i;
+
 	ft_sem_destroy(philo->common->fork, "/fork");
 	ft_sem_destroy(philo->common->print, "/print");
+	i = 0;
+	while (i < philo->info->num_of_philo)
+	{
+		ft_sem_destroy(philo[i].die, philo[i].die_sem_name);
+		i++;
+	}
 	free(philo);
 }

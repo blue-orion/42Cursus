@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:51:19 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/18 21:37:17 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/19 20:30:24 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ int	init_philo(t_philo *philo, int idx, t_info *info, t_common *common)
 	memset(philo, 0, sizeof(t_philo));
 	philo->id = idx + 1;
 	philo->last_eat_time = info->start_time;
-	make_sema_name(philo->stop_sem_name, "/stop", idx + 1);
-	sem_unlink(philo->stop_sem_name);
+	make_sema_name(philo->die_sem_name, "/die", idx + 1);
+	philo->die = ft_sem_open(philo->die_sem_name, 1);
+	if (!philo->die)
+		perror("no die sem");
 	philo->info = info;
 	philo->common = common;
 	return (0);

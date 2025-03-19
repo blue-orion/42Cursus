@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 17:19:21 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/19 16:52:02 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/19 20:25:07 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ typedef struct s_philo
 	int				id;
 	int				eat_cnt;
 	struct timeval	last_eat_time;
-	int				died;
+	char			die_sem_name[4096];
+	sem_t			*die;
+	int				die_value;
 	t_info			*info;
 	t_common		*common;
 }	t_philo;
@@ -84,4 +86,5 @@ void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 int		have_to_stop(t_philo *philo);
+
 #endif
