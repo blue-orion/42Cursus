@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:44:45 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/19 22:11:23 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/20 13:05:07 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	philo_routine(t_philo *philos, int idx)
 	philo = &philos[idx];
 	pthread_create(&tid, NULL, check_die_thread, philo);
 	if (philo->id % 2 == 0)
+	{
 		philo_think(philo);
+		usleep(100 * philo->info->num_of_philo);
+	}
 	while (1)
 	{
 		status = have_to_stop(philo);

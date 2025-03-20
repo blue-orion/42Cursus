@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:02:12 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/20 12:33:39 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/20 13:03:53 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	*philo_routine(void *data)
 
 	philo = (t_philo *)data;
 	if (philo->id % 2 == 0)
+	{
 		philo_think(philo);
+		usleep(100 * philo->info->num_of_philo);
+	}
 	while (1)
 	{
 		if (get_value(&philo->common->stop))

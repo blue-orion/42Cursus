@@ -6,14 +6,14 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 18:04:19 by takwak            #+#    #+#              #
-#    Updated: 2025/03/17 16:47:45 by takwak           ###   ########.fr        #
+#    Updated: 2025/03/20 12:50:57 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-CC = cc -Wall -Werror -Wextra
-FLAGS = -g
+CC = cc
+FLAGS = -Wall -Werror -Wextra -g
 
 SRCS = ft_philo_atoi.c			\
 	   main.c					\
