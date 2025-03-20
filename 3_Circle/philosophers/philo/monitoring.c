@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 18:48:48 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 16:41:52 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/19 18:05:37 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	monitoring(t_philo *philo)
 		}
 		if (status == DIE || finish == philo->info->num_of_philo)
 			break ;
-		usleep(500);
+		usleep(100);
 	}
 	set_value(&philo->common->stop, 1);
 }

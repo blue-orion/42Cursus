@@ -6,27 +6,27 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:21:00 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 18:28:25 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/19 19:03:43 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_usleep(int time)
+void	ft_usleep(t_philo *philo, int time)
 {
+	int				start_run;
 	struct timeval	start;
-	struct timeval	cur;
 	int				runtime;
 
+	start_run = get_runtime(philo->info->start_time);
 	gettimeofday(&start, NULL);
-	while (1)
+	runtime = get_runtime(philo->info->start_time);
+	while (runtime - start_run < time)
 	{
-		gettimeofday(&cur, NULL);
-		runtime = (cur.tv_sec - start.tv_sec) * 1000
-			+ (cur.tv_usec - start.tv_usec) / 1000;
-		if (runtime >= time)
+		if (runtime - start_run >= philo->info->time_to_die)
 			break ;
 		usleep(30);
+		runtime = get_runtime(philo->info->start_time);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 17:18:56 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/19 20:37:14 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:26:53 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	t_philo		*philo;
 
 	philo = NULL;
-	if (ac < 5 || save_info(&info, ac, av))
+	if (ac < 5 || ac > 6 || save_info(&info, ac, av))
 		return (write(2, "Invalid Input\n", 14));
 	if (make_common(&info, &common))
 		return (write(2, "Failed semaphore init\n", 22));

@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:39:52 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 16:27:44 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:26:37 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	t_common	common;
 	t_philo		*philo;
 
-	if (ac < 5 || save_info(&info, ac, av))
+	if (ac < 5 || ac > 6 || save_info(&info, ac, av))
 		return (write(2, "Invalid input\n", 14));
 	if (make_common_resources(&common, info))
 		return (write(2, "make mutex failed\n", 18));

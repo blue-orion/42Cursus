@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:05:40 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/17 16:41:01 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/19 18:01:47 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		philo_die(t_philo *philo);
 void	philo_fork(t_philo *philo);
 
 int		ft_philo_atoi(char *s);
-void	ft_usleep(int time);
+void	ft_usleep(t_philo *philo, int time);
 void	monitoring(t_philo *philo);
 void	end_philo(t_philo *philo);
 #endif

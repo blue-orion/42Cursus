@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:06:32 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/16 21:09:40 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:40:30 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	philo_eat(t_philo *philo)
 		return ;
 	print_log(philo, get_runtime(philo->info->start_time), EAT);
 	gettimeofday(&philo->last_eat_time, NULL);
-	ft_usleep(philo->info->time_to_eat);
+	ft_usleep(philo, philo->info->time_to_eat);
 	set_value(&philo->common->fork[philo->left], 1);
 	set_value(&philo->common->fork[philo->right], 1);
 	philo->eat_cnt++;
@@ -49,7 +49,7 @@ void	philo_sleep(t_philo *philo)
 	if (philo_stop(philo))
 		return ;
 	print_log(philo, get_runtime(philo->info->start_time), SLEEP);
-	ft_usleep(philo->info->time_to_sleep);
+	ft_usleep(philo, philo->info->time_to_sleep);
 }
 
 void	philo_think(t_philo *philo)
@@ -57,7 +57,7 @@ void	philo_think(t_philo *philo)
 	if (philo_stop(philo))
 		return ;
 	print_log(philo, get_runtime(philo->info->start_time), THINK);
-	ft_usleep(100);
+	usleep(1000);
 }
 
 int	philo_stop(t_philo *philo)
