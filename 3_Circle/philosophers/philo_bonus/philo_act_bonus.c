@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:36:52 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/20 13:05:25 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/21 17:36:53 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	philo_think(t_philo *philo)
 	if (have_to_stop(philo))
 		return ;
 	print_log(philo, get_runtime(philo->info->start_time), THINK);
+	usleep(100);
 }
