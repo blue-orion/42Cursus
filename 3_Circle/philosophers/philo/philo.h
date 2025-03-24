@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:05:40 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/19 18:01:47 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/21 20:27:19 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_philo
 	int					left;
 	int					right;
 	struct timeval		last_eat_time;
-	int					cur_time;
 	t_mutex				stop;
 	int					eat_cnt;
 	t_info				*info;

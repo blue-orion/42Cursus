@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:34:43 by takwak            #+#    #+#             */
-/*   Updated: 2025/03/16 20:12:06 by takwak           ###   ########.fr       */
+/*   Updated: 2025/03/21 20:27:29 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	init_philo(t_philo *philo, int i, t_info *info, t_common *common)
 	philo->right = (i + 1) % info->num_of_philo;
 	philo->eat_cnt = 0;
 	philo->last_eat_time = info->start_time;
-	philo->cur_time = 0;
 	philo->info = info;
 	philo->common = common;
 	philo->stop.value = 0;
