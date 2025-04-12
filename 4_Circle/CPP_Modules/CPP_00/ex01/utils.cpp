@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 19:16:58 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/12 18:29:24 by takwak           ###   ########.fr       */
+/*   Created: 2025/04/13 00:49:42 by takwak            #+#    #+#             */
+/*   Updated: 2025/04/13 00:49:45 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-
-char	*to_upper(char *s)
+void	init_string(char *str, int size)
 {
-	for (int i = 0; s[i]; i++) {
-		if (s[i] >= 'a' && s[i] <= 'z')
-			s[i] = s[i] - 32;
-	}
-	return (s);
+	for (int i = 0; i < size; i++)
+		str[i] = '\0';
 }
 
-int	main(int argc, char **argv)
+void	strcpy(char *dst, const char *src)
 {
-	if (argc == 1) {
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return 0;
-	}
-	for (int i = 1; i < argc; i++) {
-		std::cout << to_upper(argv[i]);
-	}
-	std::cout << std::endl;
-	return 0;
+	for (int i = 0; src[i]; i++)
+		dst[i] = src[i];
 }

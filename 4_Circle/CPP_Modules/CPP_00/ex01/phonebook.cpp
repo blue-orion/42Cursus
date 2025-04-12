@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 19:16:58 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/12 18:29:24 by takwak           ###   ########.fr       */
+/*   Created: 2025/04/12 18:55:39 by takwak            #+#    #+#             */
+/*   Updated: 2025/04/12 22:03:32 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "PhoneBook.h"
 
-char	*to_upper(char *s)
+int	main(void)
 {
-	for (int i = 0; s[i]; i++) {
-		if (s[i] >= 'a' && s[i] <= 'z')
-			s[i] = s[i] - 32;
-	}
-	return (s);
-}
+	PhoneBook	phone_book[8];
 
-int	main(int argc, char **argv)
-{
-	if (argc == 1) {
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return 0;
-	}
-	for (int i = 1; i < argc; i++) {
-		std::cout << to_upper(argv[i]);
-	}
-	std::cout << std::endl;
-	return 0;
+
 }

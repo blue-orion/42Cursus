@@ -6,16 +6,16 @@
 #    By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 18:08:17 by takwak            #+#    #+#              #
-#    Updated: 2025/04/12 18:13:10 by takwak           ###   ########.fr        #
+#    Updated: 2025/04/12 18:55:37 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = phonebook 
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = megaphone.cpp
+SRCS = phonebook.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all : $(NAME)
