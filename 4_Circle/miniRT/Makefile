@@ -3,7 +3,8 @@ NAME = miniRT
 CC = cc
 FLAGS = -g
 
-SRCS = main.c
+SRCS = main.c	\
+	   hook.c	
 
 OBJ_DIR = objs/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))

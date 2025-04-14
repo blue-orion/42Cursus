@@ -18,14 +18,36 @@
 # include <stdlib.h>
 # include <math.h>
 
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_DESTROY = 17
+};
+
+#define PI 3.141592
+
 typedef struct s_img
 {
-	void	*img;
+	void	*imgp;
 	char	*adr;
 	int		bpp;
 	int		length;
 	int		endian;
 }	t_img;
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_point;
+
+typedef struct s_circle
+{
+	t_point	c;
+	double	r;
+	int		color;
+}	t_circle;
 
 typedef struct s_mlx
 {
@@ -33,4 +55,7 @@ typedef struct s_mlx
 	void	*win;
 	t_img	*img;
 }	t_mlx;
+
+int	end_program(int keycode, t_mlx *vars);
+int	key_hook(int keycode, t_mlx *vars);
 #endif
