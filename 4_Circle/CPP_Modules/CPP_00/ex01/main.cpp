@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
+/*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 18:55:39 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/15 22:44:02 by takwak           ###   ########.fr       */
+/*   Created: 2025/04/16 20:44:36 by takwak            #+#    #+#             */
+/*   Updated: 2025/04/16 21:13:27 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.h"
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 int	main(void)
 {
@@ -19,23 +20,18 @@ int	main(void)
 
 	while (1)
 	{
-		std::cin >> input;
-		if (!input.compare("ADD"))
-		{
-			phone_book.add_contact();
-			std::cout << input << std::endl;
-		}
-		else if (!input.compare("SEARCH"))
-		{
-			phone_book.search_contact();
-			std::cout << input << std::endl;
-		}
-		else if (!input.compare("EXIT"))
-		{
-			std::cout << input << std::endl;
+		std::cout << "> ";
+		std::getline(std::cin, input);
+		if (std::cin.eof())
 			break ;
-		}
+		if (input == "ADD")
+			phone_book.add_contact();
+		else if (input == "SEARCH")
+			phone_book.search_contact();
+		else if (input == "EXIT")
+			break ;
 		else
 			std::cout << "invalid input" << std::endl;
 	}
 }
+
