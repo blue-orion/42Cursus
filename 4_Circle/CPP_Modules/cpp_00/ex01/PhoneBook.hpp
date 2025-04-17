@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:47:11 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/16 21:49:26 by takwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 22:06:24 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@
 class PhoneBook {
 private:
 	Contact contact[8];
-	int		size;
+	int		max_size;
+	int		index;
 
 public:
 	PhoneBook() {
-		size = 0;
+		max_size = 0;
+		index = 0;
 	}
 
-	void	add_contact(void);
-	void	search_contact(void);
-	int		get_size(void);
+	void	AddContact(void);
+	void	SearchContact(void);
+	void	DisplayPhoneBook(void);
 };
 
 #endif

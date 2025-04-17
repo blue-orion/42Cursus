@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:46:27 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/16 20:46:21 by takwak           ###   ########.fr       */
+/*   Updated: 2025/04/17 22:02:30 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ private:
 	std::string	darkest_secret;
 
 public:
-	void	set_first_name(std::string first_name);
-	void	set_last_name(std::string last_name);
-	void	set_nickname(std::string nickname);
-	void	set_phone_number(std::string phone_number);
-	void	set_darkest_secret(std::string darkest_secret);
+	void	SetFirstName(std::string first_name);
+	void	SetLastName(std::string last_name);
+	void	SetNickname(std::string nickname);
+	void	SetPhoneNumber(std::string phone_number);
+	void	SetDarkestSecret(std::string darkest_secret);
 
-	std::string	get_first_name(void);
-	std::string	get_last_name(void);
-	std::string	get_nickname(void);
-	std::string	get_phone_number(void);
-	std::string	get_darkest_secret(void);
+	std::string	GetFirstName(void);
+	std::string	GetLastName(void);
+	std::string	GetNickname(void);
+
+	void	print(void);
 };
 
 #endif

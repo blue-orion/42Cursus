@@ -5,33 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 20:44:36 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/16 21:13:27 by takwak           ###   ########.fr       */
+/*   Created: 2025/04/18 01:15:41 by takwak            #+#    #+#             */
+/*   Updated: 2025/04/18 01:15:41 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
-#include "PhoneBook.hpp"
+#include "Zombie.hpp"
 
-int	main(void)
+int	main( void )
 {
-	PhoneBook	phone_book;
-	std::string	input;
+	Zombie	*heap_zombie;
+	
+	randomChump("func stack");
 
-	while (1)
-	{
-		std::cout << "> ";
-		std::getline(std::cin, input);
-		if (std::cin.eof())
-			break ;
-		if (input == "ADD")
-			phone_book.add_contact();
-		else if (input == "SEARCH")
-			phone_book.search_contact();
-		else if (input == "EXIT")
-			break ;
-		else
-			std::cout << "invalid input" << std::endl;
-	}
+	Zombie	stack("main stack");
+	stack.announce();
+
+	heap_zombie = newZombie("heap");
+	heap_zombie->announce();
+
+	delete heap_zombie;
 }
-
