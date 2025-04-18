@@ -1,3 +1,0 @@
-in*	input	File open for reading: the internal stream buffer supports input operations.
-out	output	File open for writing: the internal stream buffer supports output operations.
-binary	binary	Operations are performed in binary mode rather than text.

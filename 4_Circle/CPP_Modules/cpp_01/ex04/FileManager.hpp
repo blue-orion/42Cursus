@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Sed.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 14:30:29 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/18 14:31:45 by takwak           ###   ########.fr       */
+/*   Created: 2025/04/18 20:58:19 by takwak            #+#    #+#             */
+/*   Updated: 2025/04/18 20:58:19 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
 
-int	main( void ) {
-	Zombie	*zombie_horde;
+#include <string>
 
-	zombie_horde = zombieHorde(10, "babo");
-	delete[] zombie_horde;
-	return 0;
-}
+class	FileManager {
+
+public:
+	static void	replaceString( std::string &text, const std::string &to_change, const std::string &replacement);
+	static std::string	readFile( const std::string &filename );
+	static void	saveToFile( const std::string &filename, const std::string &text );
+};

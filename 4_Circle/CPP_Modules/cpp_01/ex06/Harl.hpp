@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 14:30:29 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/18 14:31:45 by takwak           ###   ########.fr       */
+/*   Created: 2025/04/18 21:34:09 by takwak            #+#    #+#             */
+/*   Updated: 2025/04/18 21:34:09 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
 
-int	main( void ) {
-	Zombie	*zombie_horde;
+#include <string>
 
-	zombie_horde = zombieHorde(10, "babo");
-	delete[] zombie_horde;
-	return 0;
-}
+class	Harl {
+private:
+	void	debug(void);
+	void	info(void);
+	void	warning(void);
+	void	error(void);
+public:
+	void	complain(std::string level);
+};

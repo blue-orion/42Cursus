@@ -10,12 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = zombie
+NAME = filemanager
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp	\
+	   FileManager.cpp
 
 OBJ_DIR = objs/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.cpp=.o))

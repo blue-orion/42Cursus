@@ -33,5 +33,6 @@ int	main( void ) {
 	std::cout << "stringPTR variable value: " << *stringPTR << std::endl;
 	std::cout << "stringREF variable value: " << stringREF << std::endl;
 	std::cout << std::endl;
+	return 0;
 }
 
