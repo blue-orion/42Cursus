@@ -35,5 +35,6 @@ int	main(void)
 			std::cout << "You can ADD, SEARCH, EXIT" << std::endl;
 		}
 	}
+	return 0;
 }
 
