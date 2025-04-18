@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/18 13:49:47 by takwak            #+#    #+#              #
-#    Updated: 2025/04/18 13:54:05 by takwak           ###   ########.fr        #
+#    Updated: 2025/04/18 14:38:48 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp	\
 	   Zombie.cpp	\
-	   newZombie.cpp	\
-	   randomChump.cpp
+		 zombieHorde.cpp	
 
 OBJ_DIR = objs/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.cpp=.o))
