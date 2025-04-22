@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:05:08 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/18 15:13:06 by takwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 00:13:47 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main( void ) {
 	std::cout << std::endl;
 	
 	str = "HI THIS IS CHANGED BRAIN";
+	/*stringREF = NULL;*/
 	std::cout << "      str variable value: " << str << std::endl;
 	std::cout << "stringPTR variable value: " << *stringPTR << std::endl;
 	std::cout << "stringREF variable value: " << stringREF << std::endl;

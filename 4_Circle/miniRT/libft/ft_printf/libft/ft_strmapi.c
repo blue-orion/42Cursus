@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:07:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:25 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/05 23:30:10 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/06 00:21:53 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "libft.h"
 
-int main()
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
+	char			*res;
+	unsigned int	idx;
+
+	res = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (res == NULL)
+		return (NULL);
+	idx = 0;
+	while (s[idx])
 	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
+		res[idx] = f(idx, (char)s[idx]);
+		idx++;
 	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+	res[idx] = '\0';
+	return (res);
 }

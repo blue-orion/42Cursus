@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 15:47:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:42 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/03 19:37:39 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/03 19:39:54 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include "Weapon.hpp"
-
-class	HumanA {
-private:
-	std::string	_name;
-	const Weapon	&_weapon;
-
-public:
-	HumanA( const std::string &name, const Weapon &weapon);
-	void	attack( void );
-};
+int	ft_isascii(int c)
+{
+	if (c < 0 || c > 127)
+		return (0);
+	return (1);
+}

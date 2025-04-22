@@ -6,12 +6,16 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:38:25 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/18 21:38:25 by takwak           ###   ########.fr       */
+/*   Updated: 2025/04/22 00:10:50 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 #include <iostream>
+
+Harl::Harl() {
+	funcPtr = &Harl::debug;
+};
 
 void	Harl::debug(void) {
 	std::cout << "[DEBUG]\n"
@@ -38,12 +42,13 @@ void	Harl::complain(std::string level) {
 	int input = 1 * (level == "DEBUG") + 2 * (level == "INFO") +
 				3 * (level == "WARNING") + 4 * (level == "ERROR");
 
+	funcPtr = &Harl::debug;
 	switch (input) {
 		case 1:
-			debug();
+			Harl::debug();
 			break ;
 		case 2:
-			info();
+			this->info();
 			break;
 		case 3:
 			warning();

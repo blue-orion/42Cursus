@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:07:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:25 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/04 15:39:07 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/06 01:44:05 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "libft.h"
 
-int main()
+char	*ft_strrchr(const char *s, int c)
 {
+	size_t	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	while (len != 0)
 	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
+		if (s[len] == (char)c)
+			return ((char *)s + len);
+		len--;
 	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+	if (s[len] == (char)c)
+		return ((char *)s + len);
+	return (NULL);
 }

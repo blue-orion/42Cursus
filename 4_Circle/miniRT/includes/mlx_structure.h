@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   mlx_structure.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/28 16:36:22 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/05 16:11:17 by takwak           ###   ########.fr       */
+/*   Created: 2025/04/23 00:33:08 by takwak            #+#    #+#             */
+/*   Updated: 2025/04/23 00:33:08 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MLX_STRUCTURE_H
+# define MLX_STRUCTURE_H
 
-# include "minilibx-linux/mlx.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <math.h>
-
-enum
-{
-	ON_KEYDOWN = 2,
-	ON_DESTROY = 17
-};
-
-#define PI 3.141592
+# include "structures.h"
 
 typedef struct s_img
 {
@@ -35,27 +24,12 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_point
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_point;
-
-typedef struct s_circle
-{
-	t_point	c;
-	double	r;
-	int		color;
-}	t_circle;
-
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	t_img	*img;
+	t_scene	*scene;
 }	t_mlx;
 
-int	end_program(int keycode, t_mlx *vars);
-int	key_hook(int keycode, t_mlx *vars);
 #endif

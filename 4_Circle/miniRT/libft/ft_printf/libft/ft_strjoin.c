@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:07:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:25 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/05 16:14:33 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/05 16:54:12 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "libft.h"
 
-int main()
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+	char	*joined;
+	size_t	total_len;
+
+	total_len = ft_strlen(s1) + ft_strlen(s2);
+	joined = (char *)malloc(sizeof(char) * (total_len + 1));
+	if (joined == NULL)
+		return (NULL);
+	ft_strlcpy(joined, s1, ft_strlen(s1) + 1);
+	ft_strlcat(joined, s2, total_len + 1);
+	return (joined);
 }

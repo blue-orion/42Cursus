@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
+/*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 22:05:20 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/14 22:05:20 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/06 09:08:04 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/06 09:08:49 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	end_program(int keycode, t_mlx *vars)
+int	ft_lstsize(t_list *lst)
 {
-	exit(1);
-}
+	int	len;
 
-int	key_hook(int keycode, t_mlx *vars)
-{
-	printf("keycode = %d\n", (char)keycode);
-	if ((char)keycode == 27)
-		end_program(keycode, vars);
+	len = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		len++;
+	}
+	return (len);
 }

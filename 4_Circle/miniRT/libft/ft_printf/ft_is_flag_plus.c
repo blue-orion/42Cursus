@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ft_is_flag_plus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:07:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:25 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/17 21:37:10 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/19 02:02:54 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "ft_printf.h"
 
-int main()
+size_t	ft_is_flag_plus(t_printf *info)
 {
+	size_t	i;
+	size_t	print_len;
+
+	print_len = 0;
+	if (ft_is_valid_type(info))
 	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
+		i = ft_printlen_arg(info);
+		while (i + 1 < info->width)
+		{
+			print_len += ft_write(" ", 1);
+			i++;
+		}
+		if (info->id >= 0)
+			print_len += ft_write("+", 1);
+		print_len += ft_print_type(info);
+		return (print_len);
 	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+	return (ft_default_print(info));
 }

@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ft_typedef_cps.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:07:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:25 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/17 22:41:54 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/18 02:38:32 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "ft_printf.h"
 
-int main()
+void	ft_type_c(va_list ap, t_printf *info)
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+	info->type = 'c';
+	info->c = va_arg(ap, int);
+}
+
+void	ft_type_p(va_list ap, t_printf *info)
+{
+	info->type = 'p';
+	info->p = va_arg(ap, size_t);
+}
+
+void	ft_type_s(va_list ap, t_printf *info)
+{
+	info->type = 's';
+	info->s = va_arg(ap, char *);
 }

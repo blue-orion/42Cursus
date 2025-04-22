@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 15:47:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:42 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/04 15:33:55 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/04 15:34:46 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include "Weapon.hpp"
-
-class	HumanA {
-private:
-	std::string	_name;
-	const Weapon	&_weapon;
-
-public:
-	HumanA( const std::string &name, const Weapon &weapon);
-	void	attack( void );
-};
+int	ft_tolower(int c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
+}

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 15:47:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:42 by takwak           ###   ########.fr       */
+/*   Created: 2025/04/22 16:23:34 by takwak            #+#    #+#             */
+/*   Updated: 2025/04/22 16:23:34 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef SCENE_H
+# define SCENE_H
 
-#include "Weapon.hpp"
+# include "structures.h"
+# include "utils.h"
 
-class	HumanA {
-private:
-	std::string	_name;
-	const Weapon	&_weapon;
+t_canvas	canvas(int width, int height);
+t_camera	camera(t_canvas *canvas, t_point3 origin);
 
-public:
-	HumanA( const std::string &name, const Weapon &weapon);
-	void	attack( void );
-};
+t_object	*object(t_object_type type, void *element, t_color3 albedo);
+t_sphere	*sphere(t_point3 center, double radius);
+t_light		*light_point(t_point3 light_origin, t_color3 light_color, double bright_ratio);
+#endif

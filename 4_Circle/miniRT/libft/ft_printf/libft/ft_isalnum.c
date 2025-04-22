@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 15:47:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/21 21:30:42 by takwak           ###   ########.fr       */
+/*   Created: 2024/10/03 19:30:42 by takwak            #+#    #+#             */
+/*   Updated: 2024/10/04 22:41:50 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include "Weapon.hpp"
-
-class	HumanA {
-private:
-	std::string	_name;
-	const Weapon	&_weapon;
-
-public:
-	HumanA( const std::string &name, const Weapon &weapon);
-	void	attack( void );
-};
+int	ft_isalnum(int c)
+{
+	if (c < '0' || (c > '9' && c < 'A'))
+		return (0);
+	if ((c > 'Z' && c < 'a') || c > 'z')
+		return (0);
+	return (1);
+}
