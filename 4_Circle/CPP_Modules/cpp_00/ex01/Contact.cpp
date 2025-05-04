@@ -6,11 +6,13 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:55:27 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/17 22:03:53 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:18:31 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+#include <iostream>
+
 
 void	Contact::SetFirstName(std::string first_name) {
 	this->first_name = first_name;

@@ -6,14 +6,14 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:46:27 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/17 22:02:30 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:18:23 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
-# include <iostream>
+# include <string>
 
 class	Contact {
 private: 

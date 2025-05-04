@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 18:08:17 by takwak            #+#    #+#              #
-#    Updated: 2025/04/12 18:13:10 by takwak           ###   ########.fr        #
+#    Updated: 2025/05/04 16:17:07 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(CC) $(FLAGS) $^ -o $@
 
-%.o : %.c
+%.o : %.cpp
 	$(CC) $(FLAGS) -c $^ -o $@
 
 clean :

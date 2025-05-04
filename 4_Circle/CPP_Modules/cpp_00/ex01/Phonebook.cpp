@@ -6,12 +6,15 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 18:55:39 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/17 22:16:07 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:29:30 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <cstdio>
+#include <limits>
+#include <iostream>
+#include <iomanip>
 
 std::string	InputString(const char *field_name)
 {
@@ -34,10 +37,10 @@ void	PhoneBook::AddContact(void)
 {
 	std::string	input;
 
-	if (max_size == 8)
+	if (add_count >= 8)
 	{
 		std::cout << "PhoneBook max, Delete and add contact" << std::endl;
-		this->index = 0;
+		this->index = add_count % 8;
 	}
 
 	input = InputString("fisrt name");
@@ -57,13 +60,13 @@ void	PhoneBook::AddContact(void)
 
 	std::cout << "Complete!" << std::endl;
 	this->index++;
-	if (this->max_size < 8)
-		this->max_size++;
+	this->add_count++;
 }
 
 void	PhoneBook::DisplayPhoneBook(void)
 {
 	std::string	tmp;
+	int			size;
 
 	std::cout << "=============================================" << std::endl
 		<< "|" << std::right << std::setw(10) << "Index" << "|" 
@@ -72,7 +75,8 @@ void	PhoneBook::DisplayPhoneBook(void)
 		<< std::right << std::setw(10) << "Nickname" << "|" << std::endl
 		<< "=============================================" << std::endl;
 
-	for (int i = 0; i < max_size; i++) {
+	size = add_count > 8 ? 8 : add_count;
+	for (int i = 0; i < size; i++) {
 		std::cout << "|";
 		std::cout << std::right << std::setw(10) << i + 1 << "|";
 		
@@ -90,7 +94,7 @@ void	PhoneBook::DisplayPhoneBook(void)
 		if (tmp.length() > 10)
 			tmp = tmp.substr(0, 9) + ".";
 		std::cout << std::right << std::setw(10) << tmp << "|" << std::endl;
-		if (i != max_size - 1)
+		if (i != add_count - 1)
 			std::cout << "---------------------------------------------" << std::endl;
 	}
 
@@ -126,7 +130,7 @@ void	PhoneBook::SearchContact(void)
 			break ;
 		}
 	}
-	if (index <= 0 || index > max_size) {
+	if (index <= 0 || index > (add_count > 8 ? 8 : add_count)) {
 		std::cout << "Not Exist, stop searching" << std::endl;
 		return ;
 	}

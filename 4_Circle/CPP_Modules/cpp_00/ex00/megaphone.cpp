@@ -6,17 +6,18 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 19:16:58 by takwak            #+#    #+#             */
-/*   Updated: 2025/04/12 18:29:24 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:16:52 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cctype>
 
 char	*to_upper(char *s)
 {
 	for (int i = 0; s[i]; i++) {
 		if (s[i] >= 'a' && s[i] <= 'z')
-			s[i] = s[i] - 32;
+			s[i] = std::toupper(s[i]);
 	}
 	return (s);
 }
