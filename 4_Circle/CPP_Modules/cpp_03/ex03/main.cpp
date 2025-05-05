@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:21:59 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/05 16:42:32 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/06 01:36:49 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,22 @@ int	main(void) {
 
 	B.attack("A");
 	A.takeDamage(B.getAttackDamage());
+	A.beRepaired(50);
 	print_nl();
 
 	B.guardGate();
 	print_nl();
 
-	C.attack("A");
-	A.takeDamage(C.getAttackDamage());
-	print_nl();
 	C.highFivesGuys();
 	print_nl();
 
 	D.whoAmI();
+	print_nl();
 	D.guardGate();
+	print_nl();
 	D.highFivesGuys();
-	// for (int i = 0; i < 50; i++)
-	// 	D.beRepaired(1);
+	print_nl();
 	D.attack("C");
+	C.takeDamage(D.getAttackDamage());
 	print_nl();
 }
