@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 11:17:34 by takwak            #+#    #+#             */
-/*   Updated: 2024/10/06 11:17:34 by takwak           ###   ########.fr       */
+/*   Updated: 2025/04/23 22:38:57 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	{
 		past = cur;
 		cur = cur->next;
-		del(past->content);
+		if (del != NULL)
+			del(past->content);
 		free(past);
 	}
 	*lst = cur;
