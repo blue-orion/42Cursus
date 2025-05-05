@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:07:46 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/05 17:27:15 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/05 16:51:34 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,17 @@ ClapTrap::ClapTrap(std::string name) : name(name), hitPoint(10), energyPoint(10)
 ClapTrap::ClapTrap(const ClapTrap& other) {
 	std::cout << name << " ClapTrap constructed" << std::endl;
 	this->name = other.getName();
-	this->hitPoint = other.getHitPoint();
-	this->attackDamage = other.getAttackDamage();
-	this->energyPoint = other.getEnergyPoint();
 }
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& other) {
 	if (this == &other)
 		return *this;
 	this->name = other.getName();
-	this->hitPoint = other.getHitPoint();
-	this->attackDamage = other.getAttackDamage();
-	this->energyPoint = other.getEnergyPoint();
 	return *this;
 }
 
 std::string	ClapTrap::getName() const {
-	return this->name;
+	return (this->name);
 }
 
 unsigned int	ClapTrap::getAttackDamage() const {
@@ -60,23 +54,23 @@ void	ClapTrap::attack(const std::string& target) {
 	std::cout << "ClapTrap " << name << " attacks " << target;
 
 	if (energyPoint == 0) {
-		std::cout << std::endl << "But " << name << "'s energyPoint is " << energyPoint
+		std::cout << ", But " << name << "'s energyPoint is " << energyPoint
 			<< ", can't do anything" << std::endl;
 		return ;
 	}
 	if (hitPoint == 0) {
-		std::cout << std::endl << "But " << name << "'s hitPoint is " << hitPoint
+		std::cout << ", But " << name << "'s hitPoint is " << hitPoint
 			<< ", can't do anything" << std::endl;
 		return ;
 	}
+
 	std::cout << ", causing " << attackDamage << " points of damage!" << std::endl;
-	energyPoint--;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount) {
 	unsigned int	tmp = hitPoint;
 
-	if (hitPoint > amount) {
+	if (hitPoint >= amount) {
 		hitPoint -= amount;
 	}
 	else {
@@ -88,7 +82,6 @@ void	ClapTrap::takeDamage(unsigned int amount) {
 
 void	ClapTrap::beRepaired(unsigned int amount) {
 	std::cout << name << " try to repair" << std::endl;
-
 	if (energyPoint == 0) {
 		std::cout << "But " << name << "'s energyPoint is " << energyPoint
 			<< ", can't do anything" << std::endl;
@@ -99,6 +92,7 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 			<< ", can't do anything" << std::endl;
 		return ;
 	}
+
 	hitPoint += amount;
 	std::cout << name << " is repaired by " << amount
 			<< " (" << hitPoint - amount << "->" << hitPoint << ")" << std::endl;

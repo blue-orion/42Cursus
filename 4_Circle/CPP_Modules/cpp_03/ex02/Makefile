@@ -1,9 +1,12 @@
-NAME = a.out
+NAME = fragtrap
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp	\
+	   ClapTrap.cpp	\
+	   ScavTrap.cpp	\
+	   FragTrap.cpp
 
 OBJ_DIR = objs/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.cpp=.o))
@@ -27,4 +30,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : $(NAME) all clean fclean re
+.PHONY : all clean fclean re

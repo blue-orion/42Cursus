@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:34:09 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/04 18:03:11 by takwak           ###   ########.fr       */
+/*   Created: 2025/05/02 18:09:33 by takwak            #+#    #+#             */
+/*   Updated: 2025/05/05 16:47:55 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#include "ClapTrap.hpp"
 
-#include <string>
-
-class	Harl {
-private:
-	void	debug(void);
-	void	info(void);
-	void	warning(void);
-	void	error(void);
-	void	(Harl::*funcPtr[4])(void);
-
+class FragTrap : virtual public ClapTrap {
 public:
-	Harl();
-	void	complain(std::string level);
+	static const int _defaultHitPoint = 100;
+	static const int _defaultEnergyPoint = 100;
+	static const int _defaultAttackDamage = 30;
+
+	FragTrap();
+	FragTrap(std::string name);
+	FragTrap(const FragTrap& other);
+	virtual ~FragTrap();
+
+	FragTrap& operator=(const FragTrap& other);
+
+	void	highFivesGuys();
 };

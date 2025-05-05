@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 23:16:10 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/05 17:46:00 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/05 16:51:53 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ ScavTrap::~ScavTrap() {
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-	this->hitPoint = 100;
-	this->energyPoint = 50;
-	this->attackDamage = 20;
-	std::cout << this->getName()  << " ScavTrap "<< "constructed" << std::endl;
+	this->hitPoint = _defaultHitPoint;
+	this->energyPoint = _defaultEnergyPoint;
+	this->attackDamage = _defaultAttackDamage;
+	std::cout << this->name  << " ScavTrap "<< "constructed" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) {

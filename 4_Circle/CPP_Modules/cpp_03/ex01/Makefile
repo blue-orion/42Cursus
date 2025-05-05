@@ -1,4 +1,4 @@
-NAME = claptrap
+NAME = scavtrap
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
@@ -29,4 +29,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : $(NAME) all clean fclean re
+.PHONY : all clean fclean re

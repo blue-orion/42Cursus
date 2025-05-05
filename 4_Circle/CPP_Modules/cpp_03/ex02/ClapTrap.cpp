@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:07:46 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/05 17:27:15 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/05 17:42:02 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ClapTrap::ClapTrap(std::string name) : name(name), hitPoint(10), energyPoint(10)
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
-	std::cout << name << " ClapTrap constructed" << std::endl;
+	std::cout << name << " ClapTrap constructed by copy " << other.getName() << std::endl;
 	this->name = other.getName();
 	this->hitPoint = other.getHitPoint();
 	this->attackDamage = other.getAttackDamage();
