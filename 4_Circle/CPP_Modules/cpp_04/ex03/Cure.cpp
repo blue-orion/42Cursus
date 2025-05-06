@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Character.hpp                                      :+:      :+:    :+:   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 17:18:03 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/06 20:59:30 by takwak           ###   ########.fr       */
+/*   Created: 2025/05/06 21:22:27 by takwak            #+#    #+#             */
+/*   Updated: 2025/05/06 22:29:29 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Cure.hpp"
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
+#include <iostream>
 
-class Character : public ICharacter {
-private :
-	std::string	_name;
-	AMateria	*_inventory[4];
+Cure::Cure() : AMateria("cure") {}
+Cure::~Cure() {}
+Cure::Cure(const Cure& other) : AMateria(other._type) {}
 
-public :
-	Character();
-	Character(const Character& other);
-	Character& operator=(const Character& other);
-	~Character();
+Cure& Cure::operator=(const Cure& other) {
+	if (this == &other)
+		return *this;
+	this->_type = other._type;
+	return *this;
+}
 
-	Character(const std::string& name);
+void	Cure::use(ICharacter& target) {
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+}
 
-	virtual std::string const & getName() const;
-	virtual void equip(AMateria* m);
-	virtual void unequip(int idx);
-	virtual void use(int idx, ICharacter& target);
-};
+AMateria* Cure::clone() const {
+	return new Cure;
+}

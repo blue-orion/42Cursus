@@ -37,10 +37,6 @@ std::string	Animal::getType() const {
 	return (this->type);
 }
 
-void	Animal::makeSound() {
-	std::cout << "grrr..." << std::endl;
-}
-
 void	Animal::makeSound() const {
 	std::cout << "grrr..." << std::endl;
 }
@@ -67,10 +63,6 @@ WrongAnimal&	WrongAnimal::operator=(const WrongAnimal& other) {
 
 std::string	WrongAnimal::getType() const {
 	return (this->type);
-}
-
-void	WrongAnimal::makeSound() {
-	std::cout << "grrr..." << std::endl;
 }
 
 void	WrongAnimal::makeSound() const {

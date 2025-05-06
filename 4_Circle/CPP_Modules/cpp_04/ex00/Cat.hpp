@@ -20,7 +20,6 @@ public:
 	Cat(const Cat& other);
 	Cat& operator=(const Cat& other);
 
-	virtual void	makeSound();
 	virtual void	makeSound() const;
 };
 
@@ -31,6 +30,5 @@ public:
 	WrongCat(const WrongCat& other);
 	WrongCat& operator=(const WrongCat& other);
 
-	virtual void	makeSound();
-	virtual void	makeSound() const;
+	void	makeSound() const;
 };

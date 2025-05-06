@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Character.hpp                                      :+:      :+:    :+:   */
+/*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 17:18:03 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/06 20:59:30 by takwak           ###   ########.fr       */
+/*   Created: 2025/05/06 21:27:20 by takwak            #+#    #+#             */
+/*   Updated: 2025/05/06 22:29:37 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Ice.hpp"
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
+#include <iostream>
 
-class Character : public ICharacter {
-private :
-	std::string	_name;
-	AMateria	*_inventory[4];
+Ice::Ice() : AMateria("ice") {}
+Ice::Ice(const Ice& other) : AMateria(other.getType()) {}
+Ice::~Ice() {}
 
-public :
-	Character();
-	Character(const Character& other);
-	Character& operator=(const Character& other);
-	~Character();
+Ice& Ice::operator=(const Ice& other) {
+	if (this == &other)
+		return *this;
+	this->_type = other._type;
+	return *this;
+}
 
-	Character(const std::string& name);
+void	Ice::use(ICharacter& target) {
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+}
 
-	virtual std::string const & getName() const;
-	virtual void equip(AMateria* m);
-	virtual void unequip(int idx);
-	virtual void use(int idx, ICharacter& target);
-};
+AMateria* Ice::clone() const {
+	return new Ice;
+}

@@ -6,13 +6,15 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 02:48:07 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/06 17:16:56 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/06 22:15:55 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "AMateria.hpp"
+#include <string>
+
+class	AMateria;
 
 class ICharacter {
 public:

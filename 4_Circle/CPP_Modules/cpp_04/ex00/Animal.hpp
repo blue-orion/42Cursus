@@ -24,7 +24,6 @@ public:
 	Animal(const Animal& other);
 	Animal&	operator=(const Animal& other);
 
-	virtual void	makeSound();
 	virtual void	makeSound() const;
 
 	std::string	getType() const;
@@ -40,7 +39,6 @@ public:
 	WrongAnimal(const WrongAnimal& other);
 	WrongAnimal&	operator=(const WrongAnimal& other);
 
-	void	makeSound();
 	void	makeSound() const;
 
 	std::string	getType() const;

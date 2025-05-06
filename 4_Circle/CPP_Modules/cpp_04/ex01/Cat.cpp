@@ -45,10 +45,6 @@ Cat&	Cat::operator=(const Cat& other) {
 	return (*this);
 }
 
-void	Cat::makeSound() {
-	std::cout << "meow~~~" << std::endl;
-}
-
 void	Cat::makeSound() const {
 	std::cout << "meow~~~" << std::endl;
 }

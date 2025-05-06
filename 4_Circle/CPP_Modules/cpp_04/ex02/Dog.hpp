@@ -20,11 +20,10 @@ private:
 
 public:
 	Dog();
-	~Dog();
+	virtual ~Dog();
 	Dog(const Dog& other);
 	Dog& operator=(const Dog& other);
 
-	virtual void	makeSound();
 	virtual void	makeSound() const;
 
 	void	thinking(std::string content);

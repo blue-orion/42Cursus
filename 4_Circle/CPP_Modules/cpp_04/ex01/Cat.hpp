@@ -20,11 +20,10 @@ private:
 
 public:
 	Cat();
-	~Cat();
+	virtual ~Cat();
 	Cat(const Cat& other);
 	Cat& operator=(const Cat& other);
 
-	virtual void	makeSound();
 	virtual void	makeSound() const;
 
 	void	thinking(std::string content);

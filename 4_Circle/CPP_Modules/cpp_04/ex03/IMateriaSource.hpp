@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:02:48 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/06 17:03:26 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/06 21:13:42 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 #include "AMateria.hpp"
 
-class IMateriaSource
-{
+class IMateriaSource {
 public:
 	virtual ~IMateriaSource() {}
 	virtual void learnMateria(AMateria*) = 0;

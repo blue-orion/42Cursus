@@ -34,10 +34,6 @@ Cat&	Cat::operator=(const Cat& other) {
 	return (*this);
 }
 
-void	Cat::makeSound() {
-	std::cout << "meow~~~" << std::endl;
-}
-
 void	Cat::makeSound() const {
 	std::cout << "meow~~~" << std::endl;
 }
@@ -61,10 +57,6 @@ WrongCat&	WrongCat::operator=(const WrongCat& other) {
 		return (*this);
 	this->type = other.getType();
 	return (*this);
-}
-
-void	WrongCat::makeSound() {
-	std::cout << "meow~~~" << std::endl;
 }
 
 void	WrongCat::makeSound() const {

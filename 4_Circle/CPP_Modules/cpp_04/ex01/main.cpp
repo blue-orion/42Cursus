@@ -53,5 +53,14 @@ int main()
 	std::cout << copy_dog.speaking(0) << std::endl;
 	std::cout << std::endl;
 
+	std::cout << std::endl;
+	{
+		Dog basic;
+		{
+			Dog tmp;
+			tmp = basic;
+		}
+	}
+	std::cout << std::endl;
 	return 0;
 }

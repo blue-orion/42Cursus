@@ -1,9 +1,14 @@
 NAME = a.out
 
 CC = c++
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 
 SRCS = main.cpp	\
+	   AMateria.cpp	\
+	   Character.cpp	\
+	   Cure.cpp		\
+	   Ice.cpp		\
+	   MateriaSource.cpp
 
 OBJ_DIR = objs/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.cpp=.o))
