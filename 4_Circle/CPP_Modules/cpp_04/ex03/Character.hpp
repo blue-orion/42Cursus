@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                       :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 02:45:41 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/06 17:08:50 by takwak           ###   ########.fr       */
+/*   Created: 2025/05/06 17:18:03 by takwak            #+#    #+#             */
+/*   Updated: 2025/05/06 18:06:22 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include <string>
+#include "AMateria.hpp"
 #include "ICharacter.hpp"
 
-class AMateria {
-protected:
-	std::string	type;
+class Character : public ICharacter {
+private :
+	std::string	_name;
+	AMateria	*inventory[4];
 
-public:
-	AMateria(std::string const &type);
-
-	std::string const & getType() const;
-	virtual AMateria* clone() const = 0;
-	virtual void use(ICharacter& target);
+public :
+	Character();
+	Character(const std::string& name);
+	~Character();
+	virtual std::string const & getName() const;
+	virtual void equip(AMateria* m);
+	virtual void unequip(int idx);
+	virtual void use(int idx, ICharacter& target);
 };

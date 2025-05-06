@@ -6,7 +6,7 @@
 #    By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/18 13:49:47 by takwak            #+#    #+#              #
-#    Updated: 2025/04/18 13:54:05 by takwak           ###   ########.fr        #
+#    Updated: 2025/05/06 19:23:35 by takwak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,4 +42,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : $(NAME) all clean fclean re
+.PHONY : all clean fclean re
