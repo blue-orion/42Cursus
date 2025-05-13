@@ -1,4 +1,4 @@
-NAME = bureaucrat
+NAME = intern
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
@@ -8,7 +8,8 @@ SRCS = main.cpp	\
 	   AForm.cpp		\
 	   ShrubberyCreationForm.cpp	\
 	   RobotomyRequestForm.cpp	\
-	   PresidentialPardonForm.cpp
+	   PresidentialPardonForm.cpp	\
+	   Intern.cpp
 
 OBJ_DIR = objs/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.cpp=.o))
