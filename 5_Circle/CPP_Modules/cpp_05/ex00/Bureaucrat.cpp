@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:16:12 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/12 15:16:12 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/13 18:07:26 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	Bureaucrat::setGrade(int grade) {
 	this->grade = grade;
 }
 
-void	Bureaucrat::upGrade(unsigned int grade) {
+void	Bureaucrat::upGrade(int grade) {
 	if (this->grade - grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	this->grade -= grade;
 }
 
-void	Bureaucrat::downGrade(unsigned int grade) {
+void	Bureaucrat::downGrade(int grade) {
 	if (this->grade + grade > 150)
 		throw Bureaucrat::GradeTooLowException();
 	this->grade += grade;

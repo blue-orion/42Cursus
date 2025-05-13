@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:16:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/12 15:16:13 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/13 18:15:44 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ public:
 	const std::string & getName() const;
 	int					getGrade() const;
 	void				setGrade(int grade);
-	void				upGrade(unsigned int grade);
-	void				downGrade(unsigned int grade);
+	void				upGrade(int grade);
+	void				downGrade(int grade);
 
 	void				signForm(Form& form);
 
