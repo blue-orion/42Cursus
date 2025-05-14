@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:10:43 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/12 20:37:35 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/14 18:02:18 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ AForm::AForm(const AForm& other)
 	: _name(other._name), _isSigned(other._isSigned),
 	_gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) {}
 
-AForm::AForm(const std::string name, const int grade_to_sign, const int grade_to_execute)
-	: _name(name), _isSigned(0), _gradeToSign(grade_to_sign), _gradeToExecute(grade_to_execute) {
+AForm::AForm(const std::string name, const int grade_to_sign, const int grade_to_execute, const std::string target)
+	: _name(name), _isSigned(0), _gradeToSign(grade_to_sign), _gradeToExecute(grade_to_execute), _target(target) {
 	if (grade_to_sign > 150 || grade_to_execute > 150) {
 		throw AForm::GradeTooLowException();
 	}
@@ -39,6 +39,10 @@ int			AForm::getGradeToSign() const {
 }
 int			AForm::getGradeToExecute() const {
 	return this->_gradeToExecute;
+}
+
+const std::string&	AForm::getTarget() const {
+	return this->_target;
 }
 
 void	AForm::beSigned(const Bureaucrat& bureaucrat) {
