@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:42:55 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/14 19:10:29 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/15 17:47:33 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ enum {
 	FLOAT,
 	CHAR,
 	DOUBLE,
-	PSEUDO
+	PSEUDO,
+	ERROR
 };
 
 template <typename T>
@@ -53,6 +54,7 @@ int	castToInt(T t) {
 
 template <typename T>
 float	castToFloat(T t) {
+	return static_cast<float>(t);
 	if (t >= std::numeric_limits<float>::min() && t <= std::numeric_limits<float>::max())
 		return static_cast<float>(t);
 	return 0;
