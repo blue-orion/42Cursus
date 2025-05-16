@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:57:09 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/16 21:45:50 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/17 01:39:21 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main()
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
+		sp.print();
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}
@@ -62,6 +63,22 @@ int main()
 		}
 		catch (std::exception& e) {
 			std::cout << e.what() << std::endl;
+		}
+	}
+
+	{
+		std::cout << std::endl << "Another addNumber func" << std::endl;
+		Span	sp(5);
+		int		toAdd[5] = {1, 2, 3, 4,5};
+
+		sp.addNumber(toAdd, toAdd + 5);
+		sp.print();
+		try {
+			std::cout << std::endl << "Try to add when span is full" << std::endl;
+			sp.addNumber(10);
+		}
+		catch (std::exception& e) {
+			std::cout << "catch! " << e.what() << std::endl;
 		}
 	}
 	return 0;

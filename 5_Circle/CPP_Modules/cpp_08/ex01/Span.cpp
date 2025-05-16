@@ -6,11 +6,12 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:47:41 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/16 21:45:29 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/17 01:35:21 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
+#include <iostream>
 #include <climits>
 #include <algorithm>
 #include <cstdlib>
@@ -88,4 +89,12 @@ int	Span::longestSpan() const {
 	int	max = *std::max_element(_data.begin(), _data.end());
 	int	min = *std::min_element(_data.begin(), _data.end());
 	return max - min;
+}
+
+void	Span::print() const {
+	std::cout << "[";
+	for (size_t	i; i < _data.size() - 1; i++) {
+		std::cout << _data[i] << ", ";
+	}
+	std::cout << *(_data.end() - 1) << "]" << std::endl;
 }
