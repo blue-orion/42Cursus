@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:47:41 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/17 01:35:21 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/17 15:57:45 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,6 @@ void	Span::addNumber(int count, int value) {
 	}
 }
 
-// int	Span::shortestSpan() const {
-// 	if (_data.size() < 2)
-// 		throw std::logic_error("No enough elements");
-//
-// 	int	min_distance = INT_MAX;
-// 	std::vector<int> sorted = _data;
-// 	std::sort(sorted.begin(), sorted.end());
-// 	for (size_t i = 1; i < _data.size(); i++) {
-// 		int	distance = sorted[i] - sorted[i - 1];
-// 		if (distance < min_distance)
-// 			min_distance = distance;
-// 	}
-// 	return min_distance;
-// }
-
 int	Span::shortestSpan() const {
 	if (_data.size() < 2)
 		throw std::logic_error("No enough elements");
@@ -93,7 +78,7 @@ int	Span::longestSpan() const {
 
 void	Span::print() const {
 	std::cout << "[";
-	for (size_t	i; i < _data.size() - 1; i++) {
+	for (size_t	i = 0; i < _data.size() - 1; i++) {
 		std::cout << _data[i] << ", ";
 	}
 	std::cout << *(_data.end() - 1) << "]" << std::endl;

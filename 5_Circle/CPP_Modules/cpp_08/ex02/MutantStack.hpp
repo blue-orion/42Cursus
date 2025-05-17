@@ -6,39 +6,33 @@
 /*   By: takwak <takwak@student.42gyoengsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 01:22:13 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/17 02:48:59 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/17 20:15:25 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma	once
 
-#include <iostream>
 #include <deque>
 #include <stack>
 
 template <typename T, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container> {
-private:
-	;
-
 public:
-	typedef typename Container::iterator iterator;
-	/*bool		empty() const;*/
-	/*std::size_t	size() const;*/
-	/*T			top() const;*/
-	/*void		push();*/
-	/*void		emplace();*/
-	/*void		pop();*/
-	/*void		swap();*/
+	MutantStack() : std::stack<T, Container>() {}
+	~MutantStack() {}
+	MutantStack(const MutantStack& other) : std::stack<T, Container>(other) {}
+	MutantStack&	operator=(const MutantStack& other) {
+		if (this != &other) {
+			std::stack<T,  Container>::operator=(other);
+		}
+		return *this;
+	}
+
+	typedef typename Container::iterator 		iterator;
+	typedef typename Container::const_iterator	const_iterator;
 
 	iterator	begin() {return this->c.begin();}
 	iterator	end() {return this->c.end();}
-	iterator	begin() const {return this->c.begin();}
-	iterator	end() const {return this->c.end();}
-
-	void	print() {
-		for (iterator it = this->c.end() - 1; it >= this->c.begin(); it--) {
-			std::cout << *it << " " << std::endl;
-		}
-	}
+	const_iterator	begin() const {return this->c.begin();}
+	const_iterator	end() const {return this->c.end();}
 };
