@@ -5,28 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 20:47:53 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/28 14:52:52 by takwak           ###   ########.fr       */
+/*   Created: 2025/05/28 21:04:16 by takwak            #+#    #+#             */
+/*   Updated: 2025/05/28 22:28:56 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <string>
 #include <map>
+#include <exception>
+#include <string>
 
-class BitcoinExchange {
+class	BitcoinExchange {
 private:
-	std::map<std::string, int>	_data;
+	std::map<std::string, double>	_csvData;
 
 public:
-	typedef std::map<std::string, int>::iterator	iterator;
 	BitcoinExchange();
 	~BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange& other);
-	BitcoinExchange&	operator=(const BitcoinExchange& other);
+	const BitcoinExchange&	operator=(const BitcoinExchange& other);
 
-	void	makeResults(char *input);
-	int		findProperValue(std::string date);
-	void	printData();
+	void	makeResults(char* input);
+	double	findExchangeRate(std::string key);
+	void	validateCsvLine(std::string line);
+	void	validateInputLine(std::string line);
+	void	validateDate(std::string date);
+	void	validateValue(std::string value);
+
+	class	InvalidException : public std::exception {
+	private:
+		std::string	_what_arg;
+
+		InvalidException();
+		const InvalidException& operator=(const InvalidException& other);
+
+	public:
+		InvalidException(const InvalidException& other);
+		InvalidException(const std::string& what_arg);
+		~InvalidException() throw();
+		virtual	const char* what() const throw();
+	};
 };

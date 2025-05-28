@@ -5,21 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 20:48:45 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/28 21:06:46 by takwak           ###   ########.fr       */
+/*   Created: 2025/05/28 23:11:05 by takwak            #+#    #+#             */
+/*   Updated: 2025/05/28 23:11:05 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
-#include <exception>
+#include "RPN.hpp"
 #include <iostream>
 
 int	main(int ac, char **av) {
-	(void)ac;
-	try {
-		BitcoinExchange	btc;
+	if (ac < 2 || ac > 2) {
+		std::cerr << "Usage: ./RPN [postfix expression]" << std::endl;
+		return 1;
+	}
+	RPN	rpn;
+	int	result;
 
-		btc.makeResults(av[1]);
+	try {
+		result = rpn.evalExpression(av[1]);
+		std::cout << result << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cerr << e.what() << std::endl;

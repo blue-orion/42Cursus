@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 20:48:45 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/28 21:06:46 by takwak           ###   ########.fr       */
+/*   Created: 2025/05/28 22:57:40 by takwak            #+#    #+#             */
+/*   Updated: 2025/05/28 22:57:40 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
-#include <exception>
-#include <iostream>
+#pragma once
 
-int	main(int ac, char **av) {
-	(void)ac;
-	try {
-		BitcoinExchange	btc;
+#include <stack>
 
-		btc.makeResults(av[1]);
-	}
-	catch (std::exception& e) {
-		std::cerr << e.what() << std::endl;
-	}
-	return 0;
-}
+class	RPN {
+private:
+	std::stack<int>	_st;
+
+public:
+	RPN();
+	~RPN();
+	RPN(const RPN& other);
+	const RPN& operator=(const RPN& other);
+
+	void	calculate();
+	int		evalExpression(char* expr);
+};
