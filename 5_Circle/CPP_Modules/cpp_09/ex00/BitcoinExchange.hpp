@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:47:53 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/18 18:38:48 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:52:52 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ public:
 	BitcoinExchange(const BitcoinExchange& other);
 	BitcoinExchange&	operator=(const BitcoinExchange& other);
 
-	void	saveDataFromFile(char *filename);
+	void	makeResults(char *input);
+	int		findProperValue(std::string date);
 	void	printData();
 };

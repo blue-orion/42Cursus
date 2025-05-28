@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:48:45 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/18 18:41:54 by takwak           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:39:23 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	main(int ac, char **av) {
 	}
 	BitcoinExchange	btc;
 
+	(void)av;
 	try {
-		btc.saveDataFromFile(av[1]);
+		btc.makeResults(av[1]);
 	}
 	catch (std::exception& e) {
 		std::cerr << e.what() << std::endl;
