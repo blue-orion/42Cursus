@@ -1,97 +1,71 @@
+#include <limits>
 #include <vector>
 #include <cstdlib>
-#include <cmath>
+#include <cstring>
 #include <iostream>
+#include "PmergeMe.hpp"
 
-void	mergeInsertSort(std::vector<int> data);
-void	sortMainChain(std::vector<int> mainChain, std::vector< std::pair<int, int> > pairs);
-void	binaryInsert(std::vector<int> mainChain, int element, int start, int last);
+bool	check_alpha(char *s);
+bool	validate_input(int ac, char **av);
 
 int	main(int ac, char **av) {
-	std::vector<int>	data;
-
-	for (int i = 0; av[i]; i++) {
-		data.push_back(std::atoi(av[i]));
+	if (ac < 2) {
+		return 1;
 	}
-
+	if (validate_input(ac, av)) {
+		std::cerr << "Error: invalid input" << std::endl;
+		return 1;
+	}
+	std::vector<int>	vec(ac);
+	for (int i = 1; i < ac; i++) {
+		vec.push_back(std::atoi(av[i]));
+	}
 	std::cout << "Before: ";
-	for (std::vector<int>::iterator it = data.begin(); it != data.end() - 1; ++it) {
-		std::cout << *it << " ";
+	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it) {
+		if (it != vec.end() - 1)
+			std::cout << *it << " ";
+		else 
+			std::cout << *it << std::endl;
 	}
-	std::cout << *(data.end() - 1) << std::endl;
 
-	mergeInsertSort(data);
+	PmergeMe	data(vec);
+	data.mergeInsertSort();
+
+	std::cout << "After: ";
+	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it) {
+		if (it != vec.end() - 1)
+			std::cout << *it << " ";
+		else 
+			std::cout << *it << std::endl;
+	}
+	return 0;
 }
 
-void	mergeInsertSort(std::vector<int> data) {
-	std::vector<std::pair<int, int> >	temp;
-
-	for (std::vector<int>::iterator it = data.begin(); it != data.end(); it += 2) {
-		if (*it > *(it + 1)) {
-			temp.push_back(std::pair<int, int>(*it, *(it + 1)));
+bool	validate_input(int ac, char **av) {
+	for (int i = 1; i < ac; i++) {
+		if (check_alpha(av[i])) {
+			return true;
 		}
-		else {
-			temp.push_back(std::pair<int, int>(*(it + 1), *it));
+
+		long	element = std::atoi(av[i]);
+		if (element < 0 || element > std::numeric_limits<int>::max()) {
+			return true;
 		}
-		data.erase(it);
-		data.erase(it + 1);
-	}
 
-	sortMainChain(data, temp);
-
-	std::vector<int>	t;
-	t[0] = 1;
-	for (int k = 1; t[k] <= temp.size(); t[k] = std::pow(2, k) - t[k - 1]) {
-		std::cout << "k = " << k << ", jacobstal = " << t[k] << std::endl;
-		for (int i = t[k]; i > t[k - 1]; --i) {
-			data.push_back(temp[t[k - 1] + 1].first);
-			binaryInsert(data, temp[i].second, 0, data.size());
-			
-		}
-	}
-}
-
-void	sortMainChain(std::vector<int> mainChain, std::vector< std::pair<int, int> > pairs) {
-	std::vector< std::pair<int, int> >	result;
-	std::vector<int>	temp;
-
-	for (std::vector< std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it) {
-		temp.push_back(it->first);
-	}
-	mergeInsertSort(temp);
-	for (std::vector<int>::iterator it = temp.begin(); it != temp.end(); ++it) {
-		for (std::vector< std::pair<int, int> >::iterator iter = pairs.begin(); iter != pairs.end(); ++iter) {
-			if (*it == iter->first) {
-				if (it == temp.begin()) {
-					mainChain.push_back(iter->second);
-					mainChain.push_back(iter->first);
-				}
-				else
-					result.push_back(*iter);
-				pairs.erase(iter);
+		for (int j = 1; j < i; j++) {
+			if (av[i] == av[j]) {
+				return true;
 			}
 		}
 	}
-	pairs = result;
+	return false;
 }
 
-void	binaryInsert(std::vector<int> mainChain, int element, int start, int last) {
-	int	middle = (start + last) / 2;
-
-	if (middle == start) {
-		if (element < mainChain[middle]) {
-			mainChain.insert(mainChain.begin() + middle - 1, element);
+bool	check_alpha(char *s) {
+	for (int i = 0; i < std::strlen(s); ++i) {
+		if (!std::isdigit(s[i])) {
+			return true;
 		}
-		else {
-			mainChain.insert(mainChain.begin() + middle + 1, element);
-		}
-		return ;
 	}
-	if (element < mainChain[middle]) {
-		binaryInsert(mainChain, element, start, middle - 1);
-	}
-
-	if (element > mainChain[middle]) {
-		binaryInsert(mainChain, element, middle + 1, last);
-	}
+	return false;
 }

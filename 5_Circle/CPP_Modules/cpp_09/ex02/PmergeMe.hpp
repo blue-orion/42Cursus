@@ -4,19 +4,14 @@
 
 class PmergeMe {
 private:
-	std::vector<int>	_elements;
+	std::vector<int>					_mainChain;
+	std::vector< std::pair<int, int> >	_pairs;
 
 public:
-	PmergeMe();
-	~PmergeMe();
-	PmergeMe(const PmergeMe& other);
-	const PmergeMe& operator=(const PmergeMe& other);
+	typedef std::vector<int>					mainChain;
+	typedef std::vector< std::pair<int, int> >	pairs;
 
-	const std::vector<int>&	getElements() const;
-	void					addElement(int element);
-	void					setElements(std::vector<int> vectorData);
-
-	void					addArguments(char **av);
-
-	void	makePairs();
+	void	mergeInsertSort(std::vector<int>& data);
+	void	generalize();
+	void	insertElements();
 };
