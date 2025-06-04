@@ -54,8 +54,16 @@ int	RPN::evalExpression(char* expr) {
 void	RPN::calculate() {
 	char	expr = _st.top();
 	_st.pop();
+
+	if (_st.empty()) {
+		throw std::runtime_error("Error: Invalid expression");
+	}
 	int	b = _st.top();
 	_st.pop();
+
+	if (_st.empty()) {
+		throw std::runtime_error("Error: Invalid expression");
+	}
 	int	a = _st.top();
 	_st.pop();
 

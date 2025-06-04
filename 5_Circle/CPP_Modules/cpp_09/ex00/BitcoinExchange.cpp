@@ -176,7 +176,7 @@ void	BitcoinExchange::validateValue(std::string value) {
 	if (number < 0) {
 		throw InvalidException("Error: not a positive number");
 	}
-	if (number > INT_MAX) {
+	if (number > 1000) {
 		throw InvalidException("Error: too large a number");
 	}
 }

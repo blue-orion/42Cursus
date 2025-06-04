@@ -1,7 +1,7 @@
 #pragma	once
 
 #include <vector>
-#include <string>
+#include <iostream>
 #include <deque>
 
 class PmergeMe {
@@ -41,12 +41,38 @@ public:
 };
 
 template <typename T>
-std::string	isSorted(T vec) {
+bool	isSorted(T vec) {
 	for (typename T::iterator it = vec.begin(); it != vec.end() - 1; ++it) {
 		typename T::iterator	next = it + 1;
 		if (*it > *next) {
-			return "KO";
+			return false;
 		}
 	}
-	return "Sorted!";
+	return true;
+}
+
+template <typename iter>
+bool	isSorted(iter start, iter end) {
+	for (iter it = start; it != end - 1; ++it) {
+		iter	next = it + 1;
+		std::cout << *it << ", " << *next << std::endl;
+		if (*it >= *next) {
+			return false;
+		}
+	}
+	return true;
+}
+
+template <typename T>
+void	printElements(T container) {
+	for (std::size_t i = 0; i < container.size(); i++) {
+		if (i == 4 && container.size() > 5) {
+			std::cout << "[...]" << std::endl;
+			break ;
+		}
+		if (i != container.size() - 1)
+			std::cout << container[i] << " ";
+		else 
+			std::cout << container[i] << std::endl;
+	}
 }
