@@ -6,7 +6,7 @@
 /*   By: takwak <takwak@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 21:17:43 by takwak            #+#    #+#             */
-/*   Updated: 2025/05/28 22:52:16 by takwak           ###   ########.fr       */
+/*   Updated: 2025/06/05 03:09:57 by takwak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void	BitcoinExchange::validateValue(std::string value) {
 	if (number < 0) {
 		throw InvalidException("Error: not a positive number");
 	}
-	if (number > 1000) {
+	if (number > INT_MAX) {
 		throw InvalidException("Error: too large a number");
 	}
 }
