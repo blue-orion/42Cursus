@@ -8,38 +8,33 @@ services:
       - "8443:443"
     volumes:
       - wordpress_data:/var/www/html
-      - ./requirements/nginx/conf:/etc/nginx
     networks:
       - internal
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
 
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
-    # depends_on:
-    #   - mariadb
+    depends_on:
+      - mariadb
     volumes:
       - wordpress_data:/var/www/html
-      - ./requirements/wordpress/tools:/docker-entrypoint-initwp.d
-    ports:
-      - "8080:9000"
     networks:
       - internal
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
 
-  # mariadb:
-  #   build: ./requirements/mariadb
-  #   container_name: mariadb
-  #   volumes:
-  #     - mariadb_data:/var/lib/mysql
-  #     - ./requirements/mariadb/tools:/docker-entrypoint-initdb.d
-  #   networks:
-  #     - internal
-  #   env_file:
-  #     - .env
-  #
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - internal
+    env_file:
+      - .env
+
 volumes:
   wordpress_data:
   mariadb_data:

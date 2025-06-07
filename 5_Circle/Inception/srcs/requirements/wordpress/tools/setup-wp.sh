@@ -1,6 +1,6 @@
 #!/bin/sh
 
-WP_PATH=/var/www/wordpress
+WP_PATH=/var/www/html
 
 # wp-config.php가 이미 존재하면 무시
 if [ -f "$WP_PATH/wp-config.php" ]; then

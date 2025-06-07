@@ -2,11 +2,11 @@
 
 CONFIG_PATH=/var/www/html/wp-config.php
 
-# ✅ MariaDB가 연결될 때까지 대기
-echo "[INFO] Waiting for MariaDB to be ready..."
-while ! mariadb-admin ping -h"${DB_HOST%%:*}" --silent; do
-	sleep 1
-done
+# # ✅ MariaDB가 연결될 때까지 대기
+# echo "[INFO] Waiting for MariaDB to be ready..."
+# while ! ping "${DB_HOST%%:*}"; do
+# 	sleep 1
+# done
 
 # ✅ wp-config.php 생성
 if [ ! -f "$CONFIG_PATH" ]; then
@@ -39,5 +39,5 @@ EOF
 fi
 
 # ✅ php-fpm 실행
-exec php-fpm
+exec php-fpm82 -F
 
