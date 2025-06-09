@@ -1,6 +1,15 @@
 FROM alpine:3.21
 
-RUN apk update && apk add --no-cache nginx openssl
+RUN apk update \
+	&& apk add --no-cache \
+		nginx	\
+		openssl	\
+		ca-certificates \
+		nss-tools
+
+RUN curl -Lo mkcert https://github.com/FiloSottile/mkcert/releases/latest/download/mkcert-linux-amd64
+RUN chmod +x mkcert
+RUN mv mkcert /usr/local/bin/
 
 RUN mkdir -p /etc/nginx/certs /run/nginx
 
@@ -8,12 +17,13 @@ RUN mkdir -p /etc/nginx/certs /run/nginx
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/mime.types /etc/nginx/mime.types
 COPY conf/fastcgi_params /etc/nginx/fastcgi_params
-COPY conf/certs/server.crt /etc/nginx/certs/server.crt
-COPY conf/certs/server.key /etc/nginx/certs/server.key
 
 WORKDIR /var/www/html
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY conf/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 

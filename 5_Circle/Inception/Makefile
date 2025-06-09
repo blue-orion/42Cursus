@@ -1,6 +1,7 @@
 NAME = inception
 
-DOCKER_COMPOSE = docker-compose -f srcs/docker-compose.yml
+DOCKER_COMPOSE = docker-compose -f
+SRC = srcs/docker-compose.yml
 ENV_FILE = srcs/.env
 
 .PHONY: all up down stop fclean re
@@ -8,22 +9,18 @@ ENV_FILE = srcs/.env
 all: up
 
 up:
-	@echo "\n[🔧] Building and starting containers..."
-	$(DOCKER_COMPOSE) --env-file $(ENV_FILE) up --build -d
+	$(DOCKER_COMPOSE) $(SRC) --env-file $(ENV_FILE) up --build -d
 
 down:
-	@echo "\n[🧹] Stopping containers..."
-	$(DOCKER_COMPOSE) down
+	$(DOCKER_COMPOSE) $(SRC) down
 
 stop:
-	@echo "\n[⏹️] Stopping containers (without removing)..."
-	$(DOCKER_COMPOSE) stop
+	$(DOCKER_COMPOSE) $(SRC) stop
 
 fclean: down
-	@echo "\n[🔥] Removing volumes..."
+	docker rmi $(shell docker images -qa)
 	docker volume rm $(shell docker volume ls -qf "name=wordpress_data") 2>/dev/null || true
 	docker volume rm $(shell docker volume ls -qf "name=mariadb_data") 2>/dev/null || true
-	@echo "[✅] Cleanup complete."
 
 re: fclean all
 
