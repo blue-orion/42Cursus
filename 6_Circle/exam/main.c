@@ -12,7 +12,7 @@ t_client	client[1024];
 int			client_num = 0;
 
 int	main(int ac, char **av) {
-	int	max_fd = 1024;
+	int	max_fd = 2;
 	int sockfd;
 
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -43,7 +43,7 @@ int	main(int ac, char **av) {
 	while (1) {
 		int	event = select(client_num + 1, &read, NULL, NULL, NULL);
 		printf("select return : %d\n", event);
-		for (int i = 0; i < client_num + 1; i++) {
+		for (int i = 3; i < max_fd + 1; i++) {
 			if (!FD_ISSET(i, &read))
 				continue ;
 			if (i == sockfd) {
